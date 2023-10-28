@@ -28,11 +28,7 @@ export default function Page() {
     useEffect(() => {
         setloadingstatus(CartStatus);
     }, [CartStatus])
-    useEffect(() => {
-        if (!product || Object.keys(product).length == 0) {
-            dispatch(getproduct({ id }));
-        }
-    }, [])
+
 
     if (!product && loadingstatus === 'Loading') {
         return <div><ProductPrefetch /></div>
@@ -40,7 +36,7 @@ export default function Page() {
 
     return (
         <div className='mt-4 sm:mx-10'>
-
+            {loadingstatus === 'Loading' && <DisableandLoadingComponent />}
             <div className='flex max-m:flex-col  sm:gap-4  '>
                 <SwiperImagecomponent
                     imageUrls={imageUrls}

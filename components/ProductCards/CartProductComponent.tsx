@@ -27,7 +27,6 @@ const CartProductComponent = () => {
   const styledproduucts = cartproducts.map((product, index) => {
     return (
       <div className={`${roboto.className} ${robotoslab.className}`} key={index}>
-
         <div className='grid grid-cols-9 '>
           <div className='col-span-4 mr-2 h-28 max-h-28 bg-red-200  relative'>
             <CldImage
@@ -72,10 +71,14 @@ const CartProductComponent = () => {
       </div>
     )
   })
+  console.log(LoadingStatus, 'cartcomp');
+  if (LoadingStatus === 'Loading' && !cartproducts.length) {
+    return <ProductsPrefetch />
+  }
+
   return (
     <div>
-      {LoadingStatus === 'Loading' && !cartproducts && <ProductsPrefetch />}
-
+      {LoadingStatus === 'Loading' && <DisableandLoadingComponent />}
       <div className='grid grid-flow-row gap-4 mb-4  mx-auto max-w-xl  justify-center items-center'>
         {styledproduucts}
 

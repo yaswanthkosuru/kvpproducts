@@ -40,6 +40,9 @@ export const CartSlice = createSlice({
             .addCase(AddCartItem.pending, (state, action) => {
                 state.status = 'Loading';
             })
+            .addCase(AddCartItem.rejected, (state, action) => {
+                state.status = 'rejected'
+            })
             .addCase(AddCartItem.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = 'idle'
                 const item: itemtype = {
@@ -55,6 +58,9 @@ export const CartSlice = createSlice({
             .addCase(getcartitems.pending, (state, action) => {
                 state.status = 'Loading';
             })
+            .addCase(getcartitems.rejected, (state, action) => {
+                state.status = 'rejected';
+            })
             .addCase(getcartitems.fulfilled, (state, action) => {
                 state.status = 'idle';
                 const data = action.payload;
@@ -64,6 +70,9 @@ export const CartSlice = createSlice({
             })
             .addCase(updatecart.pending, (state, action) => {
                 state.status = 'Loading'
+            })
+            .addCase(updatecart.rejected, (state, action) => {
+                state.status = 'rejected'
             })
             .addCase(updatecart.fulfilled, (state, action) => {
                 state.status = 'idle'

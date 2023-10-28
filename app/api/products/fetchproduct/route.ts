@@ -20,7 +20,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         _id: product_id
     })
     console.log(product, 'r fetchsingleproduct');
-
     return NextResponse.json({ product: product }, { status: 500 })
 
 }
