@@ -101,6 +101,7 @@ const Page = ({ }) => {
                 <button
                     onClick={handleorderclick}
                     className='ripple w-1/2'
+
                 >
                     Ordernow
                 </button>
