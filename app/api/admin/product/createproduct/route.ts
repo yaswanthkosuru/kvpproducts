@@ -46,7 +46,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const price = await stripe.prices.create({
         product: createdProduct.id,
         currency: 'inr',
-        unit_amount: formData.price * 100,
+        unit_amount: parseInt(formData.price as string) * 100,
         metadata: {
             mongodb_id: productcreated.insertedId,
         },
