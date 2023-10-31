@@ -4,7 +4,7 @@ import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { ConnectToDB } from "@utils/ConnectDB";
 import { Session, getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { Filter, UpdateFilter } from "mongodb";
+import { Filter, ObjectId, UpdateFilter } from "mongodb";
 
 export async function POST(req: NextRequest, res: NextResponse) {
     const { session, User, Database } = await GetSessionAndDB();
@@ -22,7 +22,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     console.log(formData, update, 'r create address');
 
     if (update) {
-        const filter: Filter<AddressType> = { user_id: User._id }
+        const filter: Filter<AddressType> = {
+            user_id: new ObjectId(User._id)
+        }
         const update: UpdateFilter<AddressType> = {
             $set: {
                 street: formData.street,
@@ -48,7 +50,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     else {
         const InsertDoc = {
             ...formData,
-            user_id: User._id
+            user_id: new ObjectId(User._id)
         }
         AddressCollection.insertOne(InsertDoc);
         return NextResponse.json({ sucess: false }, { status: 200, statusText: 'insert successfully' });

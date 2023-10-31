@@ -8,6 +8,9 @@ const nextConfig = {
     },
     typescript: {
     },
+    compiler: {
+        styledComponents: true
+    }
 
 }
 

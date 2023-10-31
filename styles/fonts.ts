@@ -58,7 +58,7 @@ const prompt = Prompt(
 const inter = Inter(
     {
         subsets: ['latin'],
-        weight: '900',
+        weight: '400',
     }
 )
 const roboto = Roboto(

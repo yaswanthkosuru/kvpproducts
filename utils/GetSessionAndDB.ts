@@ -19,7 +19,7 @@ export async function GetSessionAndDB(): Promise<Retype> {
 
         const UserCollection = Database?.collection('users');
         let User = await UserCollection?.findOne<Promise<UserType>>({ email: session?.user?.email });
-        console.log(User, session);
+
 
         return { session, User, Database };
     }

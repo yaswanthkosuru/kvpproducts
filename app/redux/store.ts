@@ -3,7 +3,7 @@ import Cartreducer from './feautres/cart/cartslice'
 import productreducer from './feautres/products/product-slice'
 import reviewreducer from './feautres/Reviews/Reviewslice'
 import AddressReducer from './feautres/address/addressslice'
-import OrderReducer from './feautres/Orders/orderslice';
+import OrderReducer from './feautres/orders/orderslice';
 export const store = configureStore({
     reducer: {
         cartreducer: Cartreducer,

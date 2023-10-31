@@ -1,6 +1,6 @@
 'use client'
 import Fivestar from '@components/Buttons/RatingComponent';
-import { roboto, robotoslab } from '@styles/fonts';
+import { inter, roboto, robotoslab } from '@styles/fonts';
 import ProductsPrefetch from '@components/Skeletons/ProductsPrefetch';
 import Link from 'next/link';
 import { CldImage } from 'next-cloudinary';
@@ -65,7 +65,7 @@ export default function Product_Component() {
                                 />
                             </div>
                         </div>
-                        <div className={`mt-4 ${roboto.className} ${robotoslab.className}`}>
+                        <div className={`mt-4 ${roboto.className} ${robotoslab.className} ${inter.className}`}>
                             <span className='font-semibold text-md'>{name.toUpperCase()}</span>
                             <p className=' truncate'>{description}</p>
                             <span className=' font-extrabold'>&#8377;{price}</span>

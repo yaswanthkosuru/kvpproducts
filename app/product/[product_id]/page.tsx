@@ -17,6 +17,8 @@ export default function Page() {
     const { product_id } = useParams();
 
     const id = product_id as string;
+    console.log(id, 'pageproductid');
+
     const product = useSelector((state: RootState) => selectproductwithid(state, id));
     console.log(product, 'page p/pid');
     const { imageUrls } = product || {};
@@ -43,7 +45,7 @@ export default function Page() {
                 />
                 <ProductDetailsComponent product={product} />
             </div>
-            <div className=' grid grid-cols-2 m:w-[55%] gap-4'>
+            <div className='grid grid-cols-2 m:w-[55%] gap-4'>
                 <AddtoCartComponent />
                 <BuynowComponent />
 

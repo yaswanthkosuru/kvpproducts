@@ -7,9 +7,9 @@ import axios from 'axios'
 //schemas and models 
 import { itemtype } from '@models/Cart_Model'
 import { CartStoreType } from '@CustomTypes/ReduxType'
-
 const initialState: CartStoreType = {
     items: undefined,
+    cartlength: 0,
     status: 'idle'
 }
 export const AddCartItem = createAsyncThunk('api/addcart',
@@ -53,6 +53,7 @@ export const CartSlice = createSlice({
                 if (!isexists) {
                     state.items?.push(item);
                 }
+                state.cartlength = state.items?.length;
 
             })
             .addCase(getcartitems.pending, (state, action) => {
@@ -66,6 +67,7 @@ export const CartSlice = createSlice({
                 const data = action.payload;
                 console.log(data, 'fullfiled getcart');
                 state.items = data;
+                state.cartlength = state.items?.length;
 
             })
             .addCase(updatecart.pending, (state, action) => {
@@ -87,11 +89,13 @@ export const CartSlice = createSlice({
                         state.items = state.items?.filter(item => item.product_id != currentItem.product_id);
                     }
                 }
+                state.cartlength = state.items?.length;
 
             })
     }
 })
 
 export const SelectCartItems = (state: RootState) => state.cartreducer.items;
+export const SelectCartLength = (state: RootState) => state.cartreducer.cartlength;
 export const SelectCartStatus = (state: RootState) => state.cartreducer.status;
 export default CartSlice.reducer

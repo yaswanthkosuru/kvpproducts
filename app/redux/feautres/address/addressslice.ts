@@ -7,7 +7,7 @@ import { AddressType } from "@models/Address_Model";
 type formdatatype = Omit<AddressType, '_id'>;
 interface AddressesType {
     Address: AddressType | null;
-    status: 'idle' | 'Loading';
+    status: 'idle' | 'Loading' | 'rejected';
 }
 const initialState: AddressesType = {
     Address: null,
@@ -18,7 +18,6 @@ export const createAddress = createAsyncThunk('/api/createaddress',
         console.log(formData, update, 'called createAddress');
         const response = await axios.post('/api/address/createaddress', { formData, update });
         console.log(response.status, response.statusText, 'created address slices status');
-
         return formData;
     }
 )
@@ -28,7 +27,6 @@ export const getaddress = createAsyncThunk('/api/getaddress',
         const response = await axios.get('/api/address/getuseraddress',);
         const { data } = response;
         const { UserAddress }: { UserAddress: formdatatype } = data;
-
         return UserAddress;
 
     }
@@ -41,11 +39,27 @@ export const Productslice = createSlice({
     },
     extraReducers(builder) {
         builder
+            .addCase(createAddress.pending, (state, action) => {
+                state.status = 'Loading'
+            })
+            .addCase(createAddress.rejected, (state, action) => {
+                state.status = 'rejected'
+            })
             .addCase(createAddress.fulfilled, (state, action) => {
+                state.status = 'idle'
                 state.Address = action.payload;
                 console.log(state.Address, 'createaddress success');
             })
+            .addCase(getaddress.pending, (state, action) => {
+                state.status = 'Loading'
+
+            })
+            .addCase(getaddress.rejected, (state, action) => {
+                state.status = 'rejected'
+
+            })
             .addCase(getaddress.fulfilled, (state, action) => {
+                state.status = 'idle'
                 if (action.payload) {
                     state.Address = action.payload
                 }
@@ -54,4 +68,5 @@ export const Productslice = createSlice({
 }
 )
 export const selectaddress = (state: RootState) => state.adressreducer.Address;
+export const selectaddressstatus = (state: RootState) => state.adressreducer.status;
 export default Productslice.reducer

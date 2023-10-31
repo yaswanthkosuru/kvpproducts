@@ -1,8 +1,13 @@
 'use client'
 
+import OrderComponent from "@components/ProductCards/OrderComponent"
+
 export default function Page() {
     return (
-        <div>orders</div>
+        <div>
+            <OrderComponent />
+        </div>
+
     )
 }
 

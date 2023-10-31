@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux'
-import { SelectCartItems, getcartitems } from '@app/redux/feautres/cart/cartslice';
+import { SelectCartItems, SelectCartLength, getcartitems } from '@app/redux/feautres/cart/cartslice';
 import { usePathname } from 'next/navigation';
 import { GetSessionData } from '@utils/GetClientSession';
 import { AppDispatch } from '@app/redux/store';
@@ -11,11 +11,11 @@ const Navcart = () => {
     const { session, status } = GetSessionData();
     const dispatch = useDispatch<AppDispatch>();
 
-    const cartitems = useSelector(SelectCartItems);
-    console.log(cartitems, 'cartitems');
+    const cartlen = useSelector(SelectCartLength);
+
 
     useEffect(() => {
-        if (status === 'authenticated' && !cartitems) {
+        if (status === 'authenticated' && !cartlen) {
             dispatch(getcartitems());
         }
     }, []);
@@ -43,7 +43,7 @@ const Navcart = () => {
                 </div>
 
                 <div className="absolute  text-[9px] font-extrabold  bg-red-500 text-white rounded-full px-1 top-1 right-2 ">
-                    {cartitems?.length}
+                    {cartlen}
                 </div>
             </Link>
         </div>

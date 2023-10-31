@@ -7,7 +7,7 @@ const Paymentinfo = () => {
     console.log(cartproducts, QuantityMap);
     var totalprice = 0, deliveryFee = 0;
     const items = cartproducts?.map((product, index) => {
-        totalprice += QuantityMap.get(product._id) * product.price;
+        totalprice += QuantityMap.get(product._id) * parseInt(product.price as string, 10);
         deliveryFee += 40;
         return (
             <div key={index} className='flex flex-col border-b border-dashed border-zinc-400'>
@@ -21,14 +21,19 @@ const Paymentinfo = () => {
                     </span>
                 </div>
                 <div className='flex justify-between'>
-                    price:
+                    unitprice:
                     <span className='font-bold'>
-                        &#8377; {product.price * QuantityMap.get(product._id)}
+                        &#8377; {product.price}
                     </span>
                 </div>
                 <div className='flex justify-between'>
-                    delivery:<span className='font-semibold'>&#8377;40</span>
+                    totalproductprice:
+                    <span className='font-bold'>
+                        &#8377; {parseInt(product.price as string, 10) * QuantityMap.get(product._id)}
+                    </span>
                 </div>
+
+
 
             </div>
         )
@@ -43,7 +48,7 @@ const Paymentinfo = () => {
                 </div>
                 <div className='flex justify-between  '>
                     <div>deliver fee:</div>
-                    <div className='font-bold'>&#8377;{deliveryFee}</div>
+                    <div className='font-bold'>&#8377;{60}</div>
                 </div>
                 <div className='flex justify-between'>
                     <div>Payment mode</div>

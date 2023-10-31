@@ -1,5 +1,6 @@
 
 import { AddressType } from "@models/Address_Model";
+import { CartType } from "@models/Cart_Model";
 import { OrderType } from "@models/Order_Model";
 import { ProductType } from "@models/ProductModel";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
@@ -8,6 +9,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
+    console.log('inside post create order');
+
     const { session, User, Database } = await GetSessionAndDB();
     if (!session) {
         return NextResponse.json({ msg: 'No session found in Browser' }, { status: 401, statusText: 'userid not found ' })
@@ -18,36 +21,47 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
-    const data = await req.json();
-    const { product_id } = data;
-    if (!product_id) {
-        return NextResponse.json({ msg: 'invalid request' }, { status: 401, statusText: 'invalid request' });
+    const CartCollection = Database.collection<CartType>('carts');
+
+    const usercart = await CartCollection.findOne({
+        user_id: User._id,
+    })
+
+    if (!usercart) {
+        return NextResponse.json({}, { status: 400, statusText: 'unable to findcart items ' });
     }
-    const ProductCollection = Database.collection<ProductType>('products');
-    const products = await ProductCollection.find({}).toArray();
 
     const AddressCollection = Database.collection<AddressType>('addresses');
     const currentaddress = await AddressCollection.findOne({ user_id: User._id });
 
+    if (!usercart) {
+        return NextResponse.json({}, { status: 400, statusText: 'unable to Address ' });
+    }
 
+    const ProductCollection = Database.collection<ProductType>('products');
+    const products = await ProductCollection.find({}).toArray();
+
+    if (!usercart) {
+        return NextResponse.json({}, { status: 400, statusText: 'product unavailible' });
+    }
+    var overallcost = 60;
+    for (const item of usercart.items) {
+        const product = products.find(p => {
+            console.log(p._id, item.product_id, 'inside find');
+            return p._id.toString() === item.product_id.toString()
+        });
+        console.log('r:createorder', product);
+        if (product) {
+            const price = parseInt(product.price as string, 10);
+            overallcost += price * item.quantity;
+        }
+    }
 
     const OrderCollection = Database.collection<OrderType>('orders');
-
-    const product = products.find(p => p._id.toString() === product_id)
-    console.log(product, product_id, data, 'r:createorder');
-
-    if (!product) {
-        return NextResponse.json({ msg: 'invalid request' }, { status: 401, statusText: 'invalid request' });
-    }
-    const price = parseInt(product.price as string) + 60;
-
     const createdorder = await OrderCollection.insertOne(
         {
             user_id: new ObjectId(User._id),
-            items: [{
-                product_id: new ObjectId(product_id),
-                quantity: 1,
-            }],
+            items: usercart.items,
             time: new Date(),
             address: {
                 street: currentaddress.street,
@@ -56,11 +70,16 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 postalCode: currentaddress.postalCode,
                 phoneNumber: currentaddress.phoneNumber,
             },
-            amount: price,
+            amount: overallcost,
             ordertype: 'cod',
             orderstatus: "orderbooked"
         }
     )
-    return NextResponse.json({ createdorder: true });
+    await CartCollection.deleteOne({
+        _id: usercart._id
+    })
+    console.log(createdorder, 'succesfully created order');
+
+    return NextResponse.json({ IsOrderSuccess: 'success' }, { status: 200, statusText: 'success' });
 
 }

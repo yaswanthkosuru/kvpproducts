@@ -1,4 +1,4 @@
-import { createAddress, getaddress, selectaddress } from '@app/redux/feautres/address/addressslice';
+import { createAddress, getaddress, selectaddress, selectaddressstatus } from '@app/redux/feautres/address/addressslice';
 import { AppDispatch } from '@app/redux/store';
 import { AddressType } from '@models/Address_Model';
 import { inter, merriweather, opensans, ptsans, ptserif, roboto, robotoslab } from '@styles/fonts';
@@ -7,35 +7,27 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
 import '@styles/globals.css'
+import DisableandLoadingComponent from '@components/Loading';
 type formdatatype = Omit<AddressType, '_id'>
 const postalCodes = [521121, 521125, 521126]; // Replace with your postal codes
-function DownArrowSVG() {
-    return (
-        <svg
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M7 10l5 5 5-5H7z"
-                fill="#000" // You can set the fill color here
-            />
-        </svg>
-    );
-}
+
 
 export default function AddressForm() {
     const Address = useSelector(selectaddress);
-    const dispatch = useDispatch<AppDispatch>()
-    const [update, setupdate] = useState(false);
+    const addressstatus = useSelector(selectaddressstatus);
+    const dispatch = useDispatch<AppDispatch>();
+    const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>();
     const router = useRouter();
     useEffect(() => {
         if (!Address) {
             dispatch(getaddress());
         }
+    }, []);
+    useEffect(() => {
+        setloadingstatus(addressstatus);
+        console.log(addressstatus, 'useffectcreatefrm');
 
-    })
+    }, [addressstatus])
     const {
         register,
         handleSubmit,
@@ -51,10 +43,12 @@ export default function AddressForm() {
         }
 
     }
+
     return (
         <div className={`${roboto.className} ${robotoslab.className}  `}>
+            {loadingstatus === 'Loading' && <DisableandLoadingComponent />}
             <span>Address Form </span>
-            <form className='p-4 flex flex-col gap-2 bg-[#34c6eb] text-white' onSubmit={handleSubmit(submitAddress)}>
+            <form className='p-4 flex flex-col gap-2 bg-[#34c6eb] rounded-md shadow-xl  text-white' onSubmit={handleSubmit(submitAddress)}>
                 <label> Enter your state</label>
                 <input
                     className='form-input'
@@ -100,7 +94,7 @@ export default function AddressForm() {
                     })}
                 </select>
 
-                <button className='bg-violet-800 rounded-3xl text-white font-bold w-1/2 mx-auto py-2 px-4' type='submit'>{!Address ? 'submit' : 'update'}</button>
+                <button className='bg-indigo-500 rounded-3xl text-white font-bold w-1/2 mx-auto py-2 px-4' type='submit'>{!Address ? 'submit' : 'update'}</button>
             </ form>
 
         </div>

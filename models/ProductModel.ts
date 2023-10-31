@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 export type ProductType = {
     name: string;
     description: string;
-    price: number;
+    price: number | string;
     usersrated: number;
     overallrating: number;
     stripe_product_id: string;

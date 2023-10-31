@@ -1,28 +1,39 @@
 'use client'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { RootState } from '@app/redux/store';
-import product from '@components/ProductCards/ProductComponent'
 import { OrderType } from '@models/Order_Model'
+import { data } from 'autoprefixer';
 
 
 interface InitialState {
-    orders: OrderType[];
+    orders: OrderType[] | null;
+    status: 'loading' | 'idle' | 'rejected'
 }
 const initialState: InitialState = {
-    orders: [],
+    orders: null,
+    status: 'idle'
 }
+export const getorders = createAsyncThunk('/fetchorders', async () => {
+    console.log('dispatching getorders');
+    const response = await axios.post('/api/orders/fetchorders');
+    if (response.status === 200) {
+        const { order_details } = response.data;
+        return order_details;
+    }
 
-export const create_order = createAsyncThunk('/api/createOrder', async ({ product_id }: { product_id: string }) => {
-    const response = await axios.post('/api/Orders/createorder', { product_id })
-    const { createdorder } = response.data;
-    return createdorder;
+    return { msg: response.statusText };
+
 })
-export const Fetch_Orders = createAsyncThunk('/api/GetOrder', async () => {
-    const response = await axios.get('/api/Orders/getorders')
-    return response.data;
+export const CreateCartOrder = createAsyncThunk('/api/createOrder', async () => {
+    console.log('dispatching create cart order');
+    await axios.post('/api/orders/createcartorder')
 })
+export const CreateOrder = createAsyncThunk('/api/createorder', async ({ product_id }: { product_id: string }) => {
+    console.log('dispatching create order');
+    await axios.post('/api/orders/createorder', { product_id })
+})
+
 
 
 export const Order_slice = createSlice({
@@ -32,17 +43,41 @@ export const Order_slice = createSlice({
     },
     extraReducers(builder) {
         builder
-            .addCase(create_order.fulfilled, (state, action) => {
+
+            .addCase(CreateOrder.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(CreateOrder.rejected, (state, action) => {
+                state.status = 'rejected'
+            })
+            .addCase(CreateOrder.fulfilled, (state, action) => {
+                state.status = 'idle'
+            })
+            .addCase(CreateCartOrder.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(CreateCartOrder.rejected, (state, action) => {
+                state.status = 'rejected'
+            })
+            .addCase(CreateCartOrder.fulfilled, (state, action) => {
                 console.log(action.payload, 'createorder fullfilled');
-
+                state.status = 'idle'
             })
-            .addCase(Fetch_Orders.fulfilled, (state, action) => {
-                const { orders } = action.payload;
-                state.orders = orders;
-                console.log(orders, 'createorder fullfilled');
-
+            .addCase(getorders.pending, (state, action) => {
+                state.status = 'loading'
             })
+            .addCase(getorders.rejected, (state, action) => {
+                state.status = 'rejected'
+            })
+            .addCase(getorders.fulfilled, (state, action) => {
+                state.status = 'idle'
+                state.orders = action.payload;
+            })
+
+
+
     }
 })
-export const Select_Orders = (state: RootState) => state.OrderReducer.orders;
+export const SelectOrders = (state: RootState) => state.OrderReducer.orders;
+export const SelectOrderStatus = (state: RootState) => state.OrderReducer.status;
 export default Order_slice.reducer
