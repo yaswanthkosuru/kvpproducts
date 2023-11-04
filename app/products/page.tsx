@@ -11,12 +11,10 @@ export default function Home() {
   // Use local state for status
   const dispatch = useDispatch<AppDispatch>();
 
-
   useEffect(() => {
     console.log('inside useEffect');
     dispatch(getallproducts());
   }, []);
-
 
 
   return (

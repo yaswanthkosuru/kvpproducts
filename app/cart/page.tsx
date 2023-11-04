@@ -17,7 +17,7 @@ export default function Page() {
     return (
         <div>
             <CartProductComponent />
-            {cartlength == 0 && <div className="flex items-center justify-center h-screen">
+            {cartlength == 0 && <div className="flex items-center justify-center h-48">
                 <div className="bg-orange-100 text-orange-500 py-10 font-[30px] text-[30px] px-5">
                     <span className={`${roboto.className} ${robotoslab.className}`}>
                         NO CART ITEMS AVAILIBLE
