@@ -14,8 +14,8 @@ export default function Page() {
         return <div>
             <Link
                 href='/loginpage'
-                className="bg-orange-100 text-orange-500 py-10 font-[30px] text-[30px] px-5">
-                Please Login to view your cart items
+                className="bg-orange-100 text-orange-500 py-10 font-[20px] text-[30px] px-5">
+                Please Login by clicking here to view your cart items
             </Link>
         </div>
     }
