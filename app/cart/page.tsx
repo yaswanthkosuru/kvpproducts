@@ -4,6 +4,7 @@ import BuynowComponent from "@components/Buttons/BuyNowComponent";
 import CartProductComponent from "@components/ProductCards/CartProductComponent";
 import { roboto, robotoslab } from "@styles/fonts";
 import { GetSessionData } from "@utils/GetClientSession";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
 export default function Page() {
@@ -11,7 +12,11 @@ export default function Page() {
     const cartlength = useSelector(SelectCartLength);
     if (status === 'unauthenticated') {
         return <div>
-            <button className="ripple">Login first to see your products</button>
+            <Link
+                href='/loginpage'
+                className="bg-orange-100 text-orange-500 py-10 font-[30px] text-[30px] px-5">
+                Please Login to view your cart items
+            </Link>
         </div>
     }
     return (
