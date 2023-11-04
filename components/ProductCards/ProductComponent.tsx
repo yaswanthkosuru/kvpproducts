@@ -5,8 +5,11 @@ import ProductsPrefetch from '@components/Skeletons/ProductsPrefetch';
 import Link from 'next/link';
 import { CldImage } from 'next-cloudinary';
 import { selectallproducts, selectproductstatus } from '@app/redux/feautres/products/product-slice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { SelectOrders, getorders } from '@app/redux/feautres/orders/orderslice';
+import { AppDispatch } from '@app/redux/store';
+import { GetSessionData } from '@utils/GetClientSession';
 export default function Product_Component() {
     const products = useSelector(selectallproducts);
     const status = useSelector(selectproductstatus);
@@ -14,8 +17,15 @@ export default function Product_Component() {
     useEffect(() => {
         setIsloading(status);
     }, [status])
+    const orders = useSelector(SelectOrders);
+    const { session, status: authstate } = GetSessionData();
+    const dispatch = useDispatch<AppDispatch>();
+    useEffect(() => {
+        if (!orders && authstate === 'authenticated') {
+            dispatch(getorders());
+        }
+    }, []);
     const productCards = products?.map((product, index) => {
-
         const { name, description, imageUrls, price, _id, overallrating, usersrated } = product;
         const rating = Math.round(overallrating / usersrated);
         return (
@@ -37,11 +47,20 @@ export default function Product_Component() {
                                 />
                             </div>
                             <div className='col-span-6 my-auto '>
-                                <span className=" font-semibold">{name.toUpperCase()}</span>
-                                <p className="truncate" >{description}</p>
-                                <span className=' font-medium text-[20px]'>&#8377;{price}</span>
+                                <span className=" font-bold">{name.toUpperCase()}</span>
+                                <p className="truncate font-semibold" >{description}</p>
+                                {orders?.length > 0 ?
+                                    (<div>
+                                        <span className=' font-medium text-[20px mr-2'>&#8377;{price}  </span>
+                                    </div>
+                                    )
+                                    : (
+                                        <div>
+                                            <span className=' font-medium text-[20px]  decoration-rose-500 line-through decoration-1 mr-2'>&#8377;{price}  </span>
+                                            <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
+                                        </div>
+                                    )}
                                 <Fivestar rating={rating} />
-                                <span className='text-[8px] text-gray-400'>upto</span>65% off <span className='text-gray-400 text-[8px]'> on first order</span>
                             </div>
 
                         </div>
@@ -68,7 +87,17 @@ export default function Product_Component() {
                         <div className={`mt-4 ${roboto.className} ${robotoslab.className} ${inter.className}`}>
                             <span className='font-semibold text-md'>{name.toUpperCase()}</span>
                             <p className=' truncate'>{description}</p>
-                            <span className=' font-extrabold'>&#8377;{price}</span>
+                            {orders?.length > 0 ?
+                                (<div>
+                                    <span className=' font-medium text-[20px mr-2'>&#8377;{price}  </span>
+                                </div>
+                                )
+                                : (
+                                    <div>
+                                        <span className=' font-medium text-[20px]  decoration-rose-500 line-through decoration-1 mr-2'>&#8377;{price}  </span>
+                                        <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
+                                    </div>
+                                )}
                         </div>
                     </Link>
                 </div>

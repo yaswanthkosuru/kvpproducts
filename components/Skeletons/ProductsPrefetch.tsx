@@ -25,7 +25,7 @@ const ProductsPrefetch = () => {
             <div
                 key={index}
                 className="flex flex-col gap-4 p-6">
-                <div className=" animate-pulse w-full h-[150px] rounded-md bg-gray-200"></div>
+                <div className=" animate-pulse w-full h-[175px] rounded-md bg-gray-200"></div>
                 <div className=" animate-pulse  w-[90%] h-4 rounded-md bg-gray-200"></div>
                 <div className=" animate-pulse  w-2/5 h-4 rounded-md bg-gray-200"></div>
             </div>
