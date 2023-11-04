@@ -48,7 +48,7 @@ const CartProductComponent = () => {
             </span>
             <div className='flex gap-2 justify-start items-center'>
               <span className='font-medium'>quantity</span>
-              <div className='flex gap-3 border border-gray-600  bg-gradient-to-l from-violet-400 to-indigo-500   rounded-xl text-white'>
+              <div className='flex gap-3 border bg-gradient-to-r from-rose-100 to-teal-100  rounded-xl '>
                 <button
                   className='font-bold text-[25px]  bg-white rounded-xl text-black  px-3'
                   onClick={() => handleupdatecart({ p_id: product._id as string, increment: false })}

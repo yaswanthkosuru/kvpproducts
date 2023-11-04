@@ -32,27 +32,28 @@ export default function Page() {
     }, [CartStatus])
 
 
-    if (!product && loadingstatus === 'Loading') {
-        return <div><ProductPrefetch /></div>
-    }
 
     return (
         <div className='mt-4 sm:mx-10'>
-            {loadingstatus === 'Loading' && <DisableandLoadingComponent />}
-            <div className='flex max-m:flex-col  sm:gap-4  '>
-                <SwiperImagecomponent
-                    imageUrls={imageUrls}
-                />
-                <ProductDetailsComponent product={product} />
-            </div>
-            <div className='grid grid-cols-2 m:w-[55%] gap-4'>
-                <AddtoCartComponent />
-                <BuynowComponent />
+            {!product && loadingstatus === 'Loading' && <ProductPrefetch />}
+            {product && loadingstatus === 'Loading' && <DisableandLoadingComponent />}
+            {product && <div>
+                <div className='flex max-m:flex-col  sm:gap-4  '>
+                    <SwiperImagecomponent
+                        imageUrls={imageUrls}
+                    />
+                    <ProductDetailsComponent product={product} />
+                </div>
+                <div className='grid grid-cols-2 m:w-[55%] gap-4'>
+                    <AddtoCartComponent />
+                    <BuynowComponent />
+                    <div className='font-bold text-[24px]'>
+                        Reviews:
+                    </div>
+                </div>
+            </div>}
 
-            </div>
-            <div className='font-bold text-[24px]'>
-                Reviews:
-            </div>
+
         </div>
     )
 

@@ -9,13 +9,13 @@ const ProductsPrefetch = () => {
                 key={index}
                 className="grid grid-cols-10 gap-4">
                 <div className='col-span-4 rounded-md'>
-                    <div className='animate-pulse h-[150px] w-full rounded-md bg-gradient-to-r from-rose-100 to-teal-100'></div>
+                    <div className='animate-pulse h-[150px] w-full rounded-md bg-gray-200'></div>
                 </div>
                 <div className='col-span-6  flex flex-col gap-2  justify-between'>
-                    <div className='animate-pulse h-4 w-[95%] bg-gradient-to-r from-rose-100 to-teal-100 rounded-sm'></div>
-                    <div className='animate-pulse h-4 w-[85%] bg-gradient-to-r from-rose-100 to-teal-100 rounded-sm'></div>
-                    <div className='animate-pulse h-5 w-[40%] bg-gradient-to-r from-rose-100 to-teal-100 rounded-sm'></div>
-                    <div className='animate-pulse h-4 w-[88%] bg-gradient-to-r from-rose-100 to-teal-100 rounded-sm'></div>
+                    <div className='animate-pulse h-4 w-[95%] bg-gray-200 rounded-sm'></div>
+                    <div className='animate-pulse h-4 w-[85%] bg-gray-200 rounded-sm'></div>
+                    <div className='animate-pulse h-5 w-[40%] bg-gray-200 rounded-sm'></div>
+                    <div className='animate-pulse h-4 w-[88%] bg-gray-200 rounded-sm'></div>
                 </div>
             </div>
         )
@@ -25,9 +25,9 @@ const ProductsPrefetch = () => {
             <div
                 key={index}
                 className="flex flex-col gap-4 p-6">
-                <div className=" animate-pulse w-full h-[150px] rounded-md bg-gradient-to-r from-rose-100 to-teal-100"></div>
-                <div className=" animate-pulse  w-[90%] h-4 rounded-md bg-gradient-to-r from-rose-100 to-teal-100"></div>
-                <div className=" animate-pulse  w-2/5 h-4 rounded-md bg-gradient-to-r from-rose-100 to-teal-100"></div>
+                <div className=" animate-pulse w-full h-[150px] rounded-md bg-gray-200"></div>
+                <div className=" animate-pulse  w-[90%] h-4 rounded-md bg-gray-200"></div>
+                <div className=" animate-pulse  w-2/5 h-4 rounded-md bg-gray-200"></div>
             </div>
         )
     })

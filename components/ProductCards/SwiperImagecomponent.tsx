@@ -9,15 +9,39 @@ import 'swiper/css/thumbs';
 
 // import required modules
 import { FreeMode, Mousewheel, Navigation, Pagination, Scrollbar, Thumbs } from 'swiper/modules';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CldImage } from 'next-cloudinary';
+import { SelectCartStatus } from '@app/redux/feautres/cart/cartslice';
+import { selectproductwithid } from '@app/redux/feautres/products/product-slice';
+import { RootState, AppDispatch } from '@app/redux/store';
+import ProductPrefetch from '@components/Skeletons/productprefetch';
+import { useParams } from 'next/navigation';
+import { useSelector, useDispatch } from 'react-redux';
 
 type props = {
     imageUrls: string[]
 }
 const SwiperImagecomponent = ({ imageUrls }: props) => {
-    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass>();
+    const { product_id } = useParams();
 
+    const id = product_id as string;
+    console.log(id, 'pageproductid');
+
+    const product = useSelector((state: RootState) => selectproductwithid(state, id));
+    console.log(product, 'page p/pid');
+
+    const dispatch = useDispatch<AppDispatch>();
+    const CartStatus = useSelector(SelectCartStatus);
+    const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>();
+
+    useEffect(() => {
+        setloadingstatus(CartStatus);
+    }, [CartStatus])
+
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass>();
+    if (!product && loadingstatus === 'Loading') {
+        return <div><ProductPrefetch /></div>
+    }
     return (
         <>
             <div className='hidden  lg:w-[18%] lg:inline-block'>
