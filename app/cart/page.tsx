@@ -11,7 +11,7 @@ export default function Page() {
     const { session, status } = GetSessionData();
     const cartlength = useSelector(SelectCartLength);
     if (status === 'unauthenticated') {
-        return <div>
+        return <div className="flex items-center justify-center h-48">
             <Link
                 href='/loginpage'
                 className="bg-orange-100 text-orange-500 py-2 font-[20px] text-[30px] px-2">
