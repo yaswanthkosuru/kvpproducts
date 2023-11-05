@@ -77,19 +77,11 @@
   text-transform: uppercase;
   cursor: pointer;
   color: white;
-  background-color: #2196f3;
-
+  font-weight: bold;
+  background-color: rgb(96, 99, 242);
   box-shadow: 0 0 4px #999;
   background-position: center;
   transition: background 0.8s;
-}
-.ripple:hover {
-  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-}
-.ripple:active {
-  background-color: #6eb9f7;
-  background-size: 100%;
-  transition: background 0s;
 }
 
 

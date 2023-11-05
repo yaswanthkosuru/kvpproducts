@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import loginpage from '@public/assets/landing.jpg'
-import { inter, merriweather, opensans, ptserif, roboto, ubuntu } from "@styles/fonts";
+import { inter, merriweather, opensans, ptserif, roboto, robotoslab, ubuntu } from "@styles/fonts";
 import { BuiltInProviderType } from "next-auth/providers";
 import { store } from "@app/redux/store";
 
@@ -49,7 +49,7 @@ const Page = () => {
                         />
                     </div>
                     <div className="   ">
-                        <div className={`font-extrabold text-[30px] ${inter.className}  ${ptserif.className}`}>
+                        <div className={`font-extrabold text-[30px] ${roboto.className}  ${robotoslab.className}`}>
                             So, what are you waiting for?<br />
                             Let's get started!<br />
                             Log in now and nourish your
@@ -71,7 +71,7 @@ const Page = () => {
                                                 e.preventDefault();
                                                 await signIn(provider.id);
                                             }}
-                                            className='bg-green-500 text-white px-4 flex justify-center flex-col font-medium py-2 rounded-md active:bg-green-700'
+                                            className='bg-blue-700 text-white px-4 flex justify-center flex-col font-medium py-2 rounded-md active:bg-blue-900'
                                         >
                                             SIGN IN WITH GOOGLE
                                         </button>
@@ -97,7 +97,7 @@ const Page = () => {
             <div className="block m:hidden">
                 <div className="mt-4 mx-1">
                     <div className="">
-                        <div className={`text-[20px] ${opensans.className} ${merriweather.className}`}>
+                        <div className={`text-[20px] ${robotoslab.className} ${robotoslab.className}`}>
                             So, what are you waiting for?<br />
                             Let's get started!<br />
                             Log in now and nourish your
@@ -105,7 +105,7 @@ const Page = () => {
                             handpicked just for you. 🍠🥦
                         </div>
                         {status === 'loading' ? (
-                            <div className='text-blue-500 cursor-wait bg-white border '>
+                            <div className='text-blue-500 cursor-wait bg-white border py-4 px-2 '>
                                 SIGN IN WITH GOOGLE
                             </div>
                         ) : (
@@ -119,7 +119,7 @@ const Page = () => {
                                                 e.preventDefault();
                                                 await signIn(provider.id);
                                             }}
-                                            className='bg-green-500 text-[14px]  font-bold text-white px-2 flex justify-start flex-col  py-1 items-start active:bg-green-700'
+                                            className='bg-blue-500 text-[14px]  font-bold text-white px-4 flex justify-start flex-col  py-2 items-start active:bg-blue-900'
                                         >
                                             SIGN IN WITH GOOGLE
                                         </button>

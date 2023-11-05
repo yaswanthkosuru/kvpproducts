@@ -11,7 +11,7 @@ const ProductsPrefetch = () => {
                 <div className='col-span-4 rounded-md'>
                     <div className='animate-pulse h-[150px] w-full rounded-md bg-gray-200'></div>
                 </div>
-                <div className='col-span-6  flex flex-col gap-2  justify-between'>
+                <div className='col-span-6  flex flex-col gap-2 my-4 justify-between'>
                     <div className='animate-pulse h-4 w-[95%] bg-gray-200 rounded-sm'></div>
                     <div className='animate-pulse h-4 w-[85%] bg-gray-200 rounded-sm'></div>
                     <div className='animate-pulse h-5 w-[40%] bg-gray-200 rounded-sm'></div>

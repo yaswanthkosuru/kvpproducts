@@ -36,8 +36,8 @@ export default function Product_Component() {
                 {/* mobile version */}
                 <div className='sm:hidden block'>
                     <Link href={`/product/${_id}`}>
-                        <div className='grid bg-white grid-cols-10 gap-4'>
-                            <div className=' col-span-4   rounded-md '>
+                        <div className='grid bg-white grid-cols-10 '>
+                            <div className=' col-span-4   rounded-md mr-4'>
                                 <CldImage
                                     src={imageUrls[0]}
                                     width={600}
@@ -56,7 +56,7 @@ export default function Product_Component() {
                                     )
                                     : (
                                         <div>
-                                            <span className=' font-medium text-[20px]  decoration-rose-500 line-through decoration-1 mr-2'>&#8377;{price}  </span>
+                                            <span className=' font-medium text-[20px]  decoration-rose-500 line-through  mr-2'>&#8377;{price}  </span>
                                             <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
                                         </div>
                                     )}
@@ -94,7 +94,7 @@ export default function Product_Component() {
                                 )
                                 : (
                                     <div>
-                                        <span className=' font-medium text-[20px]  decoration-rose-500 line-through decoration-1 mr-2'>&#8377;{price}  </span>
+                                        <span className=' font-medium text-[20px]  decoration-rose-500 line-through  mr-2'>&#8377;{price}  </span>
                                         <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
                                     </div>
                                 )}

@@ -3,15 +3,26 @@ import '@styles/globals.css'
 import { useDispatch, } from 'react-redux'
 import { AppDispatch } from '@app/redux/store'
 import { AddCartItem, } from '@app/redux/feautres/cart/cartslice'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { GetSessionData } from '@utils/GetClientSession'
 
 const AddtoCartComponent = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { product_id } = useParams();
     const p_id = product_id as string;
-
+    const { status, session } = GetSessionData();
+    const router = useRouter();
     const Addtocart = async () => {
-        dispatch(AddCartItem({ p_id }))
+        if (status === 'unauthenticated') {
+
+            router.push('/loginpage');
+        }
+        else if (status === 'authenticated') {
+            dispatch(AddCartItem({ p_id }))
+        }
+        else {
+            alert('please wait... and try again');
+        }
     }
 
     return (

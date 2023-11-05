@@ -51,7 +51,7 @@ const Page = ({ }) => {
 
 
             <div className='flex justify-center font-semibold'>
-                <button className='flex justify-between bg-gradient-to-l from-violet-500 to-indigo-700  text-white py-2 px-4 w-full mx-2 ' onClick={() => { setAddressdisplay((prev) => !prev) }}>
+                <button className='flex justify-between bg-gradient-to-r from-rose-100 to-teal-100   py-2 px-4 w-full mx-2 ' onClick={() => { setAddressdisplay((prev) => !prev) }}>
                     <div>Step1: Check Your Address</div>
                     <DownArrowSVG />
                 </button>
@@ -63,7 +63,7 @@ const Page = ({ }) => {
                 }
             </div>
             <div className='flex justify-center font-semibold'>
-                <button className='flex justify-between bg-gradient-to-l from-violet-500 to-indigo-700  text-white py-2 px-4 w-full mx-2 ' onClick={() => { setproductsdisplay((prev) => !prev) }}>
+                <button className='flex justify-between bg-gradient-to-r from-rose-100 to-teal-100   py-2 px-4 w-full mx-2 ' onClick={() => { setproductsdisplay((prev) => !prev) }}>
                     <div>Step2:Cross Check Products</div>
                     <DownArrowSVG />
                 </button>
@@ -75,7 +75,7 @@ const Page = ({ }) => {
                 }
             </div>
             <div className='flex justify-center font-semibold'>
-                <button className='flex justify-between bg-gradient-to-l from-violet-500 to-indigo-700  text-white  py-2 px-4 w-full mx-2 ' onClick={() => { setpaymentinfodisplay((prev) => !prev) }}>
+                <button className='flex justify-between bg-gradient-to-r from-rose-100 to-teal-100    py-2 px-4 w-full mx-2 ' onClick={() => { setpaymentinfodisplay((prev) => !prev) }}>
                     <div>Step3:Payment Info</div>
                     <DownArrowSVG />
                 </button>

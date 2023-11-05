@@ -33,7 +33,7 @@ const MobileNav = () => {
             <div className='relative top-0'>
 
 
-                <div className="w-full py-2 border bg-white rounded-md flex flex-row gap-2 justify-between items-center">
+                <div className="w-full h-14 border bg-white rounded-md flex flex-row gap-2 justify-between items-center">
                     <Image
                         src={searchicon}
                         width={36}
@@ -43,6 +43,7 @@ const MobileNav = () => {
                     />
                     <Link
                         href='/search'
+                        className='w-full'
                     >
                         <input
                             placeholder="search products"
@@ -55,7 +56,7 @@ const MobileNav = () => {
                             <div>
                                 <Link
                                     href='/loginpage'
-                                    className="bg-blue-700 h-full  py-[2px] px-3 text-white rounded-md font-medium" >
+                                    className="bg-blue-700 h-full  py-2 px-4 text-white rounded-md font-medium" >
                                     LOGIN
                                 </Link>
                             </div>

@@ -31,7 +31,7 @@ const CheckoutProductComponent = () => {
                 <div className='col-span-5'>
                     {product.name}
                     <div className=''>
-                        <div className=' line-clamp-2'>
+                        <div className='line-clamp-1'>
                             {product.description}
                         </div>
                     </div>
@@ -39,8 +39,8 @@ const CheckoutProductComponent = () => {
                     <span className='font-bold'>
                         &#8377; {parseInt(product.price as string)}
                     </span>
-                    <div className=' text-lg '>
-                        delivery fee:&#8377;60
+                    <div className=' '>
+                        DELIVERY FEE:&#8377;60
                     </div>
 
                 </div>
