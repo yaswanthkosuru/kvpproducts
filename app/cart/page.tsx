@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 export default function Page() {
     const { session, status } = GetSessionData();
     const cartlength = useSelector(SelectCartLength);
+    console.log(cartlength, 'cartlength');
+
     if (status === 'unauthenticated') {
         return <div className="flex items-center justify-center h-48">
             <Link

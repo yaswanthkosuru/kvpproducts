@@ -8,6 +8,8 @@ import Product_Component from '@components/ProductCards/ProductComponent';
 import { ProductType } from '@models/ProductModel';
 import FilteredProductComponent from '@components/ProductCards/FilteredProductComponent';
 import Link from 'next/link';
+import { playfairdisplay, roboto } from '@styles/fonts';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
     const products = useSelector(selectallproducts);
@@ -23,17 +25,28 @@ const Page = () => {
         setfilterproducts(temparr);
         setinputval(target.value);
     }
+    const router = useRouter()
+    const handlebackclick = () => {
+        router.back();
+    }
 
     return (
         <div>
-            <input
-                className='border border-gray-900 w-full h-10  focus:outline-none'
-                placeholder='search products'
-                onChange={handlechange}
-                value={inputval}
-            >
-            </input>
 
+            <div className='flex m-1'>
+                <button onClick={handlebackclick} className='border border-gray-500 h-10 px-2 font-bold'>
+                    <span className={`text-xl ${roboto.className} ${playfairdisplay.className}`}>&#8592;</span>
+                </button>
+                <input
+                    className='border border-gray-900 w-full h-10  pl-2 focus:outline-none'
+                    placeholder='search products'
+                    onChange={handlechange}
+                    value={inputval}
+                >
+                </input>
+
+
+            </div>
             <FilteredProductComponent products={filterproducts} />
         </div>
     )

@@ -28,6 +28,7 @@ const ProductsPrefetch = () => {
                 <div className=" animate-pulse w-full h-[175px] rounded-md bg-gray-200"></div>
                 <div className=" animate-pulse  w-[90%] h-4 rounded-md bg-gray-200"></div>
                 <div className=" animate-pulse  w-2/5 h-4 rounded-md bg-gray-200"></div>
+
             </div>
         )
     })
@@ -35,6 +36,7 @@ const ProductsPrefetch = () => {
         <div>
             <div className='sm:hidden flex flex-col gap-6'>
                 {mobile_version}
+
             </div>
             {/* Skeleton loader for desktop version */}
             <div className=" hidden sm:grid sm:grid-cols-2  m:grid  m:grid-cols-3 gap-4 ">

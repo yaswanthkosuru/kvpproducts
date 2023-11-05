@@ -96,6 +96,6 @@ export const CartSlice = createSlice({
 })
 
 export const SelectCartItems = (state: RootState) => state.cartreducer.items;
-export const SelectCartLength = (state: RootState) => state.cartreducer.cartlength;
+export const SelectCartLength = (state: RootState) => state.cartreducer.cartlength || 0;
 export const SelectCartStatus = (state: RootState) => state.cartreducer.status;
 export default CartSlice.reducer
