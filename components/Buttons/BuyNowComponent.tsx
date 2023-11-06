@@ -1,28 +1,41 @@
+import { GetSessionData } from "@utils/GetClientSession";
 import Link from "next/link";
-import { useParams, usePathname } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 const BuynowComponent = () => {
     const { product_id } = useParams();
     const path = usePathname()
     var url = '';
     console.log(path.startsWith('/product'), 'is startswith /product');
-    if (path.startsWith('/product')) {
-        url = '/checkout/' + product_id
-    }
-    else if (path.startsWith('/cart')) {
-        url = '/checkout/cart'
-    }
     const id = product_id as string;
+    const { status } = GetSessionData();
+    const router = useRouter();
+    const handlebuynowclick = () => {
+        console.log('clicked');
+
+        if (status === 'unauthenticated') {
+            router.push('/loginpage');
+        }
+        else if (status === 'authenticated') {
+            if (path.startsWith('/product')) {
+                router.push('/checkout/' + product_id);
+            }
+            else if (path.startsWith('/cart')) {
+                router.push('/checkout/cart');
+            }
+        }
+        else {
+            alert('please wait ... and try again');
+        }
+    }
     return (
-        <Link
-            className="flex justify-center"
-            href={url}
+
+        <button
+            onClick={handlebuynowclick}
+            className='ripple w-full max-w-md mx-auto'
         >
-            <button
-                className='ripple w-full max-w-sm mx-auto'
-            >
-                Buy Now
-            </button>
-        </Link>
+            Buy Now
+        </button>
+
     )
 }
 

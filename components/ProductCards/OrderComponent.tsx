@@ -2,12 +2,12 @@ import { SelectOrders, getorders } from '@app/redux/feautres/orders/orderslice';
 import { selectallproducts } from '@app/redux/feautres/products/product-slice';
 import { AppDispatch } from '@app/redux/store'
 import DownArrowSVG from '@components/icons/Downarrowsvg';
-import { itemtype } from '@models/Cart_Model';
 import { inter, merriweather, playfairdisplay, roboto, robotoslab } from '@styles/fonts';
 import { CldImage } from 'next-cloudinary';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { OrderProducts } from './OrderProducts';
+import RatingInputUserForm from '@components/Forms/RatingForm';
 
 const OrderComponent = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -16,9 +16,10 @@ const OrderComponent = () => {
     }, [])
     const orders = useSelector(SelectOrders);
     const mp = {};
-    //usestate for moredetails
-    orders?.forEach(order => mp[order._id.toString()] = false)
-    const [moredetails, setmoredetails] = useState(mp);
+    //usestate for moredetails and reviews 
+
+    const [moredetails, setmoredetails] = useState({});
+
     const styledorders = orders?.map((order, index) => {
         const currentDate = new Date(order.time);
         const formattedDate = currentDate.toLocaleDateString();
@@ -31,7 +32,7 @@ const OrderComponent = () => {
         return (
             <div
                 key={index}
-                className=' py-2 max-w-md mx-auto  bg-gradient-to-l from-stone-100 to-stone-300  text-black '>
+                className=' py-2 max-w-md mx-auto  text-gray-800 bg-slate-200/60 '>
                 <div className='text-center  font-medium mx-auto'>
 
                     <span className=''>
@@ -51,6 +52,8 @@ const OrderComponent = () => {
                     <div className='text-[18px] '>more details</div>
                     <DownArrowSVG />
                 </div>
+
+
                 {
                     moredetails[order._id.toString()] && (
                         <div className={`${roboto.className} ${robotoslab.className} ${inter.className} bg-white/60 mx-4 px-4  form-transition`}>
@@ -67,8 +70,6 @@ const OrderComponent = () => {
                                     {order.ordertype}
                                 </span>
                             </div>
-
-
                             <div >
                                 AddressDetails:
                                 <span >
@@ -84,6 +85,7 @@ const OrderComponent = () => {
                         </div>
                     )
                 }
+
 
 
             </div>

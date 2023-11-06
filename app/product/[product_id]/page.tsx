@@ -44,8 +44,9 @@ export default function Page() {
                     />
                     <ProductDetailsComponent product={product} />
                 </div>
-                <div className='grid grid-cols-2 m:w-[55%] gap-4'>
+                <div className='grid-cols-1 m:grid m:grid-cols-2 m:w-[55%] gap-4'>
                     <AddtoCartComponent />
+                    <div className='m:hidden m-4'></div>
                     <BuynowComponent />
                     <div className='font-bold text-[24px]'>
                         Reviews:

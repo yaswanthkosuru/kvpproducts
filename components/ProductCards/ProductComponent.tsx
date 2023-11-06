@@ -26,7 +26,7 @@ export default function Product_Component() {
         }
     }, []);
     const productCards = products?.map((product, index) => {
-        const { name, description, imageUrls, price, _id, overallrating, usersrated } = product;
+        const { name, description, imageUrls, price, _id, overallrating, usersrated, units } = product;
         const rating = Math.round(overallrating / usersrated);
         return (
             <div
@@ -36,7 +36,7 @@ export default function Product_Component() {
                 {/* mobile version */}
                 <div className='sm:hidden block'>
                     <Link href={`/product/${_id}`}>
-                        <div className='grid bg-white grid-cols-10 '>
+                        <div className='grid bg-white  grid-cols-10 '>
                             <div className=' col-span-4   rounded-md mr-4'>
                                 <CldImage
                                     src={imageUrls[0]}
@@ -48,16 +48,16 @@ export default function Product_Component() {
                             </div>
                             <div className='col-span-6 my-auto '>
                                 <span className=" font-bold">{name.toUpperCase()}</span>
-                                <p className="truncate font-semibold" >{description}</p>
+                                <p className="truncate " >{description}</p>
                                 {orders?.length > 0 ?
                                     (<div>
-                                        <span className=' font-medium text-[20px mr-2'>&#8377;{price}  </span>
+                                        <span className=' font-bold  text-[20px]  mr-2'>&#8377;{price} <span className='text-base font-normal'> per  {units}</span> </span>
                                     </div>
                                     )
                                     : (
                                         <div>
-                                            <span className=' font-medium text-[20px]  decoration-rose-500 line-through  mr-2'>&#8377;{price}  </span>
-                                            <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
+                                            <span className=' font-semibold  text-[25px]    decoration-rose-500 line-through  mr-2'>&#8377;{price}  </span>
+                                            <span className=' font-semibold  text-[25px] '>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))}<span className='text-base font-normal'> per {units}</span> <span className='text-[8px] text-gray-400'> just for you</span></span>
                                         </div>
                                     )}
                                 <Fivestar rating={rating} />
@@ -85,17 +85,17 @@ export default function Product_Component() {
                             </div>
                         </div>
                         <div className={`mt-4 ${roboto.className} ${robotoslab.className} ${inter.className}`}>
-                            <span className='font-semibold text-md'>{name.toUpperCase()}</span>
+                            <span className='font-medium text-md'>{name.toUpperCase()}</span>
                             <p className=' truncate'>{description}</p>
                             {orders?.length > 0 ?
                                 (<div>
-                                    <span className=' font-medium text-[20px mr-2'>&#8377;{price}  </span>
+                                    <span className=' font-medium text-[20px] mr-2'>&#8377;{price} <span> per  {units}</span> </span>
                                 </div>
                                 )
                                 : (
                                     <div>
                                         <span className=' font-medium text-[20px]  decoration-rose-500 line-through  mr-2'>&#8377;{price}  </span>
-                                        <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
+                                        <span className=' font-medium text-[20px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))}<span>per  {units}</span> <span className='text-[8px] text-gray-400'> just for you</span></span>
                                     </div>
                                 )}
                         </div>

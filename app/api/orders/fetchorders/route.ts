@@ -19,7 +19,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         user_id: new ObjectId(User._id),
     }).toArray();
     console.log(Order, 'orderdetails');
+    //retrun reverse order
 
-    return NextResponse.json({ order_details: Order }, { status: 200, statusText: 'success' });
+    return NextResponse.json({ order_details: Order.reverse() }, { status: 200, statusText: 'success' });
 
 }

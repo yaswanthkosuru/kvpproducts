@@ -16,7 +16,6 @@ const Page = () => {
     const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>>();
     useEffect(() => {
         if (status === 'authenticated') {
-
             store.dispatch(getaddress());
             router.push('/products');
         }

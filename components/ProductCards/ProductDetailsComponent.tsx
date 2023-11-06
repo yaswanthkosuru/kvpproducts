@@ -13,30 +13,35 @@ type props = {
 const ProductDetailsComponent = ({ product }: props) => {
     const orders = useSelector(SelectOrders);
     const rating = Math.round(product?.overallrating / product?.usersrated);
+    if (!product) {
+        return <></>
+    }
+    const { name, description, price, units, caloriespercent, usersrated, overallrating } = product;
+
     return (
-        <div className='w-full '>
+        <div className='w-full text-gray-800'>
             <div className={`${roboto.className} ${robotoslab.className}  text-gray-700 font-[900px] flex flex-col  justify-center gap-2 my-4 text-justify`}>
                 <div className="  shadow-slate-100">
-                    <span className=' text-2xl font font-semibold'>{product?.name?.toUpperCase()}</span><br />
-                    <span className='font-medium'> {product?.description}</span>
+                    <span className=' text-2xl font font-semibold'>{name?.toUpperCase()}</span><br />
+                    <span className='font-medium text-xl'> {description}</span>
                 </div>
                 <div></div>
                 {orders?.length > 0 ?
                     (<div>
-                        <span className=' font-bold text-[28px] mr-2'>&#8377;{product.price}  </span>
+                        <span className=' font-bold text-[28px] mr-2'>&#8377;{price} <span> per  {units}</span> </span>
                     </div>
                     )
                     : (
                         <div>
-                            <span className=' font-bold  text-[28px]  decoration-rose-500 line-through decoration-2 mr-2'>&#8377;{product.price}  </span>
-                            <span className=' font-bold text-[28px]'>&#8377;{parseInt(product.price as string) - Math.ceil(0.6 * parseInt(product.price as string))} <span className='text-[8px] text-gray-400'> just for you</span></span>
+                            <span className=' font-bold  text-[28px]  decoration-rose-500 line-through decoration-2 mr-2'>&#8377;{price} </span>
+                            <span className=' font-bold text-[28px]'>&#8377;{parseInt(price as string) - Math.ceil(0.6 * parseInt(price as string))} <span> per  {units}</span><span className='text-[8px] text-gray-400'> just for you</span></span>
                         </div>
                     )}
-                <span className=' text-[18px]'>calories obtained:{product?.caloriespercent} per 100 g</span>
+                <span className=' text-[18px]'>calories obtained:{caloriespercent} per 100 g</span>
                 <div>
                     <Fivestar rating={rating} />
                     <span className='font-bold'>
-                        No of Users rated:{product?.usersrated}
+                        No of Users rated:{usersrated}
                     </span>
                 </div>
 

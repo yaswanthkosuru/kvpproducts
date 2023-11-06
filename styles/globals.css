@@ -71,7 +71,7 @@
 .ripple {
   border: none;
   outline: none;
-  border-radius: 2px;
+  border-radius: 25px;
   padding: 12px 18px;
   font-size: 16px;
   text-transform: uppercase;

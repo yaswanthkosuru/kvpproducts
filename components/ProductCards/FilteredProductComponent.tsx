@@ -12,7 +12,7 @@ const FilteredProductComponent = ({ products }: { products: ProductType[] }) => 
         <div>
             {
                 products?.map((product, index) => {
-                    const { name, description, imageUrls, price, _id, overallrating, usersrated } = product;
+                    const { name, description, imageUrls, price, _id, overallrating, usersrated, units } = product;
                     const rating = Math.round(overallrating / usersrated);
                     return (
                         <div
@@ -64,7 +64,7 @@ const FilteredProductComponent = ({ products }: { products: ProductType[] }) => 
                                     <div className={`mt-4 ${roboto.className} ${robotoslab.className} ${inter.className}`}>
                                         <span className='font-semibold text-md'>{name.toUpperCase()}</span>
                                         <p className=' truncate'>{description}</p>
-                                        <span className=' font-extrabold'>&#8377;{price}</span>
+                                        <span className=' font-extrabold'>&#8377;{price}/{units}</span>
                                     </div>
                                 </Link>
                             </div>
