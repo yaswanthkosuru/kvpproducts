@@ -1,10 +1,10 @@
 import { RootState } from '@app/redux/store';
-import { Reviewtype } from '@models/Review_Model';
+import { ReviewType } from '@models/Review_Model';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 
 interface initialstate {
-    Reviews: Reviewtype[],
+    Reviews: ReviewType[],
 }
 const initialState: initialstate = {
     Reviews: [],
