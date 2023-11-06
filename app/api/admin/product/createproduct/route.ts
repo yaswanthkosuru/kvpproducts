@@ -27,41 +27,38 @@ export async function POST(request: NextRequest, response: NextResponse) {
         price: formData.price,
         usersrated: 0,
         overallrating: 0,
-        stripe_product_id: '',
-        stripe_price_id: '',
         imageUrls: ImageUrls,
         caloriespercent: 20,
-        StockQuantity: formData.StockQuantity
+        StockQuantity: formData.StockQuantity,
+        units: 'kg',
     })
     console.log(productcreated);
-    const createdProduct = await stripe.products.create({
-        name: formData.name,
-        description: formData.description,
-        images: ImageUrls,
-        metadata: {
-            mongodb_id: productcreated.insertedId,
 
-        },
-    });
-    const price = await stripe.prices.create({
-        product: createdProduct.id,
-        currency: 'inr',
-        unit_amount: parseInt(formData.price as string) * 100,
-        metadata: {
-            mongodb_id: productcreated.insertedId,
-        },
-    });
-    const productupdate = await ProdctCollection.updateOne(
-        { _id: productcreated.insertedId },
-        {
-            $set: {
-                stripe_price_id: price.id,
-                stripe_product_id: createdProduct.id
-            }
-        }
-    )
-    console.log(productupdate, 'inside route createproduct')
     return NextResponse.json({ success: true })
 
-
 }
+// const createdProduct = await stripe.products.create({
+//     name: formData.name,
+//     description: formData.description,
+//     images: ImageUrls,
+//     metadata: {
+//         mongodb_id: productcreated.insertedId,
+
+//     },
+// const price = await stripe.prices.create({
+//     product: createdProduct.id,
+//     currency: 'inr',
+//     unit_amount: parseInt(formData.price as string) * 100,
+//     metadata: {
+//         mongodb_id: productcreated.insertedId,
+//     },
+// });
+// const productupdate = await ProdctCollection.updateOne(
+//     { _id: productcreated.insertedId },
+//     {
+//         $set: {
+//             stripe_price_id: price.id,
+//             stripe_product_id: createdProduct.id
+//         }
+//     }
+// )
