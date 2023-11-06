@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 
 interface initialstate {
-    Reviews: RevewType[],
+    Reviews: ReviewType[],
 }
 const initialState: initialstate = {
     Reviews: [],
