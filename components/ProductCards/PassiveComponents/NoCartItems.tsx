@@ -7,7 +7,7 @@ const NoCartItems = () => {
             <div className="flex justify-center flex-col items-center">
                 <svg
                     className=" relative opacity-20"
-                    id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg"
+                    id="visual" viewBox="0 0 900 600" width="300" height="400" xmlns="http://www.w3.org/2000/svg"
                     version="1.1"><g transform="translate(496.26805601281467 293.70804085935026)"><path d="M103.7 -83.4C129.2 -50.7 141.1 -7.9 135.6 36.8C130.1 81.6 107.1 128.2 70.6 145.2C34.1 162.2 -15.9 149.6 -78.7 131.6C-141.5 113.6 -217 90.2 -228 49.8C-239 9.4 -185.6 -48 -136.8 -86C-88.1 -123.9 -44 -142.5 -2.5 -140.5C39.1 -138.5 78.2 -116 103.7 -83.4" fill="blue"></path></g></svg>
                 <svg
                     className="absolute"
