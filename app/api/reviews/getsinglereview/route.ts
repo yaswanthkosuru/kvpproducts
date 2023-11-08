@@ -17,23 +17,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
     const { product_id, review, rating } = await req.json();
     const ReviewCollection = Database.collection<ReviewType>('reviews');
-    const prevreview = await ReviewCollection.findOneAndUpdate(
+    const prevreview = await ReviewCollection.findOne(
         {
             User_id: new ObjectId(User._id),
             Product_id: new ObjectId(product_id),
-        },
-        {
-            $set: {
-                User_id: new ObjectId(User._id),
-                Product_id: new ObjectId(product_id),
-                username: User.username,
-                review: review,
-                rating: rating,
-            }
-        },
-        { upsert: true }
-    );
-    return NextResponse.json({ sucess: true }, { status: 200 });
+        })
+    return NextResponse.json({ review: prevreview }, { status: 200 });
 
 
 }

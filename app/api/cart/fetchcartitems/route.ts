@@ -21,6 +21,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const usercart = await CartCollection.findOne({
         user_id: User._id,
     })
+
     return NextResponse.json({ items: usercart?.items }, { status: 200, headers: { 'Content-Type': 'application/json' } });
     //retrun array of cartitems
 }

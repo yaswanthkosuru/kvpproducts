@@ -19,20 +19,16 @@ const MobileNav = () => {
 
     return (
 
-        <div className="block m:hidden ">
+        <div className="block  m:hidden ">
             <div className="fixed bottom-0 left-0 right-0 z-50 ">
                 <div
-                    className="flex flex-row min-w-[320px] text-[12px] border-t  justify-between bg-white px-8 pb-2">
+                    className="flex flex-row min-w-[320px] text-[12px]  justify-between bg-white shadow-inner border-t-2 border-gray-100  px-8 pb-2">
                     <Home_component />
                     <Profile_component />
                     <Navcart />
-
-
                 </div>
             </div>
             <div className='relative top-0'>
-
-
                 <div className="w-full h-14 border bg-white rounded-md flex flex-row gap-2 justify-between items-center">
                     <Image
                         src={searchicon}

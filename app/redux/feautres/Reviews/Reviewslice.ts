@@ -4,18 +4,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 
 interface initialstate {
-    Reviews: ReviewType[],
+    Reviews: ReviewType | null,
 }
 const initialState: initialstate = {
-    Reviews: [],
+    Reviews: null,
 }
-export const getReviews = createAsyncThunk('api/getreviews', async ({ product_id }: { product_id: string }) => {
-    const response = await axios.post('/api/Reviews/getreviews', { product_id });
+export const fetchsinglereview = createAsyncThunk('api/getreviews', async ({ product_id }: { product_id: string }) => {
+    const response = await axios.post('/api/reviews/getsinglereview', { product_id });
     const res = await response.data;
     return res;
 })
 export const createreview = createAsyncThunk('/api/createreview', async ({ product_id, rating, review }: { product_id: string, rating: number, review: string }) => {
-    const response = await axios.post('/api/Reviews/createreview', { product_id, rating, review })
+    console.log('dispatching createreview');
+    const response = await axios.post('/api/reviews/createreview', { product_id, rating, review })
+    return response.data;
 })
 export const Productslice = createSlice({
     name: 'Reviewslice',
@@ -24,9 +26,10 @@ export const Productslice = createSlice({
     },
     extraReducers(builder) {
         builder
-            .addCase(getReviews.fulfilled, (state, action) => {
+            .addCase(createreview.fulfilled, (state, action) => {
+            })
+            .addCase(fetchsinglereview.fulfilled, (state, action) => {
                 console.log(action.payload, 'getReviews.fulfilled');
-
             })
     }
 

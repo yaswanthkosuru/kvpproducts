@@ -16,6 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session: Session = await getServerSession(handler) as Session;
 
 
+
   return (
     <html lang="en">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />

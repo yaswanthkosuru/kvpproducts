@@ -27,7 +27,7 @@ const CartProductComponent = () => {
     return (
       <div className={`${roboto.className} ${robotoslab.className}`} key={index}>
         <div className='grid grid-cols-9 '>
-          <div className='col-span-4 mr-2 h-28 max-h-28 bg-red-200  relative'>
+          <div className='col-span-4 mr-2 h-28 max-h-28   relative'>
             <CldImage
               src={product.imageUrls[0]}
               alt='none'
@@ -36,9 +36,9 @@ const CartProductComponent = () => {
             ></CldImage>
           </div>
           <div className='col-span-5'>
-            {product.name}
+            {product.name.toLocaleUpperCase()}
             <div className=''>
-              <div className=' line-clamp-2'>
+              <div className='line-clamp-1'>
                 {product.description}
               </div>
             </div>
@@ -47,10 +47,10 @@ const CartProductComponent = () => {
               &#8377; {parseInt(product.price as string) * QuantityMap.get(product._id)}
             </span>
             <div className='flex gap-2 justify-start items-center'>
-              <span className='font-medium'>quantity</span>
-              <div className='flex gap-3 border bg-gradient-to-r from-rose-100 to-teal-100  rounded-xl '>
+              <span className='font-medium'>Quantity</span>
+              <div className='flex  justify-between w-full mr-4 border bg-gradient-to-r from-rose-100 to-teal-100  rounded-xl '>
                 <button
-                  className='font-bold text-[25px]  bg-white rounded-xl text-black  px-3'
+                  className='font-bold text-[20px]  bg-white rounded-xl text-black  px-4'
                   onClick={() => handleupdatecart({ p_id: product._id as string, increment: false })}
                 >
                   -</button>
@@ -59,7 +59,7 @@ const CartProductComponent = () => {
                 </div>
                 <button
                   onClick={() => handleupdatecart({ p_id: product._id as string, increment: true })}
-                  className='font-bold bg-white text-[22px] rounded-xl text-black px-3
+                  className='font-bold bg-white text-[20px] rounded-xl text-gray-800 px-4
                   '>+</button>
               </div>
             </div>

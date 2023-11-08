@@ -6,109 +6,86 @@ import { SelectCartItems, SelectCartStatus } from '@app/redux/feautres/cart/cart
 import { CreateCartOrder, SelectOrderStatus } from '@app/redux/feautres/orders/orderslice';
 import { selectallproducts } from '@app/redux/feautres/products/product-slice';
 import { AppDispatch } from '@app/redux/store';
+import MultistepNextButton from '@components/Buttons/MultistepNextButton';
 
 import AddressForm from '@components/Forms/AddressForm';
+import MultiStepProgressBar from '@components/Forms/MultiStepProgressBar';
+import CouponComponent from '@components/ProductCards/CartCheckout/CouponComponent';
+
 import Paymentinfo from '@components/ProductCards/CartCheckout/PaymentInfo';
 import CartProductComponent from '@components/ProductCards/CartProductComponent';
 import DownArrowSVG from '@components/icons/Downarrowsvg';
+import { inter } from '@styles/fonts';
 
 import '@styles/globals.css';
+import { stat } from 'fs';
 import { useRouter } from 'next/navigation';
+import { type } from 'os';
 
 import React, { useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const initialState: checkoutcartstate = {
-    addressDisplay: false,
-    productsDisplay: false,
-    paymentInfoDisplay: false,
-    couponDisplay: false,
+    pageno: 1
 };
 
 // Define your reducer function
 const reducer = (state: checkoutcartstate, action: checkoutcartaction) => {
 
     switch (action.type) {
-
-        case 'ToggleAddress':
-            return { ...state, addressDisplay: !state.addressDisplay };
-        case 'ToggleProducts':
-            return { ...state, productsDisplay: !state.productsDisplay };
-        case 'TogglePaymentInfo':
-            return { ...state, paymentInfoDisplay: !state.paymentInfoDisplay };
-        case 'ToggleCouponDisplay':
-            return { ...state, couponDisplay: !state.couponDisplay };
-        default:
-            return state;
+        case 'setpageno':
+            return { ...state, pageno: action.payload };
     }
 };
 
 const Page = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-
     const cartitems = useSelector(SelectCartItems);
     const Address = useSelector(selectaddress);
     const Orderstatus = useSelector(SelectOrderStatus);
     const dispatchRedux = useDispatch<AppDispatch>();
     const router = useRouter();
-
-    const handleorderclick = () => {
+    const handleorderclick = async () => {
         if (!Address) {
-            console.log('please add address');
+            alert('please add address');
         } else if (!cartitems || cartitems.length <= 0) {
-            console.log('please add products');
-            alert('no items');
+            alert('please add products');
         } else {
-            dispatchRedux(CreateCartOrder());
-            if (Orderstatus === 'idle') {
-                router.push('/payment/success');
-            }
+            await dispatchRedux(CreateCartOrder());
+            router.push('/payment/success');
         }
     };
+    console.log(state.pageno, 'pageno');
 
     return (
-        <div className='flex flex-col mt-5 gap-4'>
-            <div className='flex justify-center font-semibold'>
-                <button className='flex justify-between bg-gradient-to-r from-rose-100 to-teal-100 py-2 px-4 w-full mx-2' onClick={() => dispatch({
-                    type: 'ToggleAddress',
+        <div>
+            <MultiStepProgressBar state={state} dispatch={dispatch} />
+            <div className='mt-5 mx-2'>
+                {
+                    {
+                        1: <div>
+                            <AddressForm />
+                            <MultistepNextButton state={state} dispatch={dispatch} />
+                        </div>,
+                        2: <div>
+                            <CartProductComponent />
+                            <MultistepNextButton state={state} dispatch={dispatch} />
+                        </div>,
+                        3: <div>
+                            <CouponComponent />
+                            <MultistepNextButton state={state} dispatch={dispatch} />
+                        </div>,
+                        4: <div>
+                            <Paymentinfo />
+                            <div className='flex justify-center'>
+                                <button onClick={handleorderclick} className='ripple w-full mt-4'>Order now</button>
 
-                })}>
-                    <div>Step1: Check Your Address</div>
-                    <DownArrowSVG />
-                </button>
+                            </div>
+                        </div>,
+                    }[state.pageno]
+                }
             </div>
-            <div className='mx-2'>
-                {state.addressDisplay && <div className='form-transition'><AddressForm /></div>}
-            </div>
-            <div className='flex justify-center font-semibold'>
-                <button className='flex justify-between bg-gradient-to-r from-rose-100 to-teal-100 py-2 px-4 w-full mx-2' onClick={() => dispatch({
-                    type: 'ToggleProducts',
 
-                })}>
-                    <div>Step2: Cross Check Products</div>
-                    <DownArrowSVG />
-                </button>
-            </div>
-            <div className='mx-2'>
-                {state.productsDisplay && <div className='form-transition'><CartProductComponent /></div>}
-            </div>
-            <div className='flex justify-center font-semibold'>
-                <button className='flex justify-between bg-gradient-to-r from-rose-100 to-teal-100 py-2 px-4 w-full mx-2' onClick={() => dispatch({
-                    type: 'TogglePaymentInfo',
-
-                })}>
-                    <div>Step3: Payment Info</div>
-                    <DownArrowSVG />
-                </button>
-            </div>
-            <div className='mx-2'>
-                {state.paymentInfoDisplay && <div className='form-transition'><Paymentinfo /></div>}
-            </div>
-            <div className='flex justify-center'>
-                <button onClick={handleorderclick} className='ripple w-1/2'>
-                    Order Now
-                </button>
-            </div>
         </div>
     );
 };

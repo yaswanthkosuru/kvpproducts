@@ -1,7 +1,13 @@
 import { ReviewType } from "@models/Review_Model"
 import { useForm, SubmitHandler } from "react-hook-form"
 import '@styles/globals.css'
-type Inputs = Omit<ReviewType, 'username'>;
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@app/redux/store";
+import { createreview } from "@app/redux/feautres/Reviews/Reviewslice";
+type Inputs = {
+    rating: number,
+    review: string
+};
 
 export default function RatingInputUserForm({ product_id }: { product_id: string }) {
     const {
@@ -10,13 +16,17 @@ export default function RatingInputUserForm({ product_id }: { product_id: string
         watch,
         formState: { errors },
     } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+    const dispatch = useDispatch<AppDispatch>();
+    const handlereviewsubmit: SubmitHandler<Inputs> = (data) => {
+        dispatch(createreview({ product_id: product_id, rating: data.rating, review: data.review }))
+        console.log(data)
 
+    }
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
         <form
             className="grid grid-flow-row  bg-blue-100/50 gap-4  px-2 mt-2"
-            onSubmit={handleSubmit(onSubmit)}>
+            onSubmit={handleSubmit(handlereviewsubmit)}>
             <label>Add Your Review  </label>
 
             <input

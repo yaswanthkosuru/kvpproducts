@@ -6,12 +6,9 @@ export type CartStoreType = {
     cartlength: number
 }
 export type checkoutcartstate = {
-    addressDisplay: boolean;
-    productsDisplay: boolean;
-    paymentInfoDisplay: boolean;
-    couponDisplay: boolean;
+    pageno: number;
 }
 export type checkoutcartaction = {
-    type: 'ToggleAddress' | 'ToggleProducts' | 'TogglePaymentInfo' | 'ToggleCouponDisplay'
+    type: 'setpageno'
     payload?: number
 }

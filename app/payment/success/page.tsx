@@ -12,13 +12,13 @@ const Page = () => {
 
     useEffect(() => {
 
-        setTimeout(() => router.push('/profile/myorders'), 2000)
+        setTimeout(() => { router.push('/profile/myorders') }, 5000)
         setTimeout(() => router.refresh(), 2000)
     }, []);
 
 
     return (
-        <div className="h-96  border-green-200 flex  flex-col justify-center items-center">
+        <div className="h-96  border-green-200 flex  flex-col justify-center items-center shadow-inner">
             <div className="relative flex  border border-green-200  flex-col justify-center items-center w-full lg:w-[60%] drop-shadow-md bg-white px-5 py-2 gap-4" >
                 <div className="success-checkmark">
                     <div className="check-icon">

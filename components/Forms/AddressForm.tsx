@@ -48,7 +48,7 @@ export default function AddressForm() {
         <div className={`${roboto.className} ${robotoslab.className}  `}>
             {loadingstatus === 'Loading' && <DisableandLoadingComponent />}
             <span>Address Form </span>
-            <form className='p-4 flex flex-col gap-2 bg-gradient-to-r from-slate-200 to-zinc-300/70 rounded-xl shadow-xl  ' onSubmit={handleSubmit(submitAddress)}>
+            <form className='p-4 flex flex-col gap-2 bg-gradient-to-r from-slate-200 to-zinc-300/70 rounded-xl   ' onSubmit={handleSubmit(submitAddress)}>
                 <label> Enter your state</label>
                 <input
                     className='form-input'
