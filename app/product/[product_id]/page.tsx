@@ -12,7 +12,7 @@ import ProductDetailsComponent from '@components/ProductCards/ProductDetailsComp
 import AddtoCartComponent from '@components/Buttons/AddtoCartComponent';
 import ProductPrefetch from '@components/Skeletons/productprefetch';
 import { SelectCartStatus } from '@app/redux/feautres/cart/cartslice';
-import DisableandLoadingComponent from '@components/Loading';
+import DisableandLoadingComponent from '@components/PassiveComponents/Loading';
 export default function Page() {
     const { product_id } = useParams();
 

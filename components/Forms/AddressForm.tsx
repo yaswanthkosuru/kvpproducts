@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
 import '@styles/globals.css'
-import DisableandLoadingComponent from '@components/Loading';
+import DisableandLoadingComponent from '@components/PassiveComponents/Loading';
 type formdatatype = Omit<AddressType, '_id'>
 const postalCodes = [521121, 521125, 521126]; // Replace with your postal codes
 

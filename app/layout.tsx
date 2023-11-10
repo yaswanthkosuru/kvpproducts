@@ -25,14 +25,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
 
 
-      <body className='pb-20 mx-1 sm:mb-0 min-w[350px] relative'>
+      <body className='mx-1 pb-[60px] sm:pb-0'>
 
         <Authprovider session={session}>
           <Reduxprovider >
             <MobileNav />
             {children}
-
-
           </Reduxprovider>
         </Authprovider>
       </body>

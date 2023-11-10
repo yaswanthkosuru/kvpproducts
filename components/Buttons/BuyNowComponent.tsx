@@ -31,7 +31,7 @@ const BuynowComponent = () => {
 
         <button
             onClick={handlebuynowclick}
-            className='ripple w-full max-w-md mx-auto'
+            className='buynow-button w-full max-w-md mx-auto'
         >
             Buy Now
         </button>

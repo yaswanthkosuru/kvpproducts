@@ -9,7 +9,7 @@ import { playfairdisplay, roboto, robotoslab } from '@styles/fonts';
 import '@styles/globals.css'
 import { FindCartProducts } from '@utils/findCartProducts';
 import ProductsPrefetch from '@components/Skeletons/ProductsPrefetch';
-import DisableandLoadingComponent from '@components/Loading';
+import DisableandLoadingComponent from '@components/PassiveComponents/Loading';
 
 const CartProductComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
