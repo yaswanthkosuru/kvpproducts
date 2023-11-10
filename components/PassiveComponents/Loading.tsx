@@ -2,7 +2,7 @@ import React from 'react'
 
 const DisableandLoadingComponent = () => {
     return (
-        <div>
+        <div className='overlay'>
             <div className="blur-overlay z-0">
                 <div className='relative top-1/2'>
                     <div className='stage'>
