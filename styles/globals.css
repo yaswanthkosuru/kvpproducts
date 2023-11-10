@@ -58,21 +58,37 @@
   border-radius: 2px;
 }
 
-/* Ripple effect */
+/* CSS */
 .ripple {
-  border: none;
-  outline: none;
-  border-radius: 25px;
-  padding: 12px 18px;
-  font-size: 16px;
-  text-transform: uppercase;
+  background-color: #cf245f;
+  background-image: linear-gradient(to bottom right, #fcd34d, #ef4444, #ec4899);
+  border: 0;
+
+  border-radius:35px;
+  box-sizing: border-box;
+  color: #fff;
   cursor: pointer;
-  color: white;
-  font-weight: bold;
-  background-color: rgb(96, 99, 242);
-  box-shadow: 0 0 4px #999;
-  background-position: center;
-  transition: background 0.8s;
+  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.75rem; /* 28px */
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.ripple:hover {
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  .ripple {
+    font-size: 1.5rem; /* 24px */
+    padding: 1rem 1.5rem;
+    line-height: 2rem; /* 32px */
+  }
 }
 
 

@@ -2,7 +2,7 @@
 import { SelectCartLength, SelectCartStatus } from "@app/redux/feautres/cart/cartslice";
 import BuynowComponent from "@components/Buttons/BuyNowComponent";
 import CartProductComponent from "@components/ProductCards/CartProductComponent";
-import NoCartItems from "@components/ProductCards/PassiveComponents/NoCartItems";
+import NoCartItems from "@components/PassiveComponents/NoCartItems";
 import { roboto, robotoslab } from "@styles/fonts";
 import { GetSessionData } from "@utils/GetClientSession";
 import Link from "next/link";
@@ -24,7 +24,7 @@ export default function Page() {
                 href='/loginpage'
                 className="bg-orange-100 text-orange-500 py-2 font-[20px] text-[30px] px-2">
                 <span>
-                    Please Login by clicking here to view your cart items
+                    Please Login before
                 </span>
             </Link>
         </div>

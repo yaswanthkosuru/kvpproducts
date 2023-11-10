@@ -1,7 +1,7 @@
 
 import { AddressType } from "@models/Address_Model";
 import { CartType } from "@models/Cart_Model";
-import { OrderType } from "@models/Order_Model";
+import { ItemType, OrderType } from "@models/Order_Model";
 import { ProductType } from "@models/ProductModel";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { ObjectId } from "mongodb";
@@ -21,6 +21,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
+    const { couponcode } = await req.json();
     const CartCollection = Database.collection<CartType>('carts');
 
     const usercart = await CartCollection.findOne({
@@ -45,6 +46,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         return NextResponse.json({}, { status: 400, statusText: 'product unavailible' });
     }
     var overallcost = 60;
+
     for (const item of usercart.items) {
         const product = products.find(p => {
             console.log(p._id, item.product_id, 'inside find');
@@ -56,12 +58,22 @@ export async function POST(req: NextRequest, res: NextResponse) {
             overallcost += price * item.quantity;
         }
     }
-
+    const items = usercart.items;
+    const orderitems = items.map(item => {
+        const product = products.find(p => {
+            console.log(p._id, item.product_id, 'inside find');
+            return p._id.toString() === item.product_id.toString()
+        });
+        return {
+            ...item,
+            price: parseInt(product.price as string),
+        }
+    })
     const OrderCollection = Database.collection<OrderType>('orders');
     const createdorder = await OrderCollection.insertOne(
         {
             user_id: new ObjectId(User._id),
-            items: usercart.items,
+            items: orderitems,
             time: new Date(),
             address: {
                 street: currentaddress.street,

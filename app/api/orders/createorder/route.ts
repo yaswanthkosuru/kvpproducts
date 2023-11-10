@@ -47,6 +47,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             items: [{
                 product_id: new ObjectId(product_id),
                 quantity: 1,
+                price: parseInt(product.price as string),
             }],
             time: new Date(),
             address: {
