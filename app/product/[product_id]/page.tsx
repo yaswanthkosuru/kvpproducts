@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 
 import { selectproductwithid, getproduct } from '@app/redux/feautres/products/product-slice';
 import { RootState, AppDispatch } from '@app/redux/store';
@@ -13,6 +13,12 @@ import AddtoCartComponent from '@components/Buttons/AddtoCartComponent';
 import ProductPrefetch from '@components/Skeletons/productprefetch';
 import { SelectCartStatus } from '@app/redux/feautres/cart/cartslice';
 import DisableandLoadingComponent from '@components/PassiveComponents/Loading';
+import axios from 'axios';
+import { getreviews, selectallreviews } from '@app/redux/feautres/Reviews/Reviewslice';
+import { roboto, robotoslab } from '@styles/fonts';
+import Fivestar from '@components/Buttons/FiveStar';
+import ReviewComponent from '@components/PassiveComponents/ReviewComponent';
+
 export default function Page() {
     const { product_id } = useParams();
 
@@ -26,11 +32,12 @@ export default function Page() {
     const dispatch = useDispatch<AppDispatch>();
     const CartStatus = useSelector(SelectCartStatus);
     const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>();
-
     useEffect(() => {
         setloadingstatus(CartStatus);
     }, [CartStatus])
-
+    useEffect(() => {
+        dispatch(getreviews({ product_id: product_id as string }));
+    }, []);
 
 
     return (
@@ -50,6 +57,10 @@ export default function Page() {
                     <BuynowComponent />
                     <div className='font-bold text-[24px]'>
                         Reviews:
+                    </div>
+                    <div>
+                        <hr />
+                        <ReviewComponent />
                     </div>
                 </div>
             </div>}
