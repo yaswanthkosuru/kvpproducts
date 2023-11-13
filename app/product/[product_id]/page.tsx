@@ -7,17 +7,18 @@ import { RootState, AppDispatch } from '@app/redux/store';
 import { useParams } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import BuynowComponent from '@components/Buttons/BuyNowComponent';
-import SwiperImagecomponent from '@components/ProductCards/SwiperImagecomponent';
-import ProductDetailsComponent from '@components/ProductCards/ProductDetailsComponent';
+import SwiperImagecomponent from '@components/productdetailspage/SwiperImagecomponent';
+import ProductDetailsComponent from '@components/productdetailspage/ProductDetailsComponent';
 import AddtoCartComponent from '@components/Buttons/AddtoCartComponent';
 import ProductPrefetch from '@components/Skeletons/productprefetch';
 import { SelectCartStatus } from '@app/redux/feautres/cart/cartslice';
-import DisableandLoadingComponent from '@components/PassiveComponents/Loading';
+import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
 import axios from 'axios';
 import { getreviews, selectallreviews } from '@app/redux/feautres/Reviews/Reviewslice';
 import { roboto, robotoslab } from '@styles/fonts';
-import Fivestar from '@components/Buttons/FiveStar';
+import Fivestar from '@components/productspage/FiveStar';
 import ReviewComponent from '@components/PassiveComponents/ReviewComponent';
+import Loadingwithspin from '@components/PassiveComponents/Loading';
 
 export default function Page() {
     const { product_id } = useParams();
@@ -29,15 +30,13 @@ export default function Page() {
     console.log(product, 'page p/pid');
     const { imageUrls } = product || {};
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatchRedux = useDispatch<AppDispatch>();
     const CartStatus = useSelector(SelectCartStatus);
     const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>();
     useEffect(() => {
         setloadingstatus(CartStatus);
     }, [CartStatus])
-    useEffect(() => {
-        dispatch(getreviews({ product_id: product_id as string }));
-    }, []);
+
 
 
     return (

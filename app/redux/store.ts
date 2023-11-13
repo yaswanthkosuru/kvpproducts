@@ -4,6 +4,7 @@ import productreducer from './feautres/products/product-slice'
 import reviewreducer from './feautres/Reviews/Reviewslice'
 import AddressReducer from './feautres/address/addressslice'
 import OrderReducer from './feautres/orders/orderslice';
+import ReduxclientReducer from './feautres/clientside/clientslice';
 export const store = configureStore({
     reducer: {
         cartreducer: Cartreducer,
@@ -11,6 +12,7 @@ export const store = configureStore({
         reviewreducer: reviewreducer,
         adressreducer: AddressReducer,
         OrderReducer: OrderReducer,
+        clientreducer: ReduxclientReducer,
     },
 })
 

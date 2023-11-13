@@ -16,6 +16,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
     const { product_id, review, rating } = await req.json();
+    console.log(product_id, review, 'rating,review');
+
     const ReviewCollection = Database.collection<ReviewType>('reviews');
     const prevreview = await ReviewCollection.findOneAndUpdate(
         {

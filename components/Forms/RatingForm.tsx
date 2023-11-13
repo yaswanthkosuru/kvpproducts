@@ -16,9 +16,9 @@ export default function RatingInputUserForm({ product_id }: { product_id: string
         watch,
         formState: { errors },
     } = useForm<Inputs>()
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatchRedux = useDispatch<AppDispatch>();
     const handlereviewsubmit: SubmitHandler<Inputs> = (data) => {
-        dispatch(createreview({ product_id: product_id, rating: data.rating, review: data.review }))
+        dispatchRedux(createreview({ product_id: product_id, rating: data.rating, review: data.review }))
         console.log(data)
 
     }
@@ -39,14 +39,14 @@ export default function RatingInputUserForm({ product_id }: { product_id: string
             <select
                 className='py-2 text-gray-800 focus:outline-none border  border-gray-900'
                 {...register('rating')}
-                defaultValue={1}
+                defaultValue={3}
             >
                 {[1, 2, 3, 4, 5].map((code) => {
                     return <option key={code} value={code}>{code}</option>
                 })}
             </select>
 
-            <button className="ripple w-1/2 mx-auto" type="submit" >submit </button>
+            <button className="bg-blue-600 px-4 py-2 text-white w-1/2 mx-auto rounded-xl" type="submit" >submit </button>
         </form>
     )
 }

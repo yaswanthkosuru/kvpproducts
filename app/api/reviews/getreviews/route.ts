@@ -19,6 +19,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const reviews = await ReviewCollection.find({
         Product_id: new ObjectId(product_id)
     }).project({ User_id: 0, _id: 0, Product_id: 0 }).toArray();
-    console.log(reviews);
     return NextResponse.json({ reviews: reviews });
 }

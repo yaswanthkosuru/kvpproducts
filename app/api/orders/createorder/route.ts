@@ -18,8 +18,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
-    const data = await req.json();
-    const { product_id } = data;
+
+    const { product_id, couponcode } = await req.json();
+    console.log(product_id, couponcode, 'product+couponcode');
+
     if (!product_id) {
         return NextResponse.json({ msg: 'invalid request' }, { status: 401, statusText: 'invalid request' });
     }
@@ -34,13 +36,29 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const OrderCollection = Database.collection<OrderType>('orders');
 
     const product = products.find(p => p._id.toString() === product_id)
-    console.log(product, product_id, data, 'r:createorder');
+    console.log(product, product_id, 'r:createorder');
 
     if (!product) {
         return NextResponse.json({ msg: 'invalid request' }, { status: 401, statusText: 'invalid request' });
     }
     const price = parseInt(product.price as string) + 60;
 
+    let originaloverallprice = parseInt(product.price as string);
+    let discount = 0;
+    if (couponcode && couponcode == 'FirstThreeOrders') {
+        discount = Math.round(0.6 * originaloverallprice);
+        if (discount > 80) {
+            discount = 80;
+        }
+    }
+    else if (couponcode === 'WinIndia') {
+        discount = Math.round(0.2 * originaloverallprice);
+        if (discount > 80) {
+            discount = 80;
+        }
+    }
+    let delivery = 60;
+    const finalamount = originaloverallprice - discount + delivery;
     const createdorder = await OrderCollection.insertOne(
         {
             user_id: new ObjectId(User._id),
@@ -57,8 +75,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 postalCode: currentaddress.postalCode,
                 phoneNumber: currentaddress.phoneNumber,
             },
-            amount: price,
-            ordertype: 'cod',
+            amount: finalamount,
+            ordertype: 'COD',
             orderstatus: "orderbooked"
         }
     )

@@ -39,7 +39,7 @@ const MultistepNextButton = ({ state, dispatch }: { state: { pageno: number }, d
                                      active:bg-blue-700/20
                                     active:text-white
                                     border-2
-                                     drop-shadow-md
+                                   
                                     border-blue-600
                                     shadow-md'>Next<span className='text-2xl'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24">

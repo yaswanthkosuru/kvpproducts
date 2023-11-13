@@ -29,14 +29,21 @@ export function PriceComponent({ price, units }: props) {
     }
     if (!orders || OrderLength < 3) {
         return (
-            <span className="flex items-center gap-1">
-                <span> &#8377;{offerprice}</span>
-                <span className='text-sm text-gray-700 '>
-                    &nbsp; per {units}
+            <div>
+                <span className="flex items-center gap-1">
+                    <span> &#8377;{offerprice}</span>
+                    <span className='text-sm text-gray-700 '>
+                        &nbsp; per {units}
+                    </span>
+                    <span className="text-gray-400 text-[12px]">m.r.p :</span>
+                    <span className="line-through decoration-rose-600 text-base text-gray-400">
+                        &#8377;{price}
+                    </span>
                 </span>
-                <span className="text-gray-400 text-[12px]">m.r.p :</span>
-                <span className="line-through decoration-rose-600 text-base text-gray-400">&#8377;{price}</span>
-            </span>
+                <div className="text-sm text-gray-400">
+                    coupon avalible during checkout
+                </div>
+            </div>
         )
     }
     return (

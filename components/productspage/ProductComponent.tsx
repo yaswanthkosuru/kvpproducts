@@ -1,5 +1,5 @@
 'use client'
-import Fivestar from '@components/Buttons/FiveStar';
+import Fivestar from '@components/productspage/FiveStar';
 import { inter, roboto, robotoslab } from '@styles/fonts';
 import ProductsPrefetch from '@components/Skeletons/ProductsPrefetch';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { SelectOrders, getorders } from '@app/redux/feautres/orders/orderslice';
 import { AppDispatch } from '@app/redux/store';
 import { GetSessionData } from '@utils/GetClientSession';
-import { PriceComponent } from '@components/ProductCards/PriceComponent';
+import { PriceComponent } from '@components/productspage/PriceComponent';
 export default function Product_Component() {
     const products = useSelector(selectallproducts);
     const status = useSelector(selectproductstatus);
@@ -80,7 +80,6 @@ export default function Product_Component() {
                             <p className='line-clamp-1'>{description}</p>
                             <span className='flex text-xl gap-2'>
                                 <PriceComponent price={parseInt(price as string)} units={units} />
-
                             </span>
                         </div>
                     </Link>

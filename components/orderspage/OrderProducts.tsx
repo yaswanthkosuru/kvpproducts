@@ -5,7 +5,7 @@ import { itemtype } from "@models/Cart_Model";
 import { CldImage } from "next-cloudinary";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { PriceComponent } from "./PriceComponent";
+import { PriceComponent } from "../productspage/PriceComponent";
 
 export const OrderProducts = ({ items }: { items: itemtype[] }) => {
     const products = useSelector(selectallproducts);
@@ -35,7 +35,7 @@ export const OrderProducts = ({ items }: { items: itemtype[] }) => {
                         <span className=" font-semibold">{name.toUpperCase()}</span>
                         <span className=" font-semibold truncate">{description}</span>
                         <span className=" font-semibold">quantity:{item.quantity}</span>
-                        <PriceComponent price={parseInt(price as string)} units='' />
+                        <span>&#8377;{product.price}</span>
                     </div>
 
                 </div>

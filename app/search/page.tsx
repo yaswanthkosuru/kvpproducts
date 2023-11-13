@@ -4,9 +4,9 @@ import '@styles/globals.css'
 import { Fusesearch } from '@utils/Fusesearch'
 import { useSelector } from 'react-redux';
 import { selectallproducts } from '@app/redux/feautres/products/product-slice';
-import Product_Component from '@components/ProductCards/ProductComponent';
+import Product_Component from '@components/productspage/ProductComponent';
 import { ProductType } from '@models/ProductModel';
-import FilteredProductComponent from '@components/ProductCards/FilteredProductComponent';
+import FilteredProductComponent from '@components/searchpage/FilteredProductComponent';
 import Link from 'next/link';
 import { playfairdisplay, roboto } from '@styles/fonts';
 import { useRouter } from 'next/navigation';

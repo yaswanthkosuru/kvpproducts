@@ -1,7 +1,7 @@
 'use client'
 import { SelectCartLength, SelectCartStatus } from "@app/redux/feautres/cart/cartslice";
 import BuynowComponent from "@components/Buttons/BuyNowComponent";
-import CartProductComponent from "@components/ProductCards/CartProductComponent";
+import CartProductComponent from "@components/cartpage/CartProductComponent";
 import NoCartItems from "@components/PassiveComponents/NoCartItems";
 import { roboto, robotoslab } from "@styles/fonts";
 import { GetSessionData } from "@utils/GetClientSession";

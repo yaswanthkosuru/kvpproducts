@@ -22,30 +22,30 @@ export default function Fivestar({ rating, isreview }: props) {
                 <svg
                     key={index}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="25"
+                    width="15"
+                    height="20"
                     viewBox="0 0 100 100"
                 >
                     <defs>
-                        <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style={{ stopColor: '#89CFF0', stopOpacity: 1 }} />
-                            <stop offset="100%" style={{ stopColor: 'white', stopOpacity: 1 }} />
+                        <linearGradient id="goldgradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style={{ stopColor: 'gold', stopOpacity: 1 }} />
+                            <stop offset="100%" style={{ stopColor: 'white', stopOpacity: 40 }} />
                         </linearGradient>
                     </defs>
                     <polygon
                         points="50,10 61.8,38.2 92.4,38.2 68.2,57.8 79.6,86 50,70.6 20.4,86 31.8,57.8 7.6,38.2 38.2,38.2"
-                        fill={val ? `url(#blueGradient)` : 'white'}
+                        fill={val ? `url(#goldgradient)` : 'white'}
                     />
                     <path
                         d="M50,10 L61.8,38.2 L92.4,38.2 L68.2,57.8 L79.6,86 L50,70.6 L20.4,86 L31.8,57.8 L7.6,38.2 L38.2,38.2 Z"
-                        stroke={val ? '#7CB9E8' : 'gray'}
-                        strokeWidth="6"
+                        stroke={val ? 'goldenrod' : 'gray'}
+                        strokeWidth='4'
                         fill="none"
                     />
                 </svg>
             );
-
         }
+
         return (
             <svg
                 key={index}
@@ -55,30 +55,26 @@ export default function Fivestar({ rating, isreview }: props) {
                 viewBox="0 0 100 100"
             >
                 <defs>
-                    {/* Define a linear gradient */}
-                    <radialGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="gold" />
-                        <stop offset="50%" stopColor="yellow" />
-                        <stop offset="100%" stopColor="goldenrod" />
-                    </radialGradient>
+                    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style={{ stopColor: '#0074d9', stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: '#3498db', stopOpacity: 1 }} />
+                    </linearGradient>
                 </defs>
-
-                {/* Use the linear gradient for the fill, conditionally */}
                 <polygon
                     points="50,10 61.8,38.2 92.4,38.2 68.2,57.8 79.6,86 50,70.6 20.4,86 31.8,57.8 7.6,38.2 38.2,38.2"
-                    fill={val ? 'url(#goldGradient)' : 'white'}
+                    fill={val ? `url(#blueGradient)` : 'white'}
                 />
-
-                {/* Use a stroke with a color based on the condition */}
                 <path
                     d="M50,10 L61.8,38.2 L92.4,38.2 L68.2,57.8 L79.6,86 L50,70.6 L20.4,86 L31.8,57.8 L7.6,38.2 L38.2,38.2 Z"
-                    stroke={val ? 'goldenrod' : 'dimgray'}
-                    strokeWidth="6"
+                    stroke={val ? '' : 'gray'}
+                    strokeWidth={val ? "2" : '6'}
                     fill="none"
                 />
             </svg>
+        );
 
-        )
+
+
     })
     return (
         <div className="flex">

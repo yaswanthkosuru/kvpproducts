@@ -1,4 +1,4 @@
-import Fivestar from "@components/Buttons/FiveStar"
+import Fivestar from "@components/productspage/FiveStar"
 import { ProductType } from "@models/ProductModel"
 import { roboto, robotoslab, inter } from "@styles/fonts"
 import { CldImage } from "next-cloudinary"

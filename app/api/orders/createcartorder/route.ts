@@ -7,7 +7,6 @@ import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function POST(req: NextRequest, res: NextResponse) {
     console.log('inside post create order');
 
@@ -22,6 +21,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
     const { couponcode } = await req.json();
+    console.log(couponcode, 'couponcode');
+
+
     const CartCollection = Database.collection<CartType>('carts');
 
     const usercart = await CartCollection.findOne({
@@ -45,7 +47,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!usercart) {
         return NextResponse.json({}, { status: 400, statusText: 'product unavailible' });
     }
-    var overallcost = 60;
+    var overallcost = 0;
 
     for (const item of usercart.items) {
         const product = products.find(p => {
@@ -58,6 +60,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
             overallcost += price * item.quantity;
         }
     }
+
+    let originaloverallprice = overallcost;
+    let discount = 0;
+    if (couponcode == 'FirstThreeOrders') {
+        discount = Math.round(0.6 * originaloverallprice);
+        if (discount > 80) {
+            discount = 80;
+        }
+    }
+    else if (couponcode === 'WinIndia') {
+        discount = Math.round(0.2 * originaloverallprice);
+        if (discount > 80) {
+            discount = 80;
+        }
+    }
+    let delivery = 60;
+    const finalprice = originaloverallprice - discount + delivery;
+    console.log('final price: ' + finalprice);
+    console.log('overall price', +originaloverallprice);
+    console.log('discount', discount);
+
+
     const items = usercart.items;
     const orderitems = items.map(item => {
         const product = products.find(p => {
@@ -67,6 +91,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         return {
             ...item,
             price: parseInt(product.price as string),
+            //cacheed price when ordered
         }
     })
     const OrderCollection = Database.collection<OrderType>('orders');
@@ -82,8 +107,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 postalCode: currentaddress.postalCode,
                 phoneNumber: currentaddress.phoneNumber,
             },
-            amount: overallcost,
-            ordertype: 'cod',
+            amount: finalprice,
+            ordertype: 'COD',
             orderstatus: "orderbooked"
         }
     )

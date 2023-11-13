@@ -13,7 +13,7 @@ export type OrderType = {
     time: string | Date,
     address: AddressType,
     amount: number,
-    ordertype: 'cod' | 'prepaid'
+    ordertype: 'COD',
     orderstatus: 'delivered' | 'shipped' | 'orderbooked'
 
 };

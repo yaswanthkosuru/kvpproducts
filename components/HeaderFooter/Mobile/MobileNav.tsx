@@ -22,7 +22,7 @@ const MobileNav = () => {
         <div className="block  m:hidden ">
             <div className="fixed bottom-0 left-0 right-0 z-[9999] shadow-on-top ">
                 <div
-                    className="flex flex-row min-w-[320px] text-[12px]  justify-between bg-white/90 px-8 pb-2">
+                    className="flex flex-row min-w-[320px] text-[12px]  justify-between bg-white px-8 pb-2">
                     <Home_component />
                     <Profile_component />
                     <Navcart />

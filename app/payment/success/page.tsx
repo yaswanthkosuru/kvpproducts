@@ -7,13 +7,14 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@app/redux/store";
 import { getcartitems } from "@app/redux/feautres/cart/cartslice";
+import { getallproducts } from "@app/redux/feautres/products/product-slice";
 const Page = () => {
     const router = useRouter();
-
+    const dispatchRedux = useDispatch<AppDispatch>();
     useEffect(() => {
-
-        setTimeout(() => { router.push('/profile/myorders') }, 5000)
-        setTimeout(() => router.refresh(), 2000)
+        setTimeout(() => { router.push('/profile/myorders') }, 5000);
+        dispatchRedux(getcartitems());
+        dispatchRedux(getallproducts());
     }, []);
 
 

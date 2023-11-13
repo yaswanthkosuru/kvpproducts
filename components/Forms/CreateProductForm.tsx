@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FormImageComp } from "./FormImage";
 import { ptsans, ptserif, roboto, robotoslab } from "@styles/fonts";
 import '@styles/globals.css'
-import DisableandLoadingComponent from "@components/PassiveComponents/Loading";
+import DisableandLoadingComponent from "@components/PassiveComponents/Disablepageandloading";
 export default function CreateProductFormComponent({ }) {
     const [ImageUrls, setImageUrls] = useState<string[]>([]);
     const productstatus = useSelector(selectproductstatus);

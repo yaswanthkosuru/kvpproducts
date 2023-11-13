@@ -11,7 +11,8 @@ const MultiStepProgressBar = ({ state, dispatch }: { state: { pageno: number }, 
                     const { val, name } = obj;
                     if (obj.val <= state.pageno) {
                         return (
-                            <div key={val}>
+                            <div
+                                key={val}>
                                 <div className='grid grid-flow-col' key={ind}>
                                     <span
                                         onClick={() => { dispatch({ type: 'setpageno', payload: val }) }}
@@ -42,7 +43,9 @@ const MultiStepProgressBar = ({ state, dispatch }: { state: { pageno: number }, 
                     }
                     else {
                         return (
-                            <div className='flex flex-col justify-center'>
+                            <div
+                                key={val}
+                                className='flex flex-col justify-center'>
 
                                 <div className='flex' key={ind}>
                                     <span

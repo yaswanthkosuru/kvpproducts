@@ -25,13 +25,13 @@ export const getorders = createAsyncThunk('/fetchorders', async () => {
     return { msg: response.statusText };
 
 })
-export const CreateCartOrder = createAsyncThunk('/api/createOrder', async () => {
+export const CreateCartOrder = createAsyncThunk('/api/createOrder', async ({ couponcode }: { couponcode?: string }) => {
     console.log('dispatching create cart order');
-    await axios.post('/api/orders/createcartorder')
+    await axios.post('/api/orders/createcartorder', { couponcode })
 })
-export const CreateOrder = createAsyncThunk('/api/createorder', async ({ product_id }: { product_id: string }) => {
+export const createOrder = createAsyncThunk('/api/createorder', async ({ product_id, couponcode }: { product_id: string, couponcode: string }) => {
     console.log('dispatching create order');
-    await axios.post('/api/orders/createorder', { product_id })
+    await axios.post('/api/orders/createorder', { product_id, couponcode })
 })
 
 
@@ -44,13 +44,13 @@ export const Order_slice = createSlice({
     extraReducers(builder) {
         builder
 
-            .addCase(CreateOrder.pending, (state, action) => {
+            .addCase(createOrder.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(CreateOrder.rejected, (state, action) => {
+            .addCase(createOrder.rejected, (state, action) => {
                 state.status = 'rejected'
             })
-            .addCase(CreateOrder.fulfilled, (state, action) => {
+            .addCase(createOrder.fulfilled, (state, action) => {
                 state.status = 'idle'
             })
             .addCase(CreateCartOrder.pending, (state, action) => {
