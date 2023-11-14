@@ -1,6 +1,5 @@
 import { Reviewaction, Reviewstate } from "@CustomTypes/ReduxType";
 import { getreviews, selectallreviews, selectreviewsstatus } from "@app/redux/feautres/Reviews/Reviewslice";
-import Fivestar from "@components/productspage/FiveStar";
 import { roboto, robotoslab } from "@styles/fonts";
 import { useEffect, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
