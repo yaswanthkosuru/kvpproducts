@@ -36,7 +36,7 @@ const FilteredProductComponent = ({ products }: { products: ProductType[] }) => 
                                             <span className=" font-semibold">{name.toUpperCase()}</span>
                                             <p className="truncate" >{description}</p>
                                             <span className=' font-medium text-[20px]'>&#8377;{price}</span>
-                                            <Fivestar rating={rating} />
+                                            <Fivestar rating={rating} usersrated={usersrated} />
                                             <span className='text-[8px] text-gray-400'>upto</span>65% off <span className='text-gray-400 text-[8px]'> on first order</span>
                                         </div>
 

@@ -45,7 +45,7 @@ export default function Product_Component() {
                                 <span className="font-medium text-lg ">{name.toUpperCase()}</span>
                                 <p className="text-base line-clamp-1" >{description}</p>
                                 <span className='flex'>
-                                    <Fivestar rating={rating} /> ({usersrated})
+                                    <Fivestar rating={rating} usersrated={usersrated} />
                                 </span>
                                 <span className='text-xl flex items-end'>
                                     <PriceComponent price={parseInt(price as string)} units={units} />

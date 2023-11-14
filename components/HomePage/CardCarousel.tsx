@@ -6,74 +6,71 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import '@styles/globals.css'
+import '@styles/homepage/styles.css'
 import Image from 'next/image';
-import cardimage from '@public/cardpage/heroine.png'
+import diwalilamp from '@public/cardpage/diwalilamp.png'
 // import required modules
 import { Autoplay, Pagination, Navigation, Scrollbar, A11y } from 'swiper/modules';
+import { alegreya, inter, playfairdisplay, roboto, robotoslab } from '@styles/fonts';
 
 const CardCarousel = () => {
     return (
         <div>
             <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                spaceBetween={50}
                 slidesPerView={1}
-                autoplay={
-                    {
-                        delay: 5000,
-                        disableOnInteraction: false
-                    }
-                }
-                cubeEffect={{
-                    slideShadows: false
-                }}
-
-                pagination={{
-                    clickable: true,
-
-                }}
-                // scrollbar={{ draggable: true }}
-                // onSwiper={(swiper) => console.log(swiper)}
-                // onSlideChange={() => console.log('slide change')}
-                className='block m:hidden'>
-                <div className='mt-8'>
-
-
-                    <SwiperSlide className='each-slide-effect'>
-                        <div className="  w-full  flex flex-row items-center bg-slate-800 py-4 px-2 text-white justify-around  ">
-                            <div className={`text-white font-bold text-[16px]`}>
-                                Elevate your dishes with the colors and flavors<br />
+                spaceBetween={50}
+                modules={[Pagination, Autoplay]}
+                autoplay={true}
+                pagination={true}
+            >
+                <SwiperSlide
+                    className='w-full h-auto  bg-slate-900'
+                >
+                    <div className='grid grid-flow-row mx-0 p-2'>
+                        <div
+                            className={`text-white  text-xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
+                            <span>
+                                Elevate your dishes with the colors and flavors
                                 only fresh vegetables can provide
                                 ready to brighten your meal
-                            </div>
+                            </span>
                             <Image
-                                src={cardimage}
+                                src={diwalilamp}
                                 width={100}
-                                alt='card image'
                                 height={100}
-                                className="z-10"
+                                alt='none'
+                                className='glow-image'
                             />
                         </div>
-                    </SwiperSlide>
-                    <SwiperSlide className='each-slide-effect'>
-                        <div className="  w-full  flex flex-row items-center  bg-zinc-800 py-4 px-2 text-white justify-around  ">
-                            <div className={`text-white font-bold text-[16px]`}>
-                                The farmer's market is a treasure trove of inspiration
-                                offering a rainbow of   ready to brighten your meals
-                            </div>
+                        <span className={`text-[16px]  text-white/90 glow ${robotoslab.className} ${roboto.className}`}>
+                            I yaswanth  wishing happy sankranti
+                        </span>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide
+                    className='w-full h-auto  bg-slate-900'
+                >
+                    <div className='grid grid-flow-row mx-0 p-2'>
+                        <div
+                            className={`text-white  text-xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
+                            <span>
+                                Elevate your dishes with the colors and flavors
+                                only fresh vegetables can provide
+                                ready to brighten your meal
+                            </span>
                             <Image
-                                src={cardimage}
+                                src={diwalilamp}
                                 width={100}
-                                alt='card image'
                                 height={100}
-                                className="z-10"
+                                alt='none'
+                                className='glow-image'
                             />
                         </div>
-                    </SwiperSlide>
-
-
-                </div>
-
+                        <span className={`text-[16px]  text-white/90 glow ${robotoslab.className} ${roboto.className}`}>
+                            I yaswanth  wishing happy sankranti
+                        </span>
+                    </div>
+                </SwiperSlide>
             </Swiper>
         </div>
     )

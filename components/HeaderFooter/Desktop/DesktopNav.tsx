@@ -53,14 +53,7 @@ const Nav = () => {
           <Link
             href='/products'
             className="hover:text-slate-900 active:text-blue-900">
-            <Image
-              src='/applogo2.png'
-              alt='menu'
-              priority={true}
-              width={56}
-              height={56}
-              className=" border-2 rounded-md border-green-900 hover:border-violet-100 active:border-blue-500"
-            />
+            home
           </Link>
           <div className="">
             <input

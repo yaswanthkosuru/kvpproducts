@@ -1,7 +1,11 @@
-import { Inter, PT_Serif, PT_Sans, Ubuntu, Roboto, Prompt, Poppins, Noto_Sans, Roboto_Slab, Open_Sans, Merriweather, Playfair_Display, Lato, Montserrat, Libre_Baskerville, Lora } from 'next/font/google'
+import { Inter, PT_Serif, PT_Sans, Ubuntu, Roboto, Prompt, Poppins, Noto_Sans, Roboto_Slab, Open_Sans, Merriweather, Playfair_Display, Lato, Montserrat, Libre_Baskerville, Lora, Alegreya } from 'next/font/google'
 
 // define your variable fonts
 export const lora = Lora({
+    weight: '400',
+    subsets: ['latin']
+})
+export const alegreya = Alegreya({
     weight: '400',
     subsets: ['latin']
 })
