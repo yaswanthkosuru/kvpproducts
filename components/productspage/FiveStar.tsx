@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 type props = {
     rating: number
-    usersrated: number
+    usersrated?: number
 }
 export default function Fivestar({ rating, usersrated }: props) {
     const [arr, setArr] = useState([0, 0, 0, 0, 0]);
