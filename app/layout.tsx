@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
 
 
-      <body className='mx-1 pb-[60px] sm:pb-0'>
+      <body className=' pb-[60px] sm:pb-0'>
 
         <Authprovider session={session}>
           <Reduxprovider >

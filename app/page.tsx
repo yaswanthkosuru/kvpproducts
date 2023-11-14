@@ -11,6 +11,7 @@ export default function Page() {
         <div className=''>
             <CardCarousel />
             <Small_Product_Component />
+            <Recomended_Component />
             <div className='my-40'></div>
         </div>
     )

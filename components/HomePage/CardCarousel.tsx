@@ -10,8 +10,8 @@ import '@styles/homepage/styles.css'
 import Image from 'next/image';
 import diwalilamp from '@public/cardpage/diwalilamp.png'
 // import required modules
-import { Autoplay, Pagination, Navigation, Scrollbar, A11y } from 'swiper/modules';
-import { alegreya, inter, playfairdisplay, roboto, robotoslab } from '@styles/fonts';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { alegreya, inter, roboto, robotoslab } from '@styles/fonts';
 
 const CardCarousel = () => {
     return (
@@ -20,8 +20,13 @@ const CardCarousel = () => {
                 slidesPerView={1}
                 spaceBetween={50}
                 modules={[Pagination, Autoplay]}
-                autoplay={true}
-                pagination={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                pagination={{
+                    dynamicBullets: true,
+                }}
             >
                 <SwiperSlide
                     className='w-full h-auto  bg-slate-900'
@@ -42,8 +47,8 @@ const CardCarousel = () => {
                                 className='glow-image'
                             />
                         </div>
-                        <span className={`text-[16px]  text-white/90 glow ${robotoslab.className} ${roboto.className}`}>
-                            I yaswanth  wishing happy sankranti
+                        <span className={`text-[16px]  text-white/90  ${robotoslab.className} ${roboto.className}`}>
+                            yaswanth  wishing happy sankranti
                         </span>
                     </div>
                 </SwiperSlide>
@@ -54,9 +59,7 @@ const CardCarousel = () => {
                         <div
                             className={`text-white  text-xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
                             <span>
-                                Elevate your dishes with the colors and flavors
-                                only fresh vegetables can provide
-                                ready to brighten your meal
+                                Harvest the goodness, delivered to your doorstep. Freshness you can taste, convenience you can savor
                             </span>
                             <Image
                                 src={diwalilamp}
@@ -67,7 +70,7 @@ const CardCarousel = () => {
                             />
                         </div>
                         <span className={`text-[16px]  text-white/90 glow ${robotoslab.className} ${roboto.className}`}>
-                            I yaswanth  wishing happy sankranti
+                            yaswanth  wishing you happy krismas
                         </span>
                     </div>
                 </SwiperSlide>
