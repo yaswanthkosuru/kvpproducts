@@ -71,7 +71,6 @@ const ReviewComponent = () => {
             </div>
 
             <span className='w-20'>
-                <Fivestar rating={review.rating} isreview={true} />
             </span>
             <span className='text-gray-800'>
                 {review.review}
