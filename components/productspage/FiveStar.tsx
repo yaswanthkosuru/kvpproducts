@@ -7,7 +7,9 @@ type props = {
 }
 export default function Fivestar({ rating, usersrated }: props) {
     const [arr, setArr] = useState([0, 0, 0, 0, 0]);
-
+    if (!isFinite(rating)) {
+        rating = 0;
+    }
     useEffect(() => {
         const newarr = [0, 0, 0, 0, 0]
         for (let i = 0; i < 5; i++) {
