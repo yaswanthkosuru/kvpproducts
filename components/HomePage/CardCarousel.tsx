@@ -29,11 +29,11 @@ const CardCarousel = () => {
                 }}
             >
                 <SwiperSlide
-                    className='w-full h-auto  bg-slate-900'
+                    className='w-full h-auto   bg-slate-900'
                 >
-                    <div className='grid grid-flow-row mx-0 p-2'>
+                    <div className='grid grid-flow-row mx-0 p-2 m:p-10'>
                         <div
-                            className={`text-white  text-xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
+                            className={`text-white  text-xl m:text-5xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
                             <span>
                                 Elevate your dishes with the colors and flavors
                                 only fresh vegetables can provide
@@ -55,9 +55,9 @@ const CardCarousel = () => {
                 <SwiperSlide
                     className='w-full h-auto  bg-slate-900'
                 >
-                    <div className='grid grid-flow-row mx-0 p-2'>
+                    <div className='grid grid-flow-row mx-0 p-2 m:p-4'>
                         <div
-                            className={`text-white  text-xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
+                            className={`text-white  text-xl m:text-5xl ${alegreya.className} ${inter.className}  text-[16x] flex p-2`}>
                             <span>
                                 Harvest the goodness, delivered to your doorstep. Freshness you can taste, convenience you can savor
                             </span>

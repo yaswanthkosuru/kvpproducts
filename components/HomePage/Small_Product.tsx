@@ -31,11 +31,13 @@ const Small_Product_Component = () => {
                 </div>
                 <div>
                     <div className=''>
-                        <div className='grid grid-cols-2 gap-4 py-1 px-3 '>
+                        <div className='grid grid-cols-2 gap-4  py-1 px-3 '>
                             {
                                 products.map((product) => {
                                     const { name, description, imageUrls, price, _id, overallrating, usersrated, units } = product;
-                                    return <div className='w-full bg-white/80 border border-gray-300 py-2  px-2 rounded-xl h-auto'>
+                                    return <Link
+                                        href={`/product/${product._id}`}
+                                        className=' mx-auto w-full m:w-1/2 bg-white/80 border border-gray-300 py-2  px-2 rounded-xl h-auto'>
                                         <span className='text-lg'>
                                             {name.toUpperCase()}
                                         </span>
@@ -44,13 +46,13 @@ const Small_Product_Component = () => {
                                             width={150}
                                             height={150}
                                             alt='image'
-                                            className=' w-full h-24'
+                                            className=' w-full m:w-1/2 h-24 '
                                         >
                                         </CldImage>
                                         <span>
                                             &#8377;{price} / {units}
                                         </span>
-                                    </div>
+                                    </Link>
                                 })
                             }
                         </div>
