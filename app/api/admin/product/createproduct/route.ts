@@ -8,16 +8,19 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export async function POST(request: NextRequest, response: NextResponse) {
     const { session, User, Database } = await GetSessionAndDB();
     if (!session) {
-        return NextResponse.json({ msg: 'No session found in Browser' }, { status: 500 })
+        return NextResponse.json({ msg: 'No session found in Browser' }, { status: 401, statusText: 'userid not found ' })
     }
     if (!User) {
-        return NextResponse.json({ msg: 'No User found in Data Base' },)
+        return NextResponse.json({ msg: 'No User found in Data Base' }, { status: 401, statusText: 'userid not found ' })
     }
     if (!Database) {
-        return NextResponse.json({ msg: 'Error connecting to Database' },)
+        return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
     const data = await request.json()
     console.log(data);
+    if (User.email != 'yaswanthkosuru999@gmail.com') {
+        return NextResponse.json({ msg: 'please add through via admin account' }, { status: 401, statusText: 'userid not matches' })
+    }
 
     const { formData, ImageUrls }: { formData: FormInputType, ImageUrls: string[] } = data;
     const ProdctCollection = Database.collection<ProductType>('products');
