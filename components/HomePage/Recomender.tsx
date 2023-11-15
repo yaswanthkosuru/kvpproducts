@@ -17,7 +17,7 @@ import Link from 'next/link';
 
 const Recomended_Component = () => {
     let products = useSelector(selectallproducts);
-    products = products.slice(0, 5);
+    products = products.slice(-5);
     if (!products || products.length == 0) {
         return <></>
     }

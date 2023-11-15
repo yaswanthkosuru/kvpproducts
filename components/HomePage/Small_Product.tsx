@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 const Small_Product_Component = () => {
 
     var products = useSelector(selectallproducts);
-    products = products.slice(0, 5);
+    products = products.slice(0, 4);
     if (!products || products.length == 0) {
         return <></>
     }
