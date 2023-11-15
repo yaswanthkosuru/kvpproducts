@@ -18,6 +18,9 @@ import Link from 'next/link';
 const Recomended_Component = () => {
     let products = useSelector(selectallproducts);
     products = products.slice(0, 5);
+    if (!products || products.length == 0) {
+        return <></>
+    }
     return (
         <div>
             <span className='font-bold mx-2 text-blue-900 text-[20px] '>

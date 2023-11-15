@@ -66,10 +66,10 @@ const CardCarousel = () => {
                                 width={100}
                                 height={100}
                                 alt='none'
-                                className='glow-image'
+                                className=''
                             />
                         </div>
-                        <span className={`text-[16px]  text-white/90 glow ${robotoslab.className} ${roboto.className}`}>
+                        <span className={`text-[16px]  text-white/90  ${robotoslab.className} ${roboto.className}`}>
                             yaswanth  wishing you happy krismas
                         </span>
                     </div>
