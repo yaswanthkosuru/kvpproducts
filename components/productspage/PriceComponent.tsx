@@ -18,16 +18,10 @@ export function PriceComponent({ price, units }: props) {
         }
     }, []);
     var offerprice = price;
-    let OrderLength = 0;
-    orders?.forEach((ord) => OrderLength += ord.items.length);
+
     //price based on orders
-    if (OrderLength < 3) {
-        var offerprice = 0.6 * price;
-        if (offerprice > 80) {
-            offerprice = price - 80;
-        }
-    }
-    if (!orders || OrderLength < 3) {
+
+    if (!orders) {
         return (
             <div>
                 <span className="flex items-center gap-1">

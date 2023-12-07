@@ -6,6 +6,7 @@ import { AppDispatch } from "@app/redux/store";
 
 import Product_Component from '@components/productspage/ProductComponent';
 import "@styles/globals.css";
+import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
 
 export default function Home() {
   // Use local state for status
