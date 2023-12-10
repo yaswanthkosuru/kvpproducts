@@ -6,19 +6,15 @@ import { selectproductwithid, getproduct } from '@app/redux/feautres/products/pr
 import { RootState, AppDispatch } from '@app/redux/store';
 import { useParams } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import BuynowComponent from '@components/Buttons/BuyNowComponent';
 import SwiperImagecomponent from '@components/productdetailspage/SwiperImagecomponent';
 import ProductDetailsComponent from '@components/productdetailspage/ProductDetailsComponent';
 import AddtoCartComponent from '@components/Buttons/AddtoCartComponent';
 import ProductPrefetch from '@components/Skeletons/productprefetch';
 import { SelectCartStatus } from '@app/redux/feautres/cart/cartslice';
 import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
-import axios from 'axios';
-import { getreviews, selectallreviews } from '@app/redux/feautres/Reviews/Reviewslice';
-import { roboto, robotoslab } from '@styles/fonts';
-import Fivestar from '@components/productspage/FiveStar';
+
 import ReviewComponent from '@components/PassiveComponents/ReviewComponent';
-import Loadingwithspin from '@components/PassiveComponents/Loading';
+
 
 export default function Page() {
     const { product_id } = useParams();
@@ -48,12 +44,12 @@ export default function Page() {
                     <SwiperImagecomponent
                         imageUrls={imageUrls}
                     />
+
                     <ProductDetailsComponent product={product} />
+
+
                 </div>
-                <div className='grid-cols-1 m:grid m:grid-cols-2 m:w-[55%] gap-4'>
-                    <AddtoCartComponent />
-                    <div className='m:hidden m-4'></div>
-                    <BuynowComponent />
+                <div className=''>
                     <div className='font-bold text-[24px]'>
                         Reviews:
                     </div>

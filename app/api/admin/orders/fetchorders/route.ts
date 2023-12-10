@@ -1,12 +1,8 @@
 
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { NextRequest, NextResponse } from "next/server";
-import { FormInputType, ProductType } from "@models/productModel";
-import { AddressType } from "@models/addressModel";
-import { OrderType } from "@models/orderModel";
-import { UserType } from "@models/userModel";
-import { ObjectId } from "mongodb";
 
+import { OrderType } from "@models/orderModel";
 
 export async function POST(request: NextRequest, response: NextResponse) {
     const { session, User, Database } = await GetSessionAndDB();

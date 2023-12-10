@@ -6,14 +6,14 @@ import c5 from '@public/category/dryfruits.png';
 import Image from 'next/image';
 import { roboto, robotoslab } from '@styles/fonts';
 import { motion, Variants } from 'framer-motion';
-import { cvariants } from '@framer/Variants';
+import { categoryvariants } from '@framer/Variants';
 import Link from 'next/link';
 const Categories = () => {
     return (
-        <motion.div variants={cvariants} initial='initial' animate='after'>
+        <motion.div variants={categoryvariants} initial='initial' animate='after'>
             <motion.span className={`text-xl ml-2 font-bold`}>whats you want </motion.span>
             <motion.div className='grid grid-cols-3 m:grid-cols-6'>
-                <motion.div variants={cvariants} className='text-center mx-1'>
+                <motion.div variants={categoryvariants} className='text-center mx-1'>
                     <Link href={{ pathname: '/category', query: { name: 'vegetables' } }}>
                         <Image
                             src={c1}
@@ -25,7 +25,7 @@ const Categories = () => {
                         <span className={`${roboto.className} ${robotoslab.className}`}>vegetables</span>
                     </Link>
                 </motion.div>
-                <motion.div variants={cvariants} className='text-center mx-1'>
+                <motion.div variants={categoryvariants} className='text-center mx-1'>
                     <Link href={{ pathname: '/category', query: { name: 'fruits' } }}>
                         <Image
                             src={c2}
@@ -37,7 +37,7 @@ const Categories = () => {
                         <span className={`${roboto.className} ${robotoslab.className}`}>Fruits</span>
                     </Link>
                 </motion.div>
-                <motion.div variants={cvariants} className='text-center mx-1'>
+                <motion.div variants={categoryvariants} className='text-center mx-1'>
                     <Link href={{ pathname: '/category', query: { name: 'dairy' } }}>
                         <Image
                             src={c3}
@@ -49,7 +49,7 @@ const Categories = () => {
                         <span className={`${roboto.className} ${robotoslab.className}`}>Dairyproducts</span>
                     </Link>
                 </motion.div>
-                <motion.div variants={cvariants} className=''>
+                <motion.div variants={categoryvariants} className=''>
                     <Link href={{ pathname: '/category', query: { name: 'grains' } }}>
                         <Image
                             src={c4}
@@ -61,7 +61,7 @@ const Categories = () => {
                         <span className={`${roboto.className} ${robotoslab.className} flex justify-center `}>Grains</span>
                     </Link>
                 </motion.div>
-                <motion.div variants={cvariants} className='text-center mx-1'>
+                <motion.div variants={categoryvariants} className='text-center mx-1'>
                     <Link href={{ pathname: '/category', query: { name: 'dryfruits' } }}>
                         <Image
                             src={c5}

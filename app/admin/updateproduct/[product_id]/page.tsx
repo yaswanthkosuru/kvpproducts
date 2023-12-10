@@ -4,7 +4,7 @@ import { selectproductwithid, updateproduct } from '@app/redux/feautres/products
 import { AppDispatch, RootState } from '@app/redux/store';
 import { FormImageComp } from '@components/Forms/FormImage';
 import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
-import { FormInputType } from '@models/productModel';
+import { FormInputType } from '@models/product';
 import { roboto, robotoslab } from '@styles/fonts';
 import { CldImage, CldUploadButton } from 'next-cloudinary';
 import { useParams } from 'next/navigation'

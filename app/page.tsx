@@ -1,20 +1,16 @@
 'use client'
 
-import Adds_Component from '@components/HomePage/Adds';
-import CardCarousel from '@components/HomePage/CardCarousel';
-import Discount_Component from '@components/HomePage/Discount';
-import Recomended_Component from '@components/HomePage/Recomender';
-import Small_Product_Component from '@components/HomePage/Small_Product';
-import Product_Component from '@components/productspage/ProductComponent';
+import Slidingbanners from "@components/HomePage/banners"
+import Categories from "@components/HomePage/Categories"
+import Small_Product_Component from "@components/HomePage/Small_Product"
+import Productscomponent from "@components/productspage/productsComponent"
 export default function Page() {
     return (
         <div className=''>
-            <CardCarousel />
-            <Small_Product_Component />
-            <Recomended_Component />
-            <Adds_Component />
-            <Discount_Component />
-            <div className='my-40'></div>
+            <Slidingbanners />
+            <Categories />
+            <div className=" block m:hidden"><Small_Product_Component /></div>
+            <Productscomponent />
         </div>
     )
 

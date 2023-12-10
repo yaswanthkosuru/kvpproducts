@@ -10,7 +10,6 @@ export default function RootLayout({
 
         <div className="m-1">
 
-            <Nav />
             {children}
         </div>
 

@@ -1,7 +1,7 @@
 
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { NextRequest, NextResponse } from "next/server";
-import { FormInputType, ProductType } from "@models/ProductModel";
+import { FormInputType, ProductType } from "@models/product";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 

@@ -1,6 +1,6 @@
 import { selectallproducts } from '@app/redux/feautres/products/product-slice'
 import { PriceComponent } from '@components/productspage/PriceComponent'
-import Product_Component from '@components/productspage/ProductComponent'
+import Product_Component from '@components/productspage/productsComponent'
 import FilteredProductComponent from '@components/searchpage/FilteredProductComponent'
 import { alegreya, inter, roboto, robotoslab } from '@styles/fonts'
 import { CldImage } from 'next-cloudinary'
@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 const Small_Product_Component = () => {
 
     var products = useSelector(selectallproducts);
-    products = products.slice(0, 4);
+    products = products?.slice(0, 4);
     if (!products || products.length == 0) {
         return <></>
     }

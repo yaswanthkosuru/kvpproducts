@@ -9,44 +9,12 @@ type props = {
     units: string
 }
 export function PriceComponent({ price, units }: props) {
-    const orders = useSelector(SelectOrders);
-    const dispatch = useDispatch<AppDispatch>();
-    const { status } = GetSessionData()
-    useEffect(() => {
-        if (!orders && status === 'authenticated') {
-            dispatch(getorders())
-        }
-    }, []);
-    var offerprice = price;
-
-    //price based on orders
-
-    if (!orders) {
-        return (
-            <div>
-                <span className="flex items-center gap-1">
-                    <span> &#8377;{offerprice}</span>
-                    <span className='text-sm text-gray-700 '>
-                        &nbsp; per {units}
-                    </span>
-                    <span className="text-gray-400 text-[12px]">m.r.p :</span>
-                    <span className="line-through decoration-rose-600 text-base text-gray-400">
-                        &#8377;{price}
-                    </span>
-                </span>
-                <div className="text-sm text-gray-400">
-                    coupon avalible during checkout
-                </div>
-            </div>
-        )
-    }
     return (
         <span className="flex items-center">
             <span> &#8377;{price}</span>
             <span className='text-sm text-gray-700 '>
                 &nbsp; /- {units}
             </span>
-
         </span>
     )
 

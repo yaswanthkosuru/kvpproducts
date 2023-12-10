@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="">
-      <Nav />
+
       {children}
     </div>
 

@@ -1,7 +1,7 @@
 
 import { AddressType } from "@models/Address_Model";
 import { OrderType } from "@models/Order_Model";
-import { ProductType } from "@models/ProductModel";
+import { ProductType } from "@models/product";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";

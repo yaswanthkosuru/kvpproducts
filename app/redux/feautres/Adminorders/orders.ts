@@ -3,7 +3,7 @@ import { OrderType } from "@models/orderModel";
 import axios from "axios";
 import { RootState } from "@app/redux/store";
 import { AddressType } from "@models/addressModel";
-import { ProductType } from "@models/productModel";
+import { ProductType } from "@models/product";
 import { UserType } from "@models/userModel";
 type init = {
     order_detals: {

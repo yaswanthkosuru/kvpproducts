@@ -4,9 +4,8 @@ import { useDispatch } from 'react-redux';
 import { getallproducts, selectproductstatus } from "@app/redux/feautres/products/product-slice";
 import { AppDispatch } from "@app/redux/store";
 
-import Product_Component from '@components/productspage/ProductComponent';
+import ProductsComponent from '@components/productspage/productsComponent';
 import "@styles/globals.css";
-import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
 
 export default function Home() {
   // Use local state for status
@@ -21,7 +20,7 @@ export default function Home() {
   return (
     <div>
       <div className="">
-        <Product_Component />
+        <ProductsComponent />
       </div>
     </div>
   );

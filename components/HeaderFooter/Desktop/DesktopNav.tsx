@@ -8,6 +8,7 @@ import { inter, ptserif, roboto, ubuntu } from "@styles/fonts";
 import Arrow from '@components/Buttons/ArrowComponent'
 import '@styles/globals.css';
 import { BuiltInProviderType } from "next-auth/providers";
+import logo from '@public/logo.png'
 
 const Nav = () => {
   const router = useRouter()
@@ -53,14 +54,18 @@ const Nav = () => {
           <Link
             href='/products'
             className="hover:text-slate-900 active:text-blue-900">
-            home
+            <Image src={logo} width={35} height={30} alt='none'></Image>
           </Link>
-          <div className="">
+          <Link
+            href='/search'
+            className=" cursor-pointer">
             <input
               placeholder='search vegetables...'
-              className='placeholder:text-slate-400 bg-white border border-gray-400 rounded-md focus:outline-none  w-auto h-8'
+              readOnly
+              className='placeholder:text-slate-400 bg-white border border-gray-400 rounded-md focus:outline-none cursor-pointer  w-auto h-8'
             />
-          </div>
+          </Link>
+
           <Link href='/membership'
             className=
             {`${ubuntu.className} underline text-blue-500 active:text-blue-500 text-xl`}>

@@ -1,6 +1,6 @@
 import { createproduct, selectproductstatus } from "@app/redux/feautres/products/product-slice";
 import { AppDispatch } from "@app/redux/store";
-import { FormInputType } from "@models/ProductModel";
+import { FormInputType } from "@models/product";
 import { CldUploadButton, CldUploadWidgetResults } from "next-cloudinary";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import DisableandLoadingComponent from "@components/PassiveComponents/Disablepag
 export default function CreateProductFormComponent({ }) {
     const [ImageUrls, setImageUrls] = useState<string[]>([]);
     const productstatus = useSelector(selectproductstatus);
-    const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>()
+    const [loadingstatus, setloadingstatus] = useState<'idle' | 'pending' | 'rejected'>()
     useEffect(() => {
         setloadingstatus(productstatus);
     }, [productstatus])

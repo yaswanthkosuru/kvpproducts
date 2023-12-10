@@ -28,7 +28,7 @@ const AddtoCartComponent = () => {
     return (
         <button
             onClick={Addtocart}
-            className='cart-button flex w-full justify-center gap-1 m:gap-6   items-center'
+            className=' cart-button flex w-full justify-center gap-1 m:gap-6   items-center'
         >
 
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

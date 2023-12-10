@@ -8,8 +8,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <div className='mt-4'>
 
-            <Nav />
-
 
 
             {children}

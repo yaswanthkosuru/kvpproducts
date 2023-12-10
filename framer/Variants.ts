@@ -16,7 +16,7 @@ export const bannervariants: Variants = {
     }
 
 }
-export const cvariants: Variants = {
+export const categoryvariants: Variants = {
     initial: {
         opacity: 0,
         y: -10,

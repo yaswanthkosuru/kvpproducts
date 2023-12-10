@@ -1,17 +1,12 @@
 import { RootState } from '@app/redux/store'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { FormInputType, ProductType } from '@models/ProductModel';
-export type initialState = {
-    value: number,
-    products: (ProductType)[],
-    status: 'idle' | 'Loading' | 'rejected',
-}
+import { initialproductstate } from '@CustomTypes/ReduxType'
 
-const initialState: initialState = {
-    value: 0,
-    products: [],
-    status: 'idle',
+
+const initialState: initialproductstate = {
+    products: undefined,
+    status: 'idle'
 }
 export const createproduct = createAsyncThunk('product/createproduct',
     async ({ formData, ImageUrls }: { formData: FormInputType, ImageUrls: string[] }) => {
@@ -25,7 +20,6 @@ export const createproduct = createAsyncThunk('product/createproduct',
         return products;
     })
 export const getallproducts = createAsyncThunk('getoverallproducts', async () => {
-    console.log('called getallproducts');
     const response = await axios.post('/api/products/fetchproducts');
     const data = await response.data;
     const { products } = data;
@@ -47,7 +41,7 @@ export const Productslice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(createproduct.pending, (state, action) => {
-                state.status = 'Loading'
+                state.status = 'pending'
             })
             .addCase(createproduct.fulfilled, (state, action) => {
                 state.status = 'idle'
@@ -56,7 +50,7 @@ export const Productslice = createSlice({
                 state.status = 'rejected';
             })
             .addCase(getallproducts.pending, (state, action) => {
-                state.status = 'Loading';
+                state.status = 'pending';
             })
             .addCase(getallproducts.fulfilled, (state, action) => {
                 console.log(action.payload, 'fulfilled');
@@ -83,7 +77,7 @@ export const selectproductwithid = (state: RootState, id: string) => {
     const product = state.productreducer.products.find((product) => {
         return product._id?.toString() === id;
     });
-    return product as ProductType;
+    return product;
 }
 
 export const { } = Productslice.actions

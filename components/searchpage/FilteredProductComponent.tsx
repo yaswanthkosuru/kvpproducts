@@ -1,15 +1,15 @@
 import Fivestar from "@components/productspage/FiveStar"
-import { ProductType } from "@models/ProductModel"
+import { productType } from "@models/product"
 import { roboto, robotoslab, inter } from "@styles/fonts"
 import { CldImage } from "next-cloudinary"
 import Link from "next/link"
 
-const FilteredProductComponent = ({ products }: { products: ProductType[] }) => {
+const FilteredProductComponent = ({ products }: { products: productType[] }) => {
     if (!products || products.length <= 0) {
         return <div></div>
     }
     return (
-        <div>
+        <div className="m:grid m:grid-cols-3">
             {
                 products?.map((product, index) => {
                     const { name, description, imageUrls, price, _id, overallrating, usersrated, units } = product;
@@ -36,7 +36,7 @@ const FilteredProductComponent = ({ products }: { products: ProductType[] }) => 
                                             <span className=" font-semibold">{name.toUpperCase()}</span>
                                             <p className="truncate" >{description}</p>
                                             <span className=' font-medium text-[20px]'>&#8377;{price}</span>
-                                            <Fivestar rating={rating} usersrated={usersrated} />
+
                                             <span className='text-[8px] text-gray-400'>upto</span>65% off <span className='text-gray-400 text-[8px]'> on first order</span>
                                         </div>
 

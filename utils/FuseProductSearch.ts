@@ -1,4 +1,4 @@
-import { ProductModel } from '@models/productModel';
+import { ProductModel } from '@models/product';
 import Fuse from 'fuse.js';
 
 const fuseOptions = {

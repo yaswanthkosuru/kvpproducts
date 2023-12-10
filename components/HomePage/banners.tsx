@@ -10,7 +10,7 @@ import banner1 from '@public/cardpage/poster1.jpg'
 import banner2 from '@public/cardpage/poster2.jpg'
 import { motion } from 'framer-motion'
 import { bannervariants } from '@framer/Variants';
-export default function slidingbanners() {
+export default function Slidingbanners() {
     return (
         <motion.div variants={bannervariants} initial='initial' animate='after'>
             <Swiper

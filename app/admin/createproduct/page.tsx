@@ -2,7 +2,7 @@
 
 import CreateProductFormComponent from "@components/Forms/CreateProductForm";
 
-export default function Page() {
+export default function page() {
 
 
 

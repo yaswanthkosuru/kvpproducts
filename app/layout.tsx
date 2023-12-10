@@ -7,6 +7,9 @@ import { getServerSession } from "next-auth/next"
 import { handler } from '@app/api/auth/[...nextauth]/route';
 import type { Session } from "next-auth"
 import MobileNav from '@components/HeaderFooter/Mobile/MobileNav';
+import Nav from '@components/HeaderFooter/Desktop/DesktopNav';
+import { headers } from "next/headers";
+
 export const metadata = {
   title: 'vegie',
   description: 'vegetables selling app',
@@ -14,6 +17,12 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session: Session = await getServerSession(handler) as Session;
+
+  const headersList = headers();
+  const activePath = headersList.get("x-url");
+  console.log(activePath, headersList, 'activePath');
+
+  const hidenav = activePath.split('/').includes('search');
 
 
 
@@ -25,10 +34,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
 
 
-      <body className=' pb-[60px] sm:pb-0'>
+      <body className='m:w-3/4 mx-auto pb-20 m:pb-0'>
 
         <Authprovider session={session}>
           <Reduxprovider >
+            <Nav />
             <MobileNav />
             {children}
           </Reduxprovider>
