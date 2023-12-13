@@ -1,4 +1,4 @@
-import { ProductModel } from '@models/product';
+import { productType } from '@models/product';
 import Fuse from 'fuse.js';
 
 const fuseOptions = {
@@ -23,7 +23,7 @@ const fuseOptions = {
 
 
 
-export function Fusesearch(products: ProductModel[], searchPattern: string) {
+export function Fusesearch(products: productType[], searchPattern: string) {
     const fuse = new Fuse(products, fuseOptions);
     return fuse.search(searchPattern)
 }

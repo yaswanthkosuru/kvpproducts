@@ -1,6 +1,5 @@
 'use client'
 
-import { checkoutcartaction, checkoutcartstate } from '@CustomTypes/Redux';
 
 import MultistepNextButton from '@components/Buttons/MultistepNextButton';
 
@@ -15,6 +14,7 @@ import '@styles/globals.css';
 
 
 import React, { useReducer, useState } from 'react';
+import { checkoutcartstate, checkoutcartaction } from '@CustomTypes/ReduxType';
 
 const initialState: checkoutcartstate = {
     pageno: 1

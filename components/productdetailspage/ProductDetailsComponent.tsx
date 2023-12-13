@@ -2,13 +2,13 @@ import { SelectOrders } from '@app/redux/feautres/orders/orderslice'
 import AddtoCartComponent from '@components/Buttons/AddtoCartComponent'
 import BuynowComponent from '@components/Buttons/BuyNowComponent'
 import Fivestar from '@components/productspage/FiveStar'
-import { ProductType } from '@models/product'
+import { productType } from '@models/product'
 import { roboto, robotoslab } from '@styles/fonts'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { PriceComponent } from '../productspage/PriceComponent'
 type props = {
-    product: ProductType
+    product: productType
 }
 
 const ProductDetailsComponent = ({ product }: props) => {
@@ -17,7 +17,7 @@ const ProductDetailsComponent = ({ product }: props) => {
     if (!product) {
         return <></>
     }
-    const { name, description, price, units, caloriespercent, usersrated, overallrating } = product;
+    const { name, description, price, units, caloriespercent, usersrated, overallrating, stockQuantity } = product;
 
     return (
         <div className='w-full text-gray-800'>
@@ -28,16 +28,20 @@ const ProductDetailsComponent = ({ product }: props) => {
                 </div>
                 <div></div>
                 <span className='text-2xl'>
-                    <PriceComponent price={parseInt(price as string)} units={units} />
+                    <PriceComponent price={price} units={units} />
                 </span>
                 <span className=' text-[18px]'>calories obtained:{caloriespercent} per 100 g</span>
                 <div>
-                    <Fivestar rating={rating} />
+
                     <span className=''>
                         No of Users rated:{usersrated}
                     </span>
                 </div>
-                <AddtoCartComponent />
+                {stockQuantity > 0 ? <AddtoCartComponent /> : (
+                    <div className='text-xl text-red-500'>
+                        product unavialible
+                    </div>
+                )}
 
 
 

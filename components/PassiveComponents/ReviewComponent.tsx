@@ -1,4 +1,4 @@
-import { Reviewaction, Reviewstate } from "@CustomTypes/ReduxType";
+
 import { getreviews, selectallreviews, selectreviewsstatus } from "@app/redux/feautres/Reviews/Reviewslice";
 import { roboto, robotoslab } from "@styles/fonts";
 import { useEffect, useReducer } from "react";
@@ -8,10 +8,10 @@ import { AppDispatch } from "@app/redux/store";
 import { useParams } from "next/navigation";
 import Noreviews from "./Noreviews";
 
-const initialState: Reviewstate = {
+const initialState = {
     reviewstatus: 'idle'
 }
-function reducer(state: Reviewstate, action: Reviewaction): Reviewstate {
+function reducer(state, action) {
     switch (action.type) {
         case 'setreviewstatus':
             state.reviewstatus = action.payload;

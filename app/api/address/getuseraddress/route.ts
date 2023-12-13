@@ -1,6 +1,5 @@
 
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
-import { ConnectToDB } from "@utils/ConnectDB";
 
 import { NextRequest, NextResponse } from "next/server";
 

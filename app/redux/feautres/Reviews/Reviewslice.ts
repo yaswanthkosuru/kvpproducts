@@ -1,5 +1,5 @@
 import { RootState } from '@app/redux/store';
-import { ReviewType } from '@models/Review_Model';
+import { ReviewType } from "@models/reviewModel";
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 

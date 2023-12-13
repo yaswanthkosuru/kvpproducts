@@ -1,4 +1,4 @@
-import { OrderType } from "@models/Order_Model";
+import { orderType } from "@models/orderModel";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
@@ -14,13 +14,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
-    const OrdersCollection = Database.collection<OrderType>('orders');
+    const OrdersCollection = Database.collection<orderType>('orders');
     const Order = await OrdersCollection.find({
         user_id: new ObjectId(User._id),
     }).toArray();
     console.log(Order, 'orderdetails');
     //retrun reverse order
 
-    return NextResponse.json({ order_details: Order.reverse() }, { status: 200, statusText: 'success' });
+    return NextResponse.json({ orders: Order.reverse() }, { status: 200, statusText: 'success' });
 
 }

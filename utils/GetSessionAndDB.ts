@@ -3,11 +3,11 @@ import { getServerSession } from "next-auth/next"
 import { handler } from "@app/api/auth/[...nextauth]/route";
 import { Session, User } from "next-auth";
 import { ConnectToDB } from "@utils/ConnectDB";
-import { UserType } from "@models/User_Model";
+import { userType } from "@models/userModel";
 import { Db } from "mongodb";
 export interface Retype {
     session: Session | null,
-    User: UserType | null | undefined,
+    User: userType | null | undefined,
     Database: Db | undefined,
 }
 export async function GetSessionAndDB(): Promise<Retype> {
@@ -18,7 +18,7 @@ export async function GetSessionAndDB(): Promise<Retype> {
         const Database = await ConnectToDB();
 
         const UserCollection = Database?.collection('users');
-        let User = await UserCollection?.findOne<Promise<UserType>>({ email: session?.user?.email });
+        let User = await UserCollection?.findOne<Promise<userType>>({ email: session?.user?.email });
 
 
         return { session, User, Database };

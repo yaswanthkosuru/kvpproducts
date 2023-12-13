@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import '@styles/globals.css'
-import { useDispatch, } from 'react-redux'
-import { AppDispatch } from '@app/redux/store'
+import { useDispatch, useSelector, } from 'react-redux'
+import { AppDispatch, RootState } from '@app/redux/store'
 import { AddCartItem, } from '@app/redux/feautres/cart/cartslice'
 import { useParams, useRouter } from 'next/navigation'
 import { GetSessionData } from '@utils/GetClientSession'
+import { selectproductwithid } from '@app/redux/feautres/products/product-slice'
 
 const AddtoCartComponent = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { product_id } = useParams();
     const p_id = product_id as string;
+    const product = useSelector((state: RootState) => selectproductwithid(state, p_id));
+    console.log(product, 'insideaddtocart');
     const { status, session } = GetSessionData();
     const router = useRouter();
     const Addtocart = async () => {
@@ -18,7 +21,7 @@ const AddtoCartComponent = () => {
             router.push('/loginpage');
         }
         else if (status === 'authenticated') {
-            dispatch(AddCartItem({ p_id }))
+            dispatch(AddCartItem({ product: product }))
         }
         else {
             alert('please wait... and try again');

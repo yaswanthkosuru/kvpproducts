@@ -49,6 +49,7 @@ export default function Productscomponent() {
                                     width={600}
                                     height={600}
                                     alt='product image'
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className='rounded-md h-[150px] border'
                                 />
                             </div>
@@ -85,8 +86,9 @@ export default function Productscomponent() {
                                 <CldImage
                                     src={imageUrls[0]}
                                     fill
-                                    sizes=''
+
                                     alt='product image'
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className=' '
                                 />
                             </div>

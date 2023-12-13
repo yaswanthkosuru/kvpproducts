@@ -9,7 +9,17 @@
 //                 "__v": 0
 // }
 
+import { ObjectId } from "mongodb"
+
 export type userModel = {
+    _id: string,
+    email: string,
+    username: string
+    image: string,
+
+}
+export type userType = {
+    _id: ObjectId,
     email: string,
     username: string
     image: string,

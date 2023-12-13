@@ -32,14 +32,14 @@ const SwiperImagecomponent = ({ imageUrls }: props) => {
 
     const dispatch = useDispatch<AppDispatch>();
     const CartStatus = useSelector(SelectCartStatus);
-    const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>();
+    const [loadingstatus, setloadingstatus] = useState<'idle' | 'pending' | 'rejected'>();
 
     useEffect(() => {
         setloadingstatus(CartStatus);
     }, [CartStatus])
 
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass>();
-    if (!product && loadingstatus === 'Loading') {
+    if (!product && loadingstatus === 'pending') {
         return <div><ProductPrefetch /></div>
     }
     return (

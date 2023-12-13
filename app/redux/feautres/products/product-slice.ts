@@ -1,7 +1,7 @@
 import { RootState } from '@app/redux/store'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { initialproductstate } from '@CustomTypes/ReduxType'
+import { createproductformtype, initialproductstate } from '@CustomTypes/ReduxType'
 
 
 const initialState: initialproductstate = {
@@ -9,9 +9,8 @@ const initialState: initialproductstate = {
     status: 'idle'
 }
 export const createproduct = createAsyncThunk('product/createproduct',
-    async ({ formData, ImageUrls }: { formData: FormInputType, ImageUrls: string[] }) => {
+    async ({ formData }: { formData: createproductformtype }) => {
         const response = await axios.post('/api/admin/product/createproduct', {
-            ImageUrls,
             formData
         });
         console.log('called async thunk cp');
@@ -73,9 +72,9 @@ export const Productslice = createSlice({
 })
 export const selectallproducts = (state: RootState) => state.productreducer.products;
 export const selectproductstatus = (state: RootState) => state.productreducer.status;
-export const selectproductwithid = (state: RootState, id: string) => {
-    const product = state.productreducer.products.find((product) => {
-        return product._id?.toString() === id;
+export const selectproductwithid = (state: RootState, product_id: string) => {
+    const product = state.productreducer.products?.find((product) => {
+        return product?._id?.toString() === product_id;
     });
     return product;
 }

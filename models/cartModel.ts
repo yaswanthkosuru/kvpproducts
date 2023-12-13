@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 
-export type CartType = {
+export type cartType = {
     _id?: string,
     user_id: ObjectId | string,
     product_id: string | ObjectId,

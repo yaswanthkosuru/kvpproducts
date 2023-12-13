@@ -24,7 +24,7 @@ const Navcart = () => {
     return (
         <div
             style={{ color: divColor }}
-            className={`active:bg-slate-100  transition-colors  rounded-sm ${border}`}
+            className={`active:bg-slate-100  transition-colors  rounded-sm  ${border} m:border-none`}
         >
             <Link className="relative flex flex-col items-center justify-center " href="/cart">
                 <svg
@@ -42,8 +42,8 @@ const Navcart = () => {
                     cart
                 </div>
 
-                <div className="absolute  text-[9px] font-extrabold  bg-red-500 text-white rounded-full px-1 top-1 right-2 ">
-                    {cartlen}
+                <div className="absolute text-white top-1 right-2 ">
+                    <span className='w-4 h-4 flex justify-center text-[12px] items-center rounded-full bg-red-500'>{cartlen}</span>
                 </div>
             </Link>
         </div>

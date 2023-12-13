@@ -8,7 +8,7 @@ import { handler } from '@app/api/auth/[...nextauth]/route';
 import type { Session } from "next-auth"
 import MobileNav from '@components/HeaderFooter/Mobile/MobileNav';
 import Nav from '@components/HeaderFooter/Desktop/DesktopNav';
-import { headers } from "next/headers";
+
 
 export const metadata = {
   title: 'vegie',
@@ -17,12 +17,6 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session: Session = await getServerSession(handler) as Session;
-
-  const headersList = headers();
-  const activePath = headersList.get("x-url");
-  console.log(activePath, headersList, 'activePath');
-
-  const hidenav = activePath.split('/').includes('search');
 
 
 

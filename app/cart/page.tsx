@@ -1,13 +1,15 @@
 'use client'
-import { SelectCartLength, SelectCartStatus } from "@app/redux/feautres/cart/cartslice";
+import { getcartitems, SelectCartLength, SelectCartStatus } from "@app/redux/feautres/cart/cartslice";
+import { AppDispatch } from "@app/redux/store";
 import BuynowComponent from "@components/Buttons/BuyNowComponent";
+
 import CartProductComponent from "@components/cartpage/CartProductComponent";
 import NoCartItems from "@components/PassiveComponents/NoCartItems";
 import { roboto, robotoslab } from "@styles/fonts";
 import { GetSessionData } from "@utils/GetClientSession";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Page() {
     const { session, status } = GetSessionData();
@@ -15,6 +17,8 @@ export default function Page() {
     console.log(cartlength, 'cartlength');
     const cartstatus = useSelector(SelectCartStatus);
     const [loadingstatus, setloadingstatus] = useState<typeof cartstatus>();
+    const dispatchRedux = useDispatch<AppDispatch>();
+
     useEffect(() => {
         setloadingstatus(cartstatus);
     }, [cartstatus])
@@ -34,7 +38,7 @@ export default function Page() {
             <CartProductComponent />
             {cartlength == 0 && loadingstatus === 'idle' && <NoCartItems />
             }
-            {cartlength > 0 && <BuynowComponent />}
+            <BuynowComponent />
         </div>
     )
 }

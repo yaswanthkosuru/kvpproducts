@@ -4,7 +4,8 @@ import { cartType } from "@models/cartModel";
 import { ObjectId } from "mongodb";
 
 export async function POST(req: NextRequest, res: NextResponse) {
-
+    const data = await req.json();
+    const { product_id } = data;
     const { session, User, Database } = await GetSessionAndDB();
     if (!session) {
         return NextResponse.json({ msg: 'No session found in Browser' }, { status: 500, statusText: 'No session found' })
@@ -16,32 +17,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 500, statusText: 'Error connecting to Database' })
     }
     const cartCollection = Database.collection<cartType>('carts');
-    const cartproducts = await cartCollection.aggregate([
-        { $match: { user_id: User._id } },
-        {
-            $lookup: {
-                from: 'products',
-                localField: 'product_id',
-                foreignField: '_id',
-                as: 'product',
-            },
-        },
-        {
-            $project: {
-                product: { $arrayElemAt: ["$product", 0] },
-                cartquantity: 1,
-            }
-        },
-        {
-            $replaceRoot: {
-                newRoot: {
-                    $mergeObjects: ["$product", { cartquantity: "$cartquantity" }]
-                }
-            }
-        }
-    ]).toArray();
+    await cartCollection.findOneAndDelete({
+        user_id: User._id,
+        product_id: new ObjectId(product_id)
+    })
 
+    return NextResponse.json({ succes: true }, { status: 200, headers: { 'Content-Type': 'application/json' } });
 
-    return NextResponse.json({ cartproducts: cartproducts }, { status: 200, headers: { 'Content-Type': 'application/json' } });
-    //retrun array of cartitems
 }

@@ -36,6 +36,8 @@ export default function Slidingbanners() {
                         alt='None'
                         src={banner2}
                         fill
+                        priority
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className='rounded-xl'
                     >
                     </Image>
@@ -44,6 +46,8 @@ export default function Slidingbanners() {
                     <Image
                         alt='None'
                         src={banner1}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority
                         className='rounded-xl'
                         fill
                     >

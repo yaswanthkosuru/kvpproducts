@@ -1,7 +1,8 @@
 
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { NextRequest, NextResponse } from "next/server";
-import { FormInputType, ProductType } from "@models/product";
+import { createproductformtype } from "@CustomTypes/ReduxType";
+import { productType } from "@models/product";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
@@ -22,8 +23,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
         return NextResponse.json({ msg: 'please add through via admin account' }, { status: 401, statusText: 'userid not matches' })
     }
 
-    const { formData, ImageUrls }: { formData: FormInputType, ImageUrls: string[] } = data;
-    const ProdctCollection = Database.collection<ProductType>('products');
+    const { formData, ImageUrls }: { formData: createproductformtype, ImageUrls: string[] } = data;
+    const ProdctCollection = Database.collection<productType>('products');
     const productcreated = await ProdctCollection.insertOne({
         name: formData.name,
         description: formData.description,
@@ -31,9 +32,9 @@ export async function POST(request: NextRequest, response: NextResponse) {
         usersrated: 0,
         overallrating: 0,
         imageUrls: ImageUrls,
-        caloriespercent: 20,
-        StockQuantity: formData.StockQuantity,
-        units: 'kg',
+        caloriespercent: formData.caloriespercent,
+        stockQuantity: formData.stockQuantity,
+        units: formData.units,
     })
     console.log(productcreated);
 

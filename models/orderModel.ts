@@ -1,13 +1,19 @@
 import { ObjectId } from "mongodb";
-
-export type OrderType = {
+import { addressType } from "./addressModel";
+import { cartproduct } from "@CustomTypes/ApiSchemaType";
+export type orderedproductsType = {
+    product: cartproduct,
+    orderstatus: 'delivered' | 'shipped' | 'ordered'
+}
+export type orderType = {
     _id?: string | ObjectId;
     user_id: ObjectId,
-    product_id: string | ObjectId,
-    orderedquantity: number,
-    time: string | Date,
-    address: string,
-    amount: number,
+    orderproducts: orderedproductsType[],
+    time: Date,
+    address: addressType,
+    discountedprice: number,
+    originalprice: number,
+    coupon: string,
+    orderstatus: 'delivered' | 'shipped' | 'ordered'
     ordertype: 'COD',
-    orderstatus: 'delivered' | 'shipped' | 'orderbooked'
 };

@@ -1,86 +1,116 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { CldImage } from 'next-cloudinary';
-import { SelectCartItems, SelectCartStatus, getcartitems, updatecart } from '@app/redux/feautres/cart/cartslice';
+import { SelectCartItems, SelectCartStatus, deletecartitem, getcartitems, updatecart } from '@app/redux/feautres/cart/cartslice';
 
-import { AppDispatch } from '@app/redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { playfairdisplay, roboto, robotoslab } from '@styles/fonts';
+import { useSelector } from 'react-redux';
+import { roboto, robotoslab } from '@styles/fonts';
 import '@styles/globals.css'
-import { FindCartProducts } from '@utils/findCartProducts';
 import ProductsPrefetch from '@components/Skeletons/ProductsPrefetch';
-import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
+
+import Link from 'next/link';
+
+import CartQuantityChange from '@components/Buttons/CartQuantityChange';
 
 const CartProductComponent = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { cartproducts, QuantityMap } = FindCartProducts();
-  console.log(cartproducts, 'cart page');
-  const handleupdatecart = ({ p_id, increment }: { p_id: string, increment: boolean }) => {
-    dispatch(updatecart({ product_id: p_id, increment }));
-  }
-  const [LoadingStatus, setLoadingStatus] = useState<'idle' | 'Loading' | 'rejected'>();
+
+  const cartproducts = useSelector(SelectCartItems);
+  console.log(cartproducts);
+
+
+  const [LoadingStatus, setLoadingStatus] = useState<'idle' | 'pending' | 'rejected'>('idle');
   const status = useSelector(SelectCartStatus);
   useEffect(() => {
     setLoadingStatus(status)
   }, [status]);
-  const styledproduucts = cartproducts.map((product, index) => {
-    return (
-      <div className={`${roboto.className} ${robotoslab.className}`} key={index}>
-        <div className='grid grid-cols-9 '>
-          <div className='col-span-4 mr-2 h-28 max-h-28   relative'>
-            <CldImage
-              src={product.imageUrls[0]}
-              alt='none'
-              fill={true}
-              className='w-full h-full'
-            ></CldImage>
-          </div>
-          <div className='col-span-5'>
-            {product.name.toLocaleUpperCase()}
-            <div className=''>
-              <div className='line-clamp-1'>
-                {product.description}
-              </div>
-            </div>
-            <span>  OverallPrice:</span>
-            <span className='font-bold'>
-              &#8377; {parseInt(product.price as string) * QuantityMap.get(product._id)}
-            </span>
-            <div className='flex gap-2 justify-start items-center'>
-              <span className='font-medium'>Quantity</span>
-              <div className='flex  justify-between w-full mr-4 border bg-gradient-to-r from-rose-100 to-teal-100  rounded-xl '>
-                <button
-                  className='font-bold text-[20px]  bg-white rounded-xl text-black  px-4'
-                  onClick={() => handleupdatecart({ p_id: product._id as string, increment: false })}
-                >
-                  -</button>
-                <div className=' font-bold flex items-center'>
-                  {QuantityMap.get(product._id)}
-                </div>
-                <button
-                  onClick={() => handleupdatecart({ p_id: product._id as string, increment: true })}
-                  className='font-bold bg-white text-[20px] rounded-xl text-gray-800 px-4
-                  '>+</button>
-              </div>
-            </div>
-          </div>
-        </div>
 
-
-      </div>
-    )
-  })
-  console.log(LoadingStatus, 'cartcomp');
-  if (LoadingStatus === 'Loading' && !cartproducts.length) {
+  if (LoadingStatus === 'pending' && !cartproducts?.length) {
     return <ProductsPrefetch />
   }
+  const productCards = cartproducts?.map((product, index) => {
+    const { name, description, imageUrls, price, _id, overallrating, usersrated, units, cartquantity } = product;
+
+
+
+    return (
+      <div
+        key={index}
+        className={`${roboto.className} ${robotoslab.className}`}
+      >
+        {/* mobileversion */}
+        <div className='sm:hidden block'>
+          <div className='grid bg-white  grid-cols-10 '>
+            <div className=' col-span-4   rounded-md mr-4'>
+              <Link href={`/product/${_id}`}>
+                <CldImage
+                  src={imageUrls[0]}
+                  width={600}
+                  height={600}
+                  alt='product image'
+                  className='rounded-md h-[150px] border'
+                />
+              </Link>
+            </div>
+
+            <div className='col-span-6 grid grid-cols-1 gap-1  my-auto '>
+              <span className="font-medium text-[15px] ">{name.toUpperCase()}</span>
+              <p className="text-base line-clamp-1" >{description}</p>
+              <span className='text-xl'> &#8377;{price}
+                <span className='text-base'>/{units}</span>
+              </span>
+              <CartQuantityChange product={product} cartquantity={cartquantity} />
+
+
+
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+        {/* desktop version */}
+        <div
+          className={`hidden sm:block  m-4 p-4 bg-white border rounded-lg`}
+        >
+          <Link href={`/product/${_id}`}>
+            <div className="">
+              <div className='w-full relative h-40'>
+                <CldImage
+                  src={imageUrls[0]}
+                  fill
+                  sizes=''
+                  alt='product image'
+                  className=' '
+                />
+              </div>
+            </div>
+            <div className={`mt-4 `}>
+              <span className='font-medium text-md line-clamp-1'>{name.toUpperCase()}</span>
+              <p className='line-clamp-1'>{description}</p>
+              <div className='flex  gap-2 justify-between'>
+                <span>
+                  <span className='text-xl'> &#8377;{price}</span>
+                  /{units}
+                </span>
+              </div>
+            </div>
+          </Link>
+          <CartQuantityChange product={product} cartquantity={cartquantity} />
+        </div>
+      </div >
+
+
+    );
+  });
 
   return (
     <div>
-      {LoadingStatus === 'Loading' && <DisableandLoadingComponent />}
-      <div className='grid grid-flow-row gap-4 mb-4  mx-auto max-w-xl  justify-center items-center'>
-        {styledproduucts}
 
+      <span className={`${roboto.className} ${robotoslab.className} text-xl`}>cart items</span>
+      <div className='grid grid-flow-row m:grid-cols-3 gap-4 mb-4  mx-auto   justify-center items-center'>
+        {productCards}
       </div>
     </div>
 

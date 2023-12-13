@@ -1,20 +1,17 @@
+import { initialAddressType } from "@CustomTypes/ReduxType";
+import { addressForm } from "@CustomTypes/formTypes";
 import { RootState } from "@app/redux/store";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AddressType } from "@models/Address_Model";
-// Define an interface for the address
-type formdatatype = Omit<AddressType, '_id'>;
-interface AddressesType {
-    Address: AddressType | null;
-    status: 'idle' | 'Loading' | 'rejected';
-}
-const initialState: AddressesType = {
+
+
+const initialState: initialAddressType = {
     Address: null,
     status: 'idle',
 }
 export const createAddress = createAsyncThunk('/api/createaddress',
-    async ({ formData, update }: { formData: formdatatype, update?: boolean }) => {
+    async ({ formData, update }: { formData: addressForm, update?: boolean }) => {
         console.log(formData, update, 'called createAddress');
         const response = await axios.post('/api/address/createaddress', { formData, update });
         console.log(response.status, response.statusText, 'created address slices status');
@@ -26,7 +23,7 @@ export const getaddress = createAsyncThunk('/api/getaddress',
     async () => {
         const response = await axios.get('/api/address/getuseraddress',);
         const { data } = response;
-        const { UserAddress }: { UserAddress: formdatatype } = data;
+        const { UserAddress }: { UserAddress: addressForm } = data;
         return UserAddress;
 
     }
@@ -40,7 +37,7 @@ export const Productslice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(createAddress.pending, (state, action) => {
-                state.status = 'Loading'
+                state.status = 'pending'
             })
             .addCase(createAddress.rejected, (state, action) => {
                 state.status = 'rejected'
@@ -51,7 +48,7 @@ export const Productslice = createSlice({
                 console.log(state.Address, 'createaddress success');
             })
             .addCase(getaddress.pending, (state, action) => {
-                state.status = 'Loading'
+                state.status = 'pending'
 
             })
             .addCase(getaddress.rejected, (state, action) => {

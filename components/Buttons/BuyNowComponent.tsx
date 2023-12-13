@@ -3,10 +3,7 @@ import Link from "next/link";
 import { useParams, usePathname, useRouter } from 'next/navigation';
 const BuynowComponent = () => {
     const { product_id } = useParams();
-    const path = usePathname()
-    var url = '';
-    console.log(path.startsWith('/product'), 'is startswith /product');
-    const id = product_id as string;
+
     const { status } = GetSessionData();
     const router = useRouter();
     const handlebuynowclick = () => {
@@ -16,12 +13,10 @@ const BuynowComponent = () => {
             router.push('/loginpage');
         }
         else if (status === 'authenticated') {
-            if (path.startsWith('/product')) {
-                router.push('/checkout/' + product_id);
-            }
-            else if (path.startsWith('/cart')) {
-                router.push('/checkout/cart');
-            }
+
+
+            router.push('/checkout');
+
         }
         else {
             alert('please wait ... and try again');
@@ -31,7 +26,7 @@ const BuynowComponent = () => {
 
         <button
             onClick={handlebuynowclick}
-            className='buynow-button w-full max-w-md mx-auto'
+            className='cart-button w-full max-w-md mx-auto'
         >
             Buy Now
         </button>

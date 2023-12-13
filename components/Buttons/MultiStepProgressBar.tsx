@@ -1,8 +1,8 @@
-import { checkoutcartaction } from '@CustomTypes/ReduxType';
+
 import { inter } from '@styles/fonts';
 import React from 'react'
 
-const MultiStepProgressBar = ({ state, dispatch }: { state: { pageno: number }, dispatch: React.Dispatch<checkoutcartaction> }) => {
+const MultiStepProgressBar = ({ state, dispatch }: { state: { pageno: number }, dispatch }) => {
     const objects = [{ val: 1, name: 'Address' }, { val: 2, name: 'Products' }, { val: 3, name: 'Coupon' }, { val: 4, name: 'Payment' }]
     return (
         <div className='flex justify-center border-b-2 border-gray-100 shadow-md pb-2'>

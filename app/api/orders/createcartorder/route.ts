@@ -1,12 +1,78 @@
 
-import { AddressType } from "@models/Address_Model";
-import { CartType } from "@models/Cart_Model";
-import { ItemType, OrderType } from "@models/Order_Model";
-import { ProductType } from "@models/product";
+import { cartproductType } from "@CustomTypes/ApiSchemaType";
+import { addressType } from "@models/addressModel";
+import { cartType } from "@models/cartModel";
+import { orderType, orderedproductsType } from "@models/orderModel";
+import { productType } from "@models/product";
+import { userType } from "@models/userModel";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
-import { ObjectId } from "mongodb";
+import { Db, ObjectId, Document } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
+async function calculateDiscount({ cartprice, coupon, Database }: { cartprice: number, coupon: string, Database: Db }) {
+    console.log(coupon);
+    if (coupon === 'FirstThreeOrders') {
 
+        const eightyoff = Math.ceil(cartprice * 0.6);
+        return Math.min(eightyoff, 100);
+    }
+    else if (coupon === 'TryYourLuck') {
+        const luckoff = Math.floor(Math.random() * (45 - 15 + 1)) + 10;
+        const discountbyluckoff = Math.ceil(cartprice * (luckoff / 100));
+        console.log(discountbyluckoff);
+
+        return Math.min(discountbyluckoff, 80);
+    }
+    return 0;
+}
+async function calculatecartprice({ Database, User }: { Database: Db, User: userType }) {
+    const cartCollection = Database.collection<orderType>('carts');
+    const cartproducts: cartproductType = await cartCollection.aggregate([
+        { $match: { user_id: User._id } },
+        {
+            $lookup: {
+                from: 'products',
+                localField: 'product_id',
+                foreignField: '_id',
+                as: 'product',
+            },
+        },
+        {
+            $project: {
+                product: { $arrayElemAt: ["$product", 0] },
+                cartquantity: 1,
+            }
+        },
+        {
+            $replaceRoot: {
+                newRoot: {
+                    $mergeObjects: ["$product", { cartquantity: "$cartquantity" }]
+                }
+            }
+        }
+    ]).toArray();
+    let cartprice = 0
+    console.log(cartproducts);
+
+    cartproducts.forEach((p) => cartprice += p.price * p.cartquantity);
+
+    return { cartprice, cartproducts };
+
+}
+async function getAddress({ Database, User }: { Database: Db, User: userType }) {
+    const AddressCollection = Database.collection<addressType>('addresses');
+    const address = await AddressCollection.findOne({
+        user_id: User._id
+    })
+    return address;
+
+}
+async function deleteCartItems({ Database, User }: { Database: Db, User: userType }) {
+
+    const cartCollection = Database.collection<cartType>('carts');
+    await cartCollection.deleteMany({
+        user_id: User._id
+    })
+}
 export async function POST(req: NextRequest, res: NextResponse) {
     console.log('inside post create order');
 
@@ -20,103 +86,57 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' }, { status: 401, statusText: 'userid not found ' })
     }
-    const { couponcode } = await req.json();
-    console.log(couponcode, 'couponcode');
+    const { coupon, price }: { coupon: string, price: number } = await req.json();
 
+    const { cartprice, cartproducts } = await calculatecartprice({ Database, User })
+    const discount = await calculateDiscount({ cartprice, coupon, Database })
+    const serverprice = cartprice - discount + 40;
+    if (price != serverprice) {
+        console.log(price, serverprice, cartprice);
 
-    const CartCollection = Database.collection<CartType>('carts');
-
-    const usercart = await CartCollection.findOne({
+        return NextResponse.json({ msg: 'Error price mismatch' }, { status: 403, statusText: ' price not match' });
+    }
+    //create a order
+    const order: orderedproductsType[] = [];
+    cartproducts.forEach((p) => order.push({
+        product: p,
+        orderstatus: 'ordered',
+    }));
+    const address: addressType = await getAddress({ Database: Database, User: User });
+    const ordersCollection = Database.collection<orderType>('orders');
+    cartproducts.forEach((p) => {
+        if (p.stockQuantity - p.cartquantity < 0) {
+            return NextResponse.json({ msg: 'out of stock' }, { status: 403, statusText: 'some product out of stock' });
+        }
+    })
+    const createorder = await ordersCollection.insertOne({
         user_id: User._id,
+        orderproducts: order,
+        time: new Date(),
+        address: address,
+        originalprice: cartprice,
+        discountedprice: serverprice,
+        coupon: coupon,
+        orderstatus: 'ordered',
+        ordertype: "COD"
     })
-
-    if (!usercart) {
-        return NextResponse.json({}, { status: 400, statusText: 'unable to findcart items ' });
+    console.log(createorder, 'order created succesfuuly');
+    const productCollection = Database.collection<productType>('products');
+    for await (const p of cartproducts) {
+        await productCollection.findOneAndUpdate(
+            { _id: new ObjectId(p._id), stockQuantity: { $gte: 1 } },
+            {
+                $inc: {
+                    stockQuantity: -1,
+                }
+            }
+        )
     }
 
-    const AddressCollection = Database.collection<AddressType>('addresses');
-    const currentaddress = await AddressCollection.findOne({ user_id: User._id });
+    await deleteCartItems({ Database, User })
 
-    if (!usercart) {
-        return NextResponse.json({}, { status: 400, statusText: 'unable to Address ' });
-    }
-
-    const ProductCollection = Database.collection<ProductType>('products');
-    const products = await ProductCollection.find({}).toArray();
-
-    if (!usercart) {
-        return NextResponse.json({}, { status: 400, statusText: 'product unavailible' });
-    }
-    var overallcost = 0;
-
-    for (const item of usercart.items) {
-        const product = products.find(p => {
-            console.log(p._id, item.product_id, 'inside find');
-            return p._id.toString() === item.product_id.toString()
-        });
-        console.log('r:createorder', product);
-        if (product) {
-            const price = parseInt(product.price as string, 10);
-            overallcost += price * item.quantity;
-        }
-    }
-
-    let originaloverallprice = overallcost;
-    let discount = 0;
-    if (couponcode == 'FirstThreeOrders') {
-        discount = Math.round(0.6 * originaloverallprice);
-        if (discount > 80) {
-            discount = 80;
-        }
-    }
-    else if (couponcode === 'WinIndia') {
-        discount = Math.round(0.2 * originaloverallprice);
-        if (discount > 80) {
-            discount = 80;
-        }
-    }
-    let delivery = 60;
-    const finalprice = originaloverallprice - discount + delivery;
-    console.log('final price: ' + finalprice);
-    console.log('overall price', +originaloverallprice);
-    console.log('discount', discount);
+    return NextResponse.json({ msg: createorder }, { status: 200, statusText: ' succed order created' });
 
 
-    const items = usercart.items;
-    const orderitems = items.map(item => {
-        const product = products.find(p => {
-            console.log(p._id, item.product_id, 'inside find');
-            return p._id.toString() === item.product_id.toString()
-        });
-        return {
-            ...item,
-            price: parseInt(product.price as string),
-            //cacheed price when ordered
-        }
-    })
-    const OrderCollection = Database.collection<OrderType>('orders');
-    const createdorder = await OrderCollection.insertOne(
-        {
-            user_id: new ObjectId(User._id),
-            items: orderitems,
-            time: new Date(),
-            address: {
-                street: currentaddress.street,
-                city: currentaddress.city,
-                state: currentaddress.state,
-                postalCode: currentaddress.postalCode,
-                phoneNumber: currentaddress.phoneNumber,
-            },
-            amount: finalprice,
-            ordertype: 'COD',
-            orderstatus: "orderbooked"
-        }
-    )
-    await CartCollection.deleteOne({
-        _id: usercart._id
-    })
-    console.log(createdorder, 'succesfully created order');
-
-    return NextResponse.json({ IsOrderSuccess: 'success' }, { status: 200, statusText: 'success' });
 
 }

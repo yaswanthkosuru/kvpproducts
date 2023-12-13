@@ -1,6 +1,14 @@
 import { AxiosResponse } from "axios";
-import { productModel } from "@models/product";
+import { productSchema, productType } from "@models/product";
 import { z } from "zod";
-export const getproductschema = {
-
+import { ObjectId } from "mongodb";
+export const getcartitemSchema = z.object({
+    cartproducts: z.array(productSchema.extend({
+        cartquantity: z.number(),
+    }))
+})
+export type getcartitemType = AxiosResponse<z.infer<typeof getcartitemSchema>>;
+export type cartproduct = productType & {
+    cartquantity?: number,
 }
+export type cartproductType = cartproduct[]

@@ -1,12 +1,12 @@
-import { checkoutcartaction } from '@CustomTypes/ReduxType'
+
 import { selectaddress } from '@app/redux/feautres/address/addressslice'
-import { FindCartProducts } from '@utils/findCartProducts'
+
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const MultistepNextButton = ({ state, dispatch }: { state: { pageno: number }, dispatch: React.Dispatch<checkoutcartaction> }) => {
+const MultistepNextButton = ({ state, dispatch }: { state: { pageno: number }, dispatch }) => {
     const Address = useSelector(selectaddress);
-    const products = FindCartProducts();
+
     const handlenextbuttonclick = () => {
         const { pageno } = state;
         if (pageno == 1) {
@@ -18,13 +18,7 @@ const MultistepNextButton = ({ state, dispatch }: { state: { pageno: number }, d
             }
         }
         else if (pageno == 2) {
-            if (!products) {
-                alert('please select a product')
-            }
-            else {
-                dispatch({ type: 'setpageno', payload: state.pageno + 1 })
-            }
-
+            dispatch({ type: 'setpageno', payload: state.pageno + 1 })
         }
         else if (pageno == 3) {
             dispatch({ type: 'setpageno', payload: state.pageno + 1 })

@@ -12,7 +12,6 @@ import AddtoCartComponent from '@components/Buttons/AddtoCartComponent';
 import ProductPrefetch from '@components/Skeletons/productprefetch';
 import { SelectCartStatus } from '@app/redux/feautres/cart/cartslice';
 import DisableandLoadingComponent from '@components/PassiveComponents/Disablepageandloading';
-
 import ReviewComponent from '@components/PassiveComponents/ReviewComponent';
 
 
@@ -28,7 +27,7 @@ export default function Page() {
 
     const dispatchRedux = useDispatch<AppDispatch>();
     const CartStatus = useSelector(SelectCartStatus);
-    const [loadingstatus, setloadingstatus] = useState<'idle' | 'Loading' | 'rejected'>();
+    const [loadingstatus, setloadingstatus] = useState<'idle' | 'pending' | 'rejected'>();
     useEffect(() => {
         setloadingstatus(CartStatus);
     }, [CartStatus])
@@ -37,8 +36,8 @@ export default function Page() {
 
     return (
         <div className='mt-4 sm:mx-10'>
-            {!product && loadingstatus === 'Loading' && <ProductPrefetch />}
-            {product && loadingstatus === 'Loading' && <DisableandLoadingComponent />}
+            {!product && loadingstatus === 'pending' && <ProductPrefetch />}
+
             {product && <div>
                 <div className='flex max-m:flex-col  sm:gap-4  '>
                     <SwiperImagecomponent

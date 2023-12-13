@@ -2,12 +2,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { RootState } from '@app/redux/store';
-import { OrderType } from '@models/Order_Model'
+import { orderType } from '@models/orderModel';
 import { data } from 'autoprefixer';
 
 
 interface InitialState {
-    orders: OrderType[] | null;
+    orders: orderType[] | null;
     status: 'loading' | 'idle' | 'rejected'
 }
 const initialState: InitialState = {
@@ -18,21 +18,18 @@ export const getorders = createAsyncThunk('/fetchorders', async () => {
     console.log('dispatching getorders');
     const response = await axios.post('/api/orders/fetchorders');
     if (response.status === 200) {
-        const { order_details } = response.data;
-        return order_details;
+        const { orders } = response.data;
+        return orders;
     }
 
     return { msg: response.statusText };
 
 })
-export const CreateCartOrder = createAsyncThunk('/api/createOrder', async ({ couponcode }: { couponcode?: string }) => {
+export const CreateCartOrder = createAsyncThunk('/api/createcartOrder', async ({ price, coupon }: { price: number, coupon?: string }) => {
     console.log('dispatching create cart order');
-    await axios.post('/api/orders/createcartorder', { couponcode })
+    await axios.post('/api/orders/createcartorder', { coupon, price })
 })
-export const createOrder = createAsyncThunk('/api/createorder', async ({ product_id, couponcode }: { product_id: string, couponcode: string }) => {
-    console.log('dispatching create order');
-    await axios.post('/api/orders/createorder', { product_id, couponcode })
-})
+
 
 
 
@@ -44,15 +41,7 @@ export const Order_slice = createSlice({
     extraReducers(builder) {
         builder
 
-            .addCase(createOrder.pending, (state, action) => {
-                state.status = 'loading'
-            })
-            .addCase(createOrder.rejected, (state, action) => {
-                state.status = 'rejected'
-            })
-            .addCase(createOrder.fulfilled, (state, action) => {
-                state.status = 'idle'
-            })
+
             .addCase(CreateCartOrder.pending, (state, action) => {
                 state.status = 'loading'
             })
@@ -60,7 +49,7 @@ export const Order_slice = createSlice({
                 state.status = 'rejected'
             })
             .addCase(CreateCartOrder.fulfilled, (state, action) => {
-                console.log(action.payload, 'createorder fullfilled');
+                console.log(action.payload, 'createcartorder fullfilled');
                 state.status = 'idle'
             })
             .addCase(getorders.pending, (state, action) => {
@@ -70,6 +59,8 @@ export const Order_slice = createSlice({
                 state.status = 'rejected'
             })
             .addCase(getorders.fulfilled, (state, action) => {
+                const orders = action.payload;
+                state.orders = orders;
                 state.status = 'idle'
                 state.orders = action.payload;
             })

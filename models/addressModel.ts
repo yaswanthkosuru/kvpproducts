@@ -1,5 +1,7 @@
+import { ObjectId } from "mongodb"
 
-export type addressModel = {
+export type addressType = {
+    _id?: ObjectId
     street: string
     city: string
     state: 'Andrapradesh'

@@ -1,4 +1,4 @@
-import { ReviewType } from "@models/Review_Model";
+import { ReviewType } from "@models/reviewModel";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";

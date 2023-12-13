@@ -1,4 +1,5 @@
 
+import { productType } from '@models/product';
 import { GetSessionAndDB } from '@utils/GetSessionAndDB';
 import { NextRequest, NextResponse } from 'next/server';
 export async function DELETE(request: NextRequest, res: NextResponse) {
@@ -12,7 +13,7 @@ export async function DELETE(request: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' },)
     }
-    const ProductCollection = Database.collection('products');
+    const ProductCollection = Database.collection<productType>('products');
     const deleteproduct = await ProductCollection.findOneAndDelete({ _id: User._id })
 
 

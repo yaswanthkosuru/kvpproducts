@@ -13,7 +13,7 @@ const Home_component = () => {
         >
             <Link
                 className="flex flex-col items-center justify-center "
-                href="/products"
+                href="/"
 
             >
                 <svg width="50px" height="25px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

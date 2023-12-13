@@ -36,6 +36,7 @@ const Small_Product_Component = () => {
                                 products.map((product) => {
                                     const { name, description, imageUrls, price, _id, overallrating, usersrated, units } = product;
                                     return <Link
+                                        key={_id.toString()}
                                         href={`/product/${product._id}`}
                                         className=' mx-auto w-full m:w-1/2 bg-white/80 border border-gray-300 py-2  px-2 rounded-xl h-auto'>
                                         <span className='text-lg'>

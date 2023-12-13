@@ -9,6 +9,7 @@ import Arrow from '@components/Buttons/ArrowComponent'
 import '@styles/globals.css';
 import { BuiltInProviderType } from "next-auth/providers";
 import logo from '@public/logo.png'
+import Navcart from "../Mobile/Cart";
 
 const Nav = () => {
   const router = useRouter()
@@ -52,7 +53,7 @@ const Nav = () => {
       <div className="hidden m:block">
         <nav className='flex flex-row  justify-between items-center rounded-xl h-14 mt-5 mx-5'>
           <Link
-            href='/products'
+            href='/'
             className="hover:text-slate-900 active:text-blue-900">
             <Image src={logo} width={35} height={30} alt='none'></Image>
           </Link>
@@ -66,11 +67,11 @@ const Nav = () => {
             />
           </Link>
 
-          <Link href='/membership'
+          <div
             className=
-            {`${ubuntu.className} underline text-blue-500 active:text-blue-500 text-xl`}>
-            membership
-          </Link>
+            {`${ubuntu.className} `}>
+            <Navcart />
+          </div>
           {session?.user ? (
             <div className='relative flex flex-row items-center justify-center'>
               {session?.user.image &&

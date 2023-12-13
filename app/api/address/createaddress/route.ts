@@ -1,8 +1,7 @@
 import { handler } from "@app/api/auth/[...nextauth]/route";
-import { AddressType } from "@models/Address_Model";
+import { addressType } from "@models/addressModel";
 import { GetSessionAndDB } from "@utils/GetSessionAndDB";
-import { ConnectToDB } from "@utils/ConnectDB";
-import { Session, getServerSession } from "next-auth";
+
 import { NextRequest, NextResponse } from "next/server";
 import { Filter, ObjectId, UpdateFilter } from "mongodb";
 
@@ -17,15 +16,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!Database) {
         return NextResponse.json({ msg: 'Error connecting to Database' },)
     }
-    const AddressCollection = Database.collection<AddressType>('addresses');
-    const { formData, update }: { formData: AddressType, update: boolean } = await req.json();
+    const AddressCollection = Database.collection<addressType>('addresses');
+    const { formData, update }: { formData: addressType, update: boolean } = await req.json();
     console.log(formData, update, 'r create address');
 
     if (update) {
-        const filter: Filter<AddressType> = {
+        const filter: Filter<addressType> = {
             user_id: new ObjectId(User._id)
         }
-        const update: UpdateFilter<AddressType> = {
+        const update: UpdateFilter<addressType> = {
             $set: {
                 street: formData.street,
                 city: formData.city,

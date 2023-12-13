@@ -1,0 +1,12 @@
+{
+    "coupons": [
+        {
+            "name": "FirstThreeOrders",
+            "desc": "60% off upto 100 rupees"
+        },
+        {
+            "name": "TryYourLuck",
+            "desc": "LUCK% off "
+        }
+    ]
+}
