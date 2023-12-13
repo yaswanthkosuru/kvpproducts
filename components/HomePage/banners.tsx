@@ -6,8 +6,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { Autoplay, Pagination, Navigation, } from 'swiper/modules';
 import Image from 'next/image';
-import banner1 from '@public/cardpage/poster1.jpg'
-import banner2 from '@public/cardpage/poster2.jpg'
+import banner1 from '@public/cardpage/poster1.png';
+import banner2 from '@public/cardpage/poster2.png'
+import banner3 from '@public/cardpage/poster3.png'
 import { motion } from 'framer-motion'
 import { bannervariants } from '@framer/Variants';
 export default function Slidingbanners() {
@@ -56,7 +57,7 @@ export default function Slidingbanners() {
                 <SwiperSlide className='relative h-60'>
                     <Image
                         alt='None'
-                        src={banner2}
+                        src={banner3}
                         fill
                         className='rounded-xl'
                     >
