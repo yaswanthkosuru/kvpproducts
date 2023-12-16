@@ -10,7 +10,9 @@ const Ceoimage = () => {
   }
   return (
     <div className='relative w-full h-[400px] rounded-md'>
-
+      <span className={` font-serif text-xl`}>
+        This Website Creator One Person behind
+      </span>
       <Image
         src={ceoimage}
         fill

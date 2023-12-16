@@ -16,9 +16,7 @@ export default function Page() {
             <div className=" block m:hidden"><Small_Product_Component /></div>
 
             <div className=" block m:hidden">
-                <span className={` font-serif text-xl`}>
-                    This Website Creator One Person behind
-                </span>
+
                 <CeoImage />
             </div>
 
