@@ -46,13 +46,13 @@ export default function AddressForm() {
     }
 
     return (
-        <div className={`${roboto.className} ${robotoslab.className}  `}>
+        <div className={`${roboto.className} ${robotoslab.className} m:w-3/4 mx-auto `}>
             {loadingstatus === 'pending' && <DisableandLoadingComponent />}
-            <span>Address Form </span>
-            <form className='p-4 flex flex-col gap-2 bg-gradient-to-r from-slate-200 to-zinc-300/70 rounded-xl   ' onSubmit={handleSubmit(submitAddress)}>
+            <strong>Add Your address here </strong>
+            <form className='p-4 flex flex-col gap-2   ' onSubmit={handleSubmit(submitAddress)}>
                 <label>enter your postal code</label>
                 <select
-                    className='py-2 text-gray-800 focus:outline-none'
+                    className='form-input'
                     {...register('postalCode')}
                     defaultValue={Address?.postalCode}
                 >

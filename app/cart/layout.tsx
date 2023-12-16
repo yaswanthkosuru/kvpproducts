@@ -7,8 +7,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="">
-
+    <div className="m:w-3/4 mx-auto">
+      <Nav />
       {children}
     </div>
 

@@ -5,7 +5,7 @@ import '@styles/admin.css'
 const Page = () => {
     return (
         <div>
-            admin
+            This is Under Maintainance please come back again
         </div>
     )
 }

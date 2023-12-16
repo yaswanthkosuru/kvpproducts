@@ -28,11 +28,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
 
 
-      <body className='m:w-3/4 mx-auto pb-20 m:pb-0'>
+      <body className=''>
 
         <Authprovider session={session}>
           <Reduxprovider >
-            <Nav />
+
             <MobileNav />
             {children}
           </Reduxprovider>

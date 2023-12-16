@@ -8,9 +8,9 @@ export default function RootLayout({
 }) {
     return (
 
-        <div>
+        <div className="m:w-3/4 mx-auto">
 
-
+            <Nav />
             {children}
         </div>
 

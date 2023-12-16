@@ -25,7 +25,7 @@ export default function Page() {
                         <Link
                             prefetch={false}
 
-                            href='/admin/createproduct'
+                            href='/admin'
                         >
                             Seller account
                         </Link>

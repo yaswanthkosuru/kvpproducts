@@ -6,8 +6,8 @@ import Link from 'next/link';
 export default function RootLayout({ children }: { children: JSX.Element }) {
 
     return (
-        <div className='sticky'>
-            home
+        <div className=''>
+            {children}
         </div>
     )
 }

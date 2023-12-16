@@ -14,19 +14,19 @@ const CartQuantityChange = ({ product, cartquantity }: props) => {
         dispatch(updatecart({ product: product, increment }));
     }
     return (
-        <div className="flex gap-4  rounded-md items-center ">
+        <div className="flex  gap-4 rounded-md items-center ">
             <button
                 onClick={() => handleupdatecart({ product: product, increment: false })}
-                className='w-8 h-8 flex justify-center items-center rounded-full border-gray-200 border shadow-inner hover:bg-blue-100 active:bg-blue-500'
+                className='w-10 h-10 flex justify-center items-center rounded-full border-gray-200 border shadow-inner  active:bg-blue-600 active:text-white'
             >
                 -
             </button>
-            <button className='border border-gray-200 px-6'>
+            <button className='border border-gray-200 w-16 h-10'>
                 {cartquantity}
             </button>
             <button
                 onClick={() => handleupdatecart({ product: product, increment: true })}
-                className='w-8 h-8 flex justify-center items-center rounded-full border-gray-200 border shadow-inner hover:bg-blue-100 active:bg-blue-500'>
+                className='w-10 h-10 flex justify-center items-center rounded-full border-gray-200 border shadow-inner  active:bg-blue-600 active:text-white'>
                 +
             </button>
             <button className='active:bg-red-300 p-1' onClick={() => dispatch(deletecartitem({ product_id: product._id.toString() }))}><Delete_icon /></button>

@@ -39,7 +39,7 @@ const Small_Product_Component = () => {
                                         key={_id.toString()}
                                         href={`/product/${product._id}`}
                                         className=' mx-auto w-full m:w-1/2 bg-white/80 border border-gray-300 py-2  px-2 rounded-xl h-auto'>
-                                        <span className='text-lg'>
+                                        <span className='text-lg line-clamp-1'>
                                             {name.toUpperCase()}
                                         </span>
                                         <CldImage
@@ -50,7 +50,7 @@ const Small_Product_Component = () => {
                                             className=' w-full m:w-1/2 h-24 '
                                         >
                                         </CldImage>
-                                        <span>
+                                        <span className='line-clamp-1'>
                                             &#8377;{price} / {units}
                                         </span>
                                     </Link>

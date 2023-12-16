@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
     return (
 
-        <div className="bg-gray-200 min-w-[350px]">
+        <div className="">
             {children}
         </div>
 

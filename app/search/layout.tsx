@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
     return (
 
-        <div className="m-1">
+        <div className="m-1 m:w-3/4 mx-auto">
 
             {children}
         </div>

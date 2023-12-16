@@ -50,7 +50,7 @@ const Nav = () => {
   return (
     <div>
       {/* desktop navigation */}
-      <div className="hidden m:block">
+      <div className="hidden m:block ">
         <nav className='flex flex-row  justify-between items-center rounded-xl h-14 mt-5 mx-5'>
           <Link
             href='/'

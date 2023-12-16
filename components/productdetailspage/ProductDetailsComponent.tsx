@@ -37,11 +37,7 @@ const ProductDetailsComponent = ({ product }: props) => {
                         No of Users rated:{usersrated}
                     </span>
                 </div>
-                {stockQuantity > 0 ? <AddtoCartComponent /> : (
-                    <div className='text-xl text-red-500'>
-                        product unavialible
-                    </div>
-                )}
+                <AddtoCartComponent stockQuantity={stockQuantity} />
 
 
 

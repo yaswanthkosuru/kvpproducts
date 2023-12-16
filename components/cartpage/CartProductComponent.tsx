@@ -108,7 +108,7 @@ const CartProductComponent = () => {
   return (
     <div>
 
-      <span className={`${roboto.className} ${robotoslab.className} text-xl`}>cart items</span>
+      <strong className={`${roboto.className} ${robotoslab.className} font-bold`}>cart items</strong>
       <div className='grid grid-flow-row m:grid-cols-3 gap-4 mb-4  mx-auto   justify-center items-center'>
         {productCards}
       </div>

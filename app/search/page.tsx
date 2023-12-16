@@ -31,9 +31,9 @@ const Page = () => {
     }
 
     return (
-        <div>
+        <div className=''>
 
-            <div className='flex m-1'>
+            <div className=''>
                 <button onClick={handlebackclick} className='border border-gray-300 h-10 px-2 font-bold'>
                     <span className={`text-xl ${roboto.className} ${playfairdisplay.className}`}>&#8592;</span>
                 </button>
