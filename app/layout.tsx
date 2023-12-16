@@ -11,8 +11,8 @@ import Nav from '@components/HeaderFooter/Desktop/DesktopNav';
 
 
 export const metadata = {
-  title: 'vegie',
-  description: 'vegetables selling app',
+  title: 'LUSHLY',
+  description: 'where freshness is deliverd',
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
