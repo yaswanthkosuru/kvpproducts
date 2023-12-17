@@ -21,7 +21,7 @@ const Page = () => {
         const option = Fusesearch(products, target.value as string);
         const temparr: productType[] = []
         option.forEach((o) => temparr.push(o.item));
-        console.log(option);
+
         setfilterproducts(temparr);
         setinputval(target.value);
     }

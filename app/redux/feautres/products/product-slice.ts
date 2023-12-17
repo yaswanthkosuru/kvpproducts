@@ -15,14 +15,14 @@ export const createproduct = createAsyncThunk('product/createproduct',
         });
         console.log('called async thunk cp');
         const { products } = await response.data;
-        console.log(products);
+
         return products;
     })
 export const getallproducts = createAsyncThunk('getoverallproducts', async () => {
     const response = await axios.post('/api/products/fetchproducts');
     const data = await response.data;
     const { products } = data;
-    console.log('asyncthunk', data);
+
     return products;
 })
 export const getproduct = createAsyncThunk('getsingleproduct', async ({ id }: { id: string }) => {
@@ -52,7 +52,7 @@ export const Productslice = createSlice({
                 state.status = 'pending';
             })
             .addCase(getallproducts.fulfilled, (state, action) => {
-                console.log(action.payload, 'fulfilled');
+
                 state.products = action.payload;
                 state.status = 'idle';
             })

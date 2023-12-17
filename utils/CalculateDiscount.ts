@@ -7,7 +7,7 @@ type props = {
 }
 export function calculateDiscount({ price }: props) {
     const coupon = useSelector(selectcouponcode);
-    console.log(coupon);
+    // console.log(coupon);
     if (coupon === 'FirstThreeOrders') {
         const eightyoff = Math.ceil(price * 0.6);
         return Math.min(eightyoff, 100);
@@ -16,7 +16,6 @@ export function calculateDiscount({ price }: props) {
     else if (coupon === 'TryYourLuck') {
         const luckoff = Math.floor(Math.random() * (45 - 15 + 1)) + 10;
         const discountbyluckoff = Math.ceil(price * (luckoff / 100));
-        console.log(discountbyluckoff);
 
         return Math.min(discountbyluckoff, 80);
     }

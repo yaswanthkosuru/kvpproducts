@@ -15,7 +15,7 @@ const OrderComponent = () => {
         dispatchRedux(getorders());
     }, []);
     const orders = useSelector(SelectOrders);
-    console.log(orders, 'orders');
+    // console.log(orders, 'orders');
     if (!orders || orders.length === 0) {
         return <div></div>
     }

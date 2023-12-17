@@ -34,7 +34,7 @@ const ReviewComponent = () => {
     useEffect(() => {
         dispatchRedux(getreviews({ product_id: product_id as string }));
     }, []);
-    console.log(state.reviewstatus, 'reviewstatus');
+    // console.log(state.reviewstatus, 'reviewstatus');
 
     const styledreviews = reviews?.map((review, index) => {
         return <div

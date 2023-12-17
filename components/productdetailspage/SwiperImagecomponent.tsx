@@ -25,10 +25,9 @@ const SwiperImagecomponent = ({ imageUrls }: props) => {
     const { product_id } = useParams();
 
     const id = product_id as string;
-    console.log(id, 'pageproductid');
+    // console.log(id, 'pageproductid');
 
     const product = useSelector((state: RootState) => selectproductwithid(state, id));
-    console.log(product, 'page p/pid');
 
     const dispatch = useDispatch<AppDispatch>();
     const CartStatus = useSelector(SelectCartStatus);

@@ -48,14 +48,12 @@ export default function CreateProductFormComponent({ }) {
     const [imagerr, setimagerr] = useState(false)
     const [posterror, setposterror] = useState(false)
     const onSubmit: SubmitHandler<createproductformtype> = async (formData) => {
-        console.log(ImageUrls, 'imageUrls');
-        console.log(formData);
 
         if (ImageUrls.length > 1 && ImageUrls.length < 5) {
-            console.log(formData);
+
             try {
                 formData.imageUrls = ImageUrls;
-                console.log(formData);
+                // console.log(formData);
 
                 // await dispatch(createproduct({ formData }));
                 reset();
