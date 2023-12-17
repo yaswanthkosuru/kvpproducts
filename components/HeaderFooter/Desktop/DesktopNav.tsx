@@ -51,7 +51,7 @@ const Nav = () => {
     <div>
       {/* desktop navigation */}
       <div className="hidden m:block ">
-        <nav className='flex flex-row  justify-between items-center rounded-xl h-14 mt-5 mx-5'>
+        <nav className='flex flex-row  justify-between items-center rounded-xl h-14 mt-4 mx-5'>
           <Link
             href='/'
             className="hover:text-slate-900 active:text-blue-900">
@@ -61,9 +61,9 @@ const Nav = () => {
             href='/search'
             className=" cursor-pointer">
             <input
-              placeholder='search vegetables...'
+              placeholder='search in Lushly...'
               readOnly
-              className='placeholder:text-slate-400 bg-white border border-gray-400 rounded-md focus:outline-none cursor-pointer  w-auto h-8'
+              className='placeholder:text-slate-400 bg-white border border-gray-400 rounded-md focus:outline-none cursor-pointer w-60 pl-4 h-8'
             />
           </Link>
 

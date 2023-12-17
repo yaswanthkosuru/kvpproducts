@@ -16,6 +16,23 @@ export const bannervariants: Variants = {
     }
 
 }
+export const productloading: Variants = {
+    initial: {
+        opacity: 0,
+
+    },
+    after: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 2.5,
+            duration: 4,
+            repeat: 20000,
+            repeatType: 'loop',
+        }
+
+    }
+
+}
 export const categoryvariants: Variants = {
     initial: {
         opacity: 0,
@@ -48,7 +65,7 @@ export const smallproductvariants: Variants = {
 }
 export const filteredproductvariants: Variants = {
     initial: {
-        x: 40,
+        x: 100,
     },
     after: {
         x: 0,

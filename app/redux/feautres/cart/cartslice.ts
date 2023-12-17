@@ -63,6 +63,7 @@ export const CartSlice = createSlice({
                     var np = { ...product, cartquantity: 1 }
                     state.cartproducts.push(np);
                 }
+                state.status = 'idle';
 
             })
             .addCase(getcartitems.pending, (state, action) => {
@@ -73,6 +74,7 @@ export const CartSlice = createSlice({
             })
             .addCase(getcartitems.fulfilled, (state, action) => {
                 state.cartproducts = action.payload;
+                state.status = 'idle';
             })
             .addCase(updatecart.pending, (state, action) => {
                 state.status = 'pending'
@@ -111,6 +113,7 @@ export const CartSlice = createSlice({
             .addCase(deletecartitem.fulfilled, (state, action) => {
                 const product_id = action.payload;
                 state.cartproducts = state.cartproducts.filter((p) => p._id.toString() != product_id.toString());
+                state.status = 'idle';
             })
     }
 })

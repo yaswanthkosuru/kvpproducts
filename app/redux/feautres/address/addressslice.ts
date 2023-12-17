@@ -45,7 +45,7 @@ export const Productslice = createSlice({
             .addCase(createAddress.fulfilled, (state, action) => {
                 state.status = 'idle'
                 state.Address = action.payload;
-                console.log(state.Address, 'createaddress success');
+                // console.log(state.Address, 'createaddress success');
             })
             .addCase(getaddress.pending, (state, action) => {
                 state.status = 'pending'

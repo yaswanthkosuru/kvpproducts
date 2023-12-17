@@ -15,7 +15,7 @@ const page = () => {
     console.log(products);
 
     products = products?.filter((product) => product.category === a.get('name'))
-    console.log('matched products:', products);
+    console.log(' products:', products);
     if (!products) {
         return <ProductsPrefetch />
     }

@@ -33,9 +33,9 @@ const Page = () => {
     return (
         <div className=''>
 
-            <div className=''>
-                <button onClick={handlebackclick} className='border border-gray-300 h-10 px-2 font-bold'>
-                    <span className={`text-xl ${roboto.className} ${playfairdisplay.className}`}>&#8592;</span>
+            <div className='flex'>
+                <button onClick={handlebackclick} className='border border-gray-300 h-10 px-2 font-bold active:bg-blue-500 active:text-white'>
+                    <span className={`text-2xl`}>&#8592;</span>
                 </button>
                 <input
                     className='border border-gray-300 w-full h-10  pl-2 focus:outline-none'

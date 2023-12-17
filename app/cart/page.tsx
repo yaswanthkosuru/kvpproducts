@@ -33,11 +33,14 @@ export default function Page() {
             </Link>
         </div>
     }
+    if (cartlength == 0 && loadingstatus === 'idle') {
+        return <NoCartItems />;
+    }
     return (
         <div>
             <CartProductComponent />
-            {cartlength == 0 && loadingstatus === 'idle' && <NoCartItems />
-            }
+
+
             <BuynowComponent />
         </div>
     )

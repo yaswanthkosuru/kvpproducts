@@ -15,7 +15,7 @@ const AddtoCartComponent = ({ stockQuantity }: props) => {
     const { product_id } = useParams();
     const p_id = product_id as string;
     const product = useSelector((state: RootState) => selectproductwithid(state, p_id));
-    console.log(product, 'insideaddtocart');
+
     const { status, session } = GetSessionData();
     const router = useRouter();
     const Addtocart = async () => {
